@@ -33,7 +33,15 @@ class Collection extends Model
 
   public function create($userID)
   {
-    #TODO insert collection to TABLE
+    $sql = "INSERT INTO photoCollection (userID) VALUES (:userID)";
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    return $query->execute($params); // boolean result
+  }
+
+  public function delete($collectionID)
+  {
+    // TODO delection collection and remove photos in collection
   }
 
   public function update_upload_rights($collectionID)
