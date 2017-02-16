@@ -16,9 +16,10 @@ class User extends Model
   public function authenticate_user($email, $password)
   {
     // TODO: limit field retrieved
-    $sql = "SELECT * FROM user WHERE email = :email AND password = :password LIMIT 1";
+    $sql = "SELECT userID, first_name, last_name FROM user WHERE email = :email AND password = :password LIMIT 1";
     $query = $this->db->prepare($sql);
-    $params = array(':email' => $email, ':password' => $password);
+    $params = array(':email' => $email,
+                    ':password' => $password);
     $query->execute($params);
     return $query->fetch();
   }

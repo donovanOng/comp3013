@@ -22,6 +22,7 @@ class Photo extends Model
     $query->execute($params);
     return $query->fetch();
   }
+  
 
   public function find_photo_comments($photoId)
   {
@@ -32,10 +33,15 @@ class Photo extends Model
     return $query->fetchAll();
   }
 
-  
-  public function create($collectionID, $userID, $path)
+
+  public function create($userID, $collectionID,  $path)
   {
-    #TODO insert path into table
+    $sql = "INSERT INTO photo (userID, collectionID, path) VALUES (:userID, :collectionID, :path)";
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID,
+                    ':collectionID' => $collectionID,
+                    ':path' => $path);
+    return $query->execute($params); // boolean result
   }
 
 

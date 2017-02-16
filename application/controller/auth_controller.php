@@ -22,7 +22,8 @@ class AuthController
     if (isset($_POST["login"])) {
 
       $model = new User();
-      $user = $model->authenticate_user($_POST["email"], $_POST["password"]);
+      $user = $model->authenticate_user($_POST["email"],
+                                        $_POST["password"]);
 
       // TODO: Check Password
       if ($user != NULL) {
@@ -78,7 +79,6 @@ class AuthController
         }
 
       }
-
 
     } else {
       require APP . 'view/_templates/header.php';
