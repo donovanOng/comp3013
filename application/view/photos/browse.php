@@ -13,6 +13,8 @@
          <?php } ?>
        <? } ?>
 
+       <? require APP . 'view/comments/form.php'; ?>
+
     </p>
   <? } else { ?>
       <p>Image with id = <?= $photoID ?> doesn't exist!</p>

@@ -38,7 +38,7 @@ class PhotoController
     $photo = $model->find_by_id($photoID);
 
     // TODO: Check if user has view access to photo
-    
+
     $photo_comments = NULL;
     if (count($photo) > 0) {
       $photo_comments = $model->find_photo_comments($photoID);
