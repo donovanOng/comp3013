@@ -26,7 +26,7 @@ class User extends Model
   public function find_by_id($userID)
   {
     // TODO: limit field retrieved
-    $sql = "SELECT * FROM user WHERE userID = :userID LIMIT 1";
+    $sql = "SELECT first_name, last_name FROM user WHERE userID = :userID LIMIT 1";
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);
