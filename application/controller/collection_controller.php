@@ -45,6 +45,35 @@ class CollectionController
     require APP . 'view/_templates/footer.php';
   }
 
+  public function create()
+  {
+    // TODO: add name to collection
+    $current_user = NULL;
+
+    if (isset($_SESSION['current_user'])) {
+      $current_user = $_SESSION['current_user'];
+      $model = new Collection();
+      $result = $model->create($current_user->userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Collection created!';
+      } else {
+        $_SESSION['message'] = 'Fail to create collection!';
+      }
+
+      header('location: ' . URL . 'collection');
+
+    } else {
+      $_SESSION['message'] = 'Not logged in!';
+      header('location: ' . URL);
+    }
+  }
+
+  public function delete()
+  {
+    // TODO: Delete collection and all images in collection
+  }
+
 
 }
 

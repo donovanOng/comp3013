@@ -1,5 +1,6 @@
 <div class="container">
 <h2>My Photo Collections</h2>
+<p><a href="<?= URL; ?>collection/create">New Collection</a></p>
 <? if ($collections != NULL) { ?>
   <table>
     <tbody>
