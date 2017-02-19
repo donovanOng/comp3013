@@ -1,5 +1,5 @@
 <div class="container">
-<h2>My Photo Collections</h2>
+<h2>Photo Collections of userID = <?= $userID ?></h2>
 <p><a href="<?= URL; ?>collection/create">New Collection</a></p>
 <? if ($collections != NULL) { ?>
   <table>
@@ -23,5 +23,7 @@
       <?php } ?>
     </tbody>
   </table>
+<? } else { ?>
+  <p>No collection found.</p>
 <? } ?>
 </div>

@@ -16,7 +16,7 @@ class UserController
   {
 
     $model = new User();
-    $user = $model->find_by_id($userID[0]);
+    $user = $model->find_by_id($userID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/users/profile.php';

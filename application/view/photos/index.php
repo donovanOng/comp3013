@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>My Photos</h2>
+  <h2>Photos of userID = <?= $userID ?></h2>
   <? if ($photos != NULL) { ?>
     <p>Number of photos: <?= count($photos) ?></p>
     <? if (count($photos) > 0) { ?>

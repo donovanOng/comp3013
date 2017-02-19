@@ -32,6 +32,8 @@ class CollectionController
     $model = new Collection();
     $collection = $model->find_by_id($collectionID);
 
+    // TODO: Check if user has view access to collection
+
     $collection_photos = NULL;
     if (count($collection) > 0) {
       $collection_photos = $model->find_colllection_photos($collectionID);
