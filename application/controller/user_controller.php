@@ -4,9 +4,14 @@ require_once APP . 'model/user.php';
 
 class UserController
 {
-  // TODO: ONLY admin can view
+
   public function index()
   {
+    $model = new User();
+    $users = $model->get_all();
+
+    // TODO: ONLY admin can view
+    
     require APP . 'view/_templates/header.php';
     require APP . 'view/users/index.php';
     require APP . 'view/_templates/footer.php';

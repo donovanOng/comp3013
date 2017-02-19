@@ -4,7 +4,7 @@ require_once APP . 'core/model.php';
 
 class User extends Model
 {
-  public function getAll()
+  public function get_all()
   {
     // TODO: limit field retrieved
     $sql = "SELECT * FROM user";
