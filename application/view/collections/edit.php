@@ -1,5 +1,5 @@
 <? if ($userID == $collection->userID) { ?>
-  
+
   <!-- Only collection's owner can edit rights -->
   <form action="<?php echo URL; ?>collection/update" method="POST">
 

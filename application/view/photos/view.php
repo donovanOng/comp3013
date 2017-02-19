@@ -17,6 +17,6 @@
 
     </p>
   <? } else { ?>
-      <p>Image with id = <?= $photoID ?> doesn't exist!</p>
+      <p>Photo with id = <?= $photoID ?> doesn't exist!</p>
   <? } ?>
 </div>

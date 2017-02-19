@@ -1,16 +1,29 @@
 <?php
 
 require_once APP . 'model/photo.php';
+require_once APP . 'model/collection.php';
 
 class PhotoController
 {
 
+  private function in_array_field($needle, $needle_field, $haystack, $strict = false) {
+      if ($strict) {
+          foreach ($haystack as $item)
+              if (isset($item->$needle_field) && $item->$needle_field === $needle)
+                  return true;
+      }
+      else {
+          foreach ($haystack as $item)
+              if (isset($item->$needle_field) && $item->$needle_field == $needle)
+                  return true;
+      }
+      return false;
+  }
+  
   public function index()
   {
     // list of user's photos if logged in
     $current_user = NULL;
-    $photos = NULL;
-
     $current_user = $_SESSION['current_user'];
     $userID =$current_user->userID;
 
@@ -30,14 +43,29 @@ class PhotoController
   public function view($photoID)
   {
 
+    $current_user = $_SESSION['current_user'];
+    $userID =$current_user->userID;
+
     // display photo and comments
     $model = new Photo();
     $photo = $model->find_by_id($photoID);
 
-    // TODO: Check if user has view access to photo
-
     $photo_comments = NULL;
-    if (count($photo) > 0) {
+    if ($photo != NULL) {
+
+      $collectionID = $photo->collectionID;
+      $collection_model = new Collection();
+      $collection = $collection_model->find_by_id($collectionID);
+
+      if ($collection->viewRights < 2 && $userID != $collection->userID && $photo->userID != $userID) {
+        $users_with_view_accesss = $collection_model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
+        if (!$this->in_array_field($userID, 'userID', $users_with_view_accesss)) {
+          $_SESSION['message'] = 'You dont have rights to view photo ' . $photo->photoID;
+          header('location: ' . URL);
+          die();
+        }
+      }
+
       $photo_comments = $model->find_photo_comments($photoID);
     }
 
