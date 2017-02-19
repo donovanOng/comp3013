@@ -19,7 +19,7 @@ class PhotoController
       }
       return false;
   }
-  
+
   public function index()
   {
     // list of user's photos if logged in
@@ -61,7 +61,7 @@ class PhotoController
         $users_with_view_accesss = $collection_model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
         if (!$this->in_array_field($userID, 'userID', $users_with_view_accesss)) {
           $_SESSION['message'] = 'You dont have rights to view photo ' . $photo->photoID;
-          header('location: ' . URL);
+          Redirect(URL);
           die();
         }
       }
@@ -116,22 +116,22 @@ class PhotoController
                                 $targetFile);
         if ($result) {
           $_SESSION['message'] = 'Photo uploaded successfully';
-          header('location: ' . URL . 'collection/' . $collectionID);
+          Redirect(URL . 'collection/' . $collectionID);
         } else {
           $_SESSION['message'] = 'Photo upload failed';
           unlink($targetFile); // remove uploaded file
-          header('location: ' . URL . 'photo/upload?collectionID=' . $collectionID);
+          Redirect(URL . 'photo/upload?collectionID=' . $collectionID);
         }
 
 
       } else {
         $_SESSION['message'] = 'Photo upload failed';
-        header('location: ' . URL . 'photo/upload?collectionID=' . $collectionID);
+        Redirect(URL . 'photo/upload?collectionID=' . $collectionID);
       }
 
     } else {
       $_SESSION['message'] = 'No Collection ID';
-      header('location: ' . URL);
+      Redirect(URL);
     }
 
   }

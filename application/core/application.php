@@ -89,7 +89,7 @@ class Application
         if (isset($_SESSION['message'])) {
           $_SESSION['message'] = 'Please Log In';
         }
-        header('location: ' . URL . 'login');
+        Redirect(URL . 'login');
       }
 
     }

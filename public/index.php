@@ -7,6 +7,9 @@ define('APP', ROOT . 'application' . DIRECTORY_SEPARATOR);
 // load application config (error reporting etc.)
 require APP . 'config/config.php';
 
+// load common functions
+require APP . 'libs/helper.php';
+
 // load application class
 require APP . 'core/application.php';
 

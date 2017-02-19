@@ -21,17 +21,17 @@ class CommentController
                                 $content);
         if ($result) {
           $_SESSION['message'] = 'Comment added successfully';
-          header('location: ' . URL . 'photo/' . $photoID);
+          Redirect(URL . 'photo/' . $photoID);
         } else {
           $_SESSION['message'] = 'Fail to add comment';
-          header('location: ' . URL . 'photo/' . $photoID);
+          Redirect(URL . 'photo/' . $photoID);
         }
 
       }
 
     } else {
       $_SESSION['message'] = 'Not logged in!';
-      header('location: ' . URL);
+      Redirect(URL);
     }
   }
 

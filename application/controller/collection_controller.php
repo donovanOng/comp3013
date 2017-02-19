@@ -57,7 +57,7 @@ class CollectionController
         $users_with_view_accesss = $model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
         if (!$this->in_array_field($userID, 'userID', $users_with_view_accesss)) {
           $_SESSION['message'] = 'You dont have rights to view Collection ' . $collection->collectionID;
-          header('location: ' . URL . $collection->userID);
+          Redirect(URL . $collection->userID);
           die();
         }
       }
@@ -96,7 +96,7 @@ class CollectionController
       $_SESSION['message'] = 'Fail to create collection!';
     }
 
-    header('location: ' . URL . 'collection');
+    Redirect(URL . 'collection');
   }
 
   public function update()
@@ -121,11 +121,11 @@ class CollectionController
         $_SESSION['message'] = 'Fail to update collection!';
       }
 
-      header('location: ' . URL . "collection\\" . $collectionID);
+      Redirect(URL . "collection\\" . $collectionID);
 
     } else {
       $_SESSION['message'] = 'Missing required POST header';
-      header('location: ' . URL . 'collection');
+      Redirect(URL . 'collection');
     }
   }
 
@@ -145,11 +145,11 @@ class CollectionController
 
         // TODO: Remove image files in public directory
 
-        header('location: ' . URL . 'collection');
+        Redirect(URL . 'collection');
 
     } else {
       $_SESSION['message'] = 'No Collection ID';
-      header('location: ' . URL . 'collection');
+      Redirect(URL . 'collection');
     }
   }
 

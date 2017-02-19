@@ -10,7 +10,7 @@ class AuthController
     if (isset($_SESSION['current_user'])) {
 
       $_SESSION['message'] = 'Already logged in!';
-      header('location: ' . URL);
+      Redirect(URL);
 
     } elseif (isset($_POST["login"])) {
 
@@ -23,11 +23,11 @@ class AuthController
 
         $_SESSION['current_user'] = $user;
         $_SESSION['message'] = 'Login successfully';
-        header('location: ' . URL );
+        Redirect(URL);
 
       } else {
         $_SESSION['message'] = 'Login failed';
-        header('location: ' . URL . 'login');
+        Redirect(URL . 'login');
       }
 
     } else {
@@ -44,7 +44,7 @@ class AuthController
   {
     session_unset();
     $_SESSION['message'] = 'Logout successfully';
-    header('location: ' . URL);
+    Redirect(URL);
   }
 
   public function signup()
@@ -52,7 +52,7 @@ class AuthController
     if (isset($_SESSION['current_user'])) {
 
       $_SESSION['message'] = 'Already logged in!';
-      header('location: ' . URL);
+      Redirect(URL);
 
     } elseif (isset($_POST["signup"])) {
 
@@ -63,7 +63,7 @@ class AuthController
       if ($model->find_by_email($_POST["email"])) {
 
         $_SESSION['message'] = 'Email used';
-        header('location: ' . URL . 'signup');
+        Redirect(URL . 'signup');
 
       } else {
         $result = $model->create($_POST["first_name"],
@@ -72,10 +72,10 @@ class AuthController
                                  $_POST["password"]);
         if ($result == True) {
           $_SESSION['message'] = 'Sign Up successfully';
-          header('location: ' . URL . 'login');
+          Redirect(URL . 'login');
         } else {
           $_SESSION['message'] = 'Sign Up failed';
-          header('location: ' . URL . 'signup');
+          Redirect(URL . 'signup');
         }
 
       }
