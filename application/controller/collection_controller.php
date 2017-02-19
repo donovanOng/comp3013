@@ -5,35 +5,24 @@ require_once APP . 'model/collection.php';
 class CollectionController
 {
 
-  private function in_array_field($needle, $needle_field, $haystack, $strict = false) {
-      if ($strict) {
-          foreach ($haystack as $item)
-              if (isset($item->$needle_field) && $item->$needle_field === $needle)
-                  return true;
-      }
-      else {
-          foreach ($haystack as $item)
-              if (isset($item->$needle_field) && $item->$needle_field == $needle)
-                  return true;
-      }
-      return false;
+  function __construct()
+  {
+    if (isset($_SESSION['current_user'])) {
+      $this->current_user = $_SESSION['current_user'];
+      $this->current_userID = $_SESSION['current_user']->userID;
+    }
   }
 
   public function index()
   {
     // diplay list of user's collection if logged in
-    $current_user = NULL;
-    $current_user = $_SESSION['current_user'];
-    $userID = $current_user->userID;
-
-    $this->user_index($userID);
-
+    $this->user_index($this->current_userID);
   }
 
-  public function user_index($userID)
+  public function user_index($collection_userID)
   {
     $model = new Collection();
-    $collections = $model->find_user_collection($userID);
+    $collections = $model->find_user_collection($collection_userID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/collections/index.php';
@@ -42,10 +31,6 @@ class CollectionController
 
   public function view($collectionID)
   {
-
-    $current_user = $_SESSION['current_user'];
-    $userID = $current_user->userID;
-
     // display photos from single collection
     $model = new Collection();
     $collection = $model->find_by_id($collectionID);
@@ -53,18 +38,18 @@ class CollectionController
     $collection_photos = NULL;
     if ($collection != NULL) {
 
-      if ($collection->viewRights < 2 && $userID != $collection->userID) {
+      if ($collection->viewRights < 2 && $this->current_userID != $collection->userID) {
         $users_with_view_accesss = $model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
-        if (!$this->in_array_field($userID, 'userID', $users_with_view_accesss)) {
+        if (!in_array_field($this->current_userID, 'userID', $users_with_view_accesss)) {
           $_SESSION['message'] = 'You dont have rights to view Collection ' . $collection->collectionID;
           Redirect(URL . $collection->userID);
           die();
         }
       }
 
-      if ($collection->uploadRights < 2 && $userID != $collection->userID){
+      if ($collection->uploadRights < 2 && $this->current_userID != $collection->userID){
         $users_with_upload_accesss = $model->find_users_with_collection_access($collection->userID,  $collection->uploadRights);
-        $user_upload_rights = $this->in_array_field($userID, 'userID', $users_with_upload_accesss);
+        $user_upload_rights = in_array_field($this->current_userID, 'userID', $users_with_upload_accesss);
       } else {
         $user_upload_rights = True;
       }
@@ -82,13 +67,8 @@ class CollectionController
   public function create()
   {
     // TODO: Add name to collection
-
-    $current_user = NULL;
-    $current_user = $_SESSION['current_user'];
-    $userID = $current_user->userID;
-
     $model = new Collection();
-    $result = $model->create($userID);
+    $result = $model->create($this->current_userID);
 
     if ($result) {
       $_SESSION['message'] = 'Collection created!';
@@ -103,15 +83,12 @@ class CollectionController
   {
     if (isset($_POST["update"])) {
 
-      $current_user = $_SESSION['current_user'];
-      $userID = $current_user->userID;
-
       $uploadRights = $_POST["uploadRights"];
       $viewRights = $_POST["viewRights"];
       $collectionID = $_POST["collectionID"];
       $model = new Collection();
       $result = $model->update_collection_rights($collectionID,
-                                                 $userID,
+                                                 $this->current_userID,
                                                  $uploadRights,
                                                  $viewRights);
 
@@ -135,7 +112,8 @@ class CollectionController
         $collectionID = $_GET['collectionID'];
 
         $model = new Collection();
-        $result = $model->delete($collectionID);
+        $result = $model->delete($collectionID,
+                                 $this->current_userID);
 
         if ($result) {
           $_SESSION['message'] = 'Collection deleted!';
@@ -152,8 +130,6 @@ class CollectionController
       Redirect(URL . 'collection');
     }
   }
-
-
 
 }
 

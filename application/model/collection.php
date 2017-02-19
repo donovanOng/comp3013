@@ -64,11 +64,12 @@ class Collection extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function delete($collectionID)
+  public function delete($collectionID, $userID)
   {
-    $sql = "DELETE FROM photoCollection WHERE collectionID = :collectionID";
+    $sql = "DELETE FROM photoCollection WHERE collectionID = :collectionID AND userID = :userID";
     $query = $this->db->prepare($sql);
-    $params = array(':collectionID' => $collectionID);
+    $params = array(':collectionID' => $collectionID,
+                    ':userID' => $userID);
     return $query->execute($params); // boolean result
   }
 

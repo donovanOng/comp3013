@@ -5,9 +5,17 @@ require_once APP . 'model/user.php';
 class AuthController
 {
 
-  public function login()
+  function __construct()
   {
     if (isset($_SESSION['current_user'])) {
+      $this->current_user = $_SESSION['current_user'];
+      $this->current_userID = $_SESSION['current_user']->userID;
+    }
+  }
+
+  public function login()
+  {
+    if (isset($this->current_user)) {
 
       $_SESSION['message'] = 'Already logged in!';
       Redirect(URL);
@@ -49,7 +57,7 @@ class AuthController
 
   public function signup()
   {
-    if (isset($_SESSION['current_user'])) {
+    if (isset($this->current_user)) {
 
       $_SESSION['message'] = 'Already logged in!';
       Redirect(URL);

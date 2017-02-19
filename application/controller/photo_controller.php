@@ -6,34 +6,24 @@ require_once APP . 'model/collection.php';
 class PhotoController
 {
 
-  private function in_array_field($needle, $needle_field, $haystack, $strict = false) {
-      if ($strict) {
-          foreach ($haystack as $item)
-              if (isset($item->$needle_field) && $item->$needle_field === $needle)
-                  return true;
-      }
-      else {
-          foreach ($haystack as $item)
-              if (isset($item->$needle_field) && $item->$needle_field == $needle)
-                  return true;
-      }
-      return false;
+  function __construct()
+  {
+    if (isset($_SESSION['current_user'])) {
+      $this->current_user = $_SESSION['current_user'];
+      $this->current_userID = $_SESSION['current_user']->userID;
+    }
   }
 
   public function index()
   {
     // list of user's photos if logged in
-    $current_user = NULL;
-    $current_user = $_SESSION['current_user'];
-    $userID =$current_user->userID;
-
-    $this->user_index($userID);
+    $this->user_index($this->current_userID);
   }
 
-  public function user_index($userID)
+  public function user_index($photo_userID)
   {
     $model = new Photo();
-    $photos = $model->find_user_photos($userID);
+    $photos = $model->find_user_photos($photo_userID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/photos/index.php';
@@ -42,10 +32,6 @@ class PhotoController
 
   public function view($photoID)
   {
-
-    $current_user = $_SESSION['current_user'];
-    $userID =$current_user->userID;
-
     // display photo and comments
     $model = new Photo();
     $photo = $model->find_by_id($photoID);
@@ -57,9 +43,11 @@ class PhotoController
       $collection_model = new Collection();
       $collection = $collection_model->find_by_id($collectionID);
 
-      if ($collection->viewRights < 2 && $userID != $collection->userID && $photo->userID != $userID) {
+      if ($collection->viewRights < 2
+          && $this->current_userID != $collection->userID
+          && $photo->userID != $this->current_userID) {
         $users_with_view_accesss = $collection_model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
-        if (!$this->in_array_field($userID, 'userID', $users_with_view_accesss)) {
+        if (!$this->in_array_field($this->current_userID, 'userID', $users_with_view_accesss)) {
           $_SESSION['message'] = 'You dont have rights to view photo ' . $photo->photoID;
           Redirect(URL);
           die();
@@ -76,10 +64,6 @@ class PhotoController
 
   public function upload()
   {
-
-    $current_user = NULL;
-    $current_user = $_SESSION['current_user'];
-    $userID = $current_user->userID;
 
     if (isset($_GET['collectionID'])) {
         $collectionID = $_GET['collectionID'];
@@ -99,7 +83,7 @@ class PhotoController
       // TODO validate file format, size
       // TODO rename file if already exist
 
-      $targetDirectory = "uploads/users/" . $userID . '/';
+      $targetDirectory = "uploads/users/" . $this->current_userID . '/';
       // create user's directory if it does not exist
       if (!file_exists($targetDirectory)) {
           mkdir($targetDirectory, 0777, true);
@@ -111,7 +95,7 @@ class PhotoController
       if ($uploadResult) {
         // insert into database
         $model = new Photo();
-        $result = $model->create($userID,
+        $result = $model->create($this->current_userID,
                                 $collectionID,
                                 $targetFile);
         if ($result) {

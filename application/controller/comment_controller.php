@@ -5,6 +5,14 @@ require_once APP . 'model/comment.php';
 class CommentController
 {
 
+  function __construct()
+  {
+    if (isset($_SESSION['current_user'])) {
+      $this->current_user = $_SESSION['current_user'];
+      $this->current_userID = $_SESSION['current_user']->userID;
+    }
+  }
+
   public function create()
   {
     if (isset($_POST['submit'])) {
@@ -13,7 +21,7 @@ class CommentController
 
       // insert into database
       $model = new Comment();
-      $result = $model->create($current_user->userID,
+      $result = $model->create($this->current_userID,
                               $photoID,
                               $content);
       if ($result) {

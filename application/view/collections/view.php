@@ -2,7 +2,7 @@
 <? if ($collection != NULL) { ?>
   <h2>
     Collection <?= $collectionID ?> by userID = <?= $collection->userID ?>
-    <? if ($userID == $collection->userID ) { ?> (me)<? } ?>
+    <? if ($this->current_userID == $collection->userID ) { ?> (me)<? } ?>
   </h2>
 
   <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
