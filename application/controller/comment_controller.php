@@ -1,6 +1,6 @@
 <?php
 
-require APP . 'model/comment.php';
+require_once APP . 'model/comment.php';
 
 class CommentController
 {

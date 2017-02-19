@@ -1,6 +1,6 @@
 <?php
 
-require APP . 'model/photo.php';
+require_once APP . 'model/photo.php';
 
 class PhotoController
 {

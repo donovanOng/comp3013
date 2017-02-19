@@ -1,6 +1,6 @@
 <?php
 
-require APP . 'core/model.php';
+require_once APP . 'core/model.php';
 
 class Photo extends Model
 {
@@ -22,7 +22,7 @@ class Photo extends Model
     $query->execute($params);
     return $query->fetch();
   }
-  
+
 
   public function find_photo_comments($photoId)
   {

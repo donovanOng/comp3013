@@ -1,6 +1,6 @@
 <?php
 
-require APP . 'core/model.php';
+require_once APP . 'core/model.php';
 
 class Comment extends Model
 {

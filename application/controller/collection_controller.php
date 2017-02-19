@@ -1,6 +1,6 @@
 <?php
 
-require APP . 'model/collection.php';
+require_once APP . 'model/collection.php';
 
 class CollectionController
 {

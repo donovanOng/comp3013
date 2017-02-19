@@ -1,6 +1,6 @@
 <?php
 
-require APP . 'model/user.php';
+require_once APP . 'model/user.php';
 
 class UserController
 {
