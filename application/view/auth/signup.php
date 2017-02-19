@@ -1,6 +1,6 @@
 <h2>Sign Up</h2>
 
-<form action="<?php echo URL; ?>auth/signup" method="POST">
+<form action="<?php echo URL; ?>signup" method="POST">
   <label>First Name</label>
   <input type="text" name="first_name" value="" required/><br>
   <label>Last Name</label>

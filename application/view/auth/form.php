@@ -1,6 +1,6 @@
 <h2>Log in to ###</h2>
 
-<form action="<?php echo URL; ?>auth/login" method="POST">
+<form action="<?php echo URL; ?>login" method="POST">
   <label>Email</label>
   <input type="text" name="email" value="" required /><br>
   <label>Password</label>

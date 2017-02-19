@@ -13,28 +13,84 @@ class Application
 
     $this->splitURL();
 
-    if (!$this->url_controller) {
+    if (isset($_SESSION['current_user'])){
+      // for logged in user
 
-      // load start page
-      require_once APP . 'controller/home_controller.php';
-      $page = new HomeController();
-      $page->index();
+      if (!$this->url_controller) {
 
-    } elseif (file_exists(APP . 'controller/'. $this->url_controller . '_controller.php')) {
+        // load home page
+        require_once APP . 'controller/home_controller.php';
+        $page = new HomeController();
+        $page->index();
 
-      $this->call_controller_action($this->url_controller, $this->url_action);
+      } elseif (file_exists(APP . 'controller/'. $this->url_controller . '_controller.php')) {
 
-    } elseif ($this->user_exist($this->url_controller)) {
+        $this->call_controller_action($this->url_controller, $this->url_action);
 
-      // load user profile page
-      require APP . 'controller/user_controller.php';
-      $page = new UserController();
-      $page->profile($this->url_controller);
+      } elseif ($this->user_exist($this->url_controller)) {
+
+        $userID = $this->url_controller;
+        $controller = $this->url_action;
+        $action = $this->url_params;
+
+        if (strlen($controller) == 0) {
+
+          // load user profile page
+          require APP . 'controller/user_controller.php';
+          $page = new UserController();
+          $page->profile($userID);
+
+        } else {
+
+          require_once APP . 'controller/' . $controller . '_controller.php';
+          $controller = ucfirst($controller) . 'Controller';
+          $url_controller_obj = new $controller();
+          $url_controller_obj->user_index($userID);
+
+        }
+
+      } else {
+
+        if ($this->url_controller == 'login') {
+
+          require_once APP . 'controller/auth.php';
+          $page = new AuthController();
+          $page->login();
+
+        } elseif ($this->url_controller == 'logout') {
+
+          require_once APP . 'controller/auth.php';
+          $page = new AuthController();
+          $page->logout();
+
+        } elseif ($this->url_controller == 'signup') {
+
+          require_once APP . 'controller/auth.php';
+          $page = new AuthController();
+          $page->signup();
+
+        } else {
+          echo $this->url_controller . ' user not found, and ';
+          echo $this->url_controller . ' controller not found';
+        }
+
+      }
 
     } else {
 
-      echo $this->url_controller . ' user not found, and ';
-      echo $this->url_controller . ' controller not found';
+      require_once APP . 'controller/auth.php';
+      $page = new AuthController();
+
+      if ($this->url_controller == 'login' && (count($this->url_action) == 0)) {
+        $page->login();
+      } elseif ($this->url_controller == 'signup' && (count($this->url_action) == 0)) {
+        $page->signup();
+      } else {
+        if (isset($_SESSION['message'])) {
+          $_SESSION['message'] = 'Please Log In';
+        }
+        header('location: ' . URL . 'login');
+      }
 
     }
 
@@ -42,15 +98,20 @@ class Application
 
   private function call_controller_action($controller, $action_or_id)
   {
-    require_once APP . 'controller/' . $this->url_controller . '_controller.php';
-    $controller = ucfirst($this->url_controller) . 'Controller';
+    require_once APP . 'controller/' . $controller . '_controller.php';
+    $controller = ucfirst($controller) . 'Controller';
     $url_controller_obj = new $controller();
 
 
     if (strlen($action_or_id) == 0)
     {
-      // no action, show index
-      $url_controller_obj->index();
+
+      if (method_exists($url_controller_obj, 'index')) {
+        // no action, show index
+        $url_controller_obj->index();
+      } else {
+        echo $controller . ' index method not found.';
+      }
 
     } elseif (method_exists($url_controller_obj, $action_or_id)) {
 

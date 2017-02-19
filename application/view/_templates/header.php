@@ -13,10 +13,10 @@
 <div class="navigation">
     <a href="<?php echo URL; ?>">Home</a>
     <? if(isset($_SESSION['current_user']))  { ?>
-      <a href="<?php echo URL; ?>auth/logout">Log Out</a>
+      <a href="<?php echo URL; ?>logout">Log Out</a>
     <? } else { ?>
-      <a href="<?php echo URL; ?>auth/signup">Sign Up</a>
-      <a href="<?php echo URL; ?>auth">Log In</a>
+      <a href="<?php echo URL; ?>signup">Sign Up</a>
+      <a href="<?php echo URL; ?>login">Log In</a>
     <? } ?>
 </div>
 
