@@ -7,26 +7,24 @@ class PhotoController
 
   public function index()
   {
-
     // list of user's photos if logged in
     $current_user = NULL;
     $photos = NULL;
 
-    if (isset($_SESSION['current_user'])) {
-      $current_user = $_SESSION['current_user'];
-      $model = new Photo();
-      $photos = $model->find_user_photos($current_user->userID);
+    $current_user = $_SESSION['current_user'];
+    $userID =$current_user->userID;
 
-      require APP . 'view/_templates/header.php';
-      require APP . 'view/photos/index.php';
-      require APP . 'view/_templates/footer.php';
+    $this->user_index($userID);
+  }
 
-    } else {
-      $_SESSION['message'] = 'Not logged in!';
-      require APP . 'view/_templates/header.php';
-      require APP . 'view/_templates/footer.php';
-    }
+  public function user_index($userID)
+  {
+    $model = new Photo();
+    $photos = $model->find_user_photos($userID);
 
+    require APP . 'view/_templates/header.php';
+    require APP . 'view/photos/index.php';
+    require APP . 'view/_templates/footer.php';
   }
 
   public function view($photoID)
