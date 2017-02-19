@@ -15,7 +15,7 @@
               <td><?= $collection->uploadRights ?></td>
               <td><?= $collection->viewRights ?></td>
               <td>
-                <a href="<?= URL; ?>collection/browse/<?= $collection->collectionID ?>">
+                <a href="<?= URL; ?>collection/<?= $collection->collectionID ?>">
                   View Collection
                 </a>
               </td>

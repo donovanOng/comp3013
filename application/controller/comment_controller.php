@@ -21,10 +21,10 @@ class CommentController
                                 $content);
         if ($result) {
           $_SESSION['message'] = 'Comment added successfully';
-          header('location: ' . URL . 'photo/browse/' . $photoID);
+          header('location: ' . URL . 'photo/' . $photoID);
         } else {
           $_SESSION['message'] = 'Fail to add comment';
-          header('location: ' . URL . 'photo/browse/' . $photoID);
+          header('location: ' . URL . 'photo/' . $photoID);
         }
 
       }

@@ -1,0 +1,5 @@
+<div class="container">
+  <h2>Profile</h2>
+  <?= $user->first_name ?>
+  <?= $user->last_name ?>
+</div>

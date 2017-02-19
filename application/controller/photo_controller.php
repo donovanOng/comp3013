@@ -29,11 +29,10 @@ class PhotoController
 
   }
 
-  public function browse($photoID)
+  public function view($photoID)
   {
 
     // display photo and comments
-    $photoID = $photoID[0];
     $model = new Photo();
     $photo = $model->find_by_id($photoID);
 
@@ -45,7 +44,7 @@ class PhotoController
     }
 
     require APP . 'view/_templates/header.php';
-    require APP . 'view/photos/browse.php';
+    require APP . 'view/photos/view.php';
     require APP . 'view/_templates/footer.php';
   }
 
@@ -105,7 +104,7 @@ class PhotoController
                                   $targetFile);
           if ($result) {
             $_SESSION['message'] = 'Photo uploaded successfully';
-            header('location: ' . URL . 'collection/browse/' . $collectionID);
+            header('location: ' . URL . 'collection/' . $collectionID);
           } else {
             $_SESSION['message'] = 'Photo upload failed';
             unlink($targetFile); // remove uploaded file

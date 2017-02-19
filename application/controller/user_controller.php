@@ -11,6 +11,18 @@ class UserController
     require APP . 'view/users/index.php';
     require APP . 'view/_templates/footer.php';
   }
+
+  public function profile($userID)
+  {
+
+    $model = new User();
+    $user = $model->find_by_id($userID[0]);
+
+    require APP . 'view/_templates/header.php';
+    require APP . 'view/users/profile.php';
+    require APP . 'view/_templates/footer.php';
+  }
+
 }
 
 ?>

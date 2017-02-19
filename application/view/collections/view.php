@@ -6,7 +6,7 @@
   <? if (count($collection_photos) > 0) { ?>
     <?php foreach ($collection_photos as $photo) { ?>
       <li>
-          <a href="<?= URL; ?>photo/browse/<?= $photo->photoID ?>">
+          <a href="<?= URL; ?>photo/<?= $photo->photoID ?>">
             <?= $photo->path ?>
           </a> uploaded by userID = <?= $photo->userID ?>
       </li>

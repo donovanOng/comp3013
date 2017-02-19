@@ -16,40 +16,61 @@ class Application
     if (!$this->url_controller) {
 
       // load start page
-      require APP . 'controller/home_controller.php';
+      require_once APP . 'controller/home_controller.php';
       $page = new HomeController();
       $page->index();
 
     } elseif (file_exists(APP . 'controller/'. $this->url_controller . '_controller.php')) {
 
-      require APP . 'controller/' . $this->url_controller . '_controller.php';
-      $controller = ucfirst($this->url_controller) . 'Controller';
-      $this->url_controller_obj = new $controller();
+      $this->call_controller_action($this->url_controller, $this->url_action);
 
-      if (method_exists($this->url_controller_obj, $this->url_action)) {
+    } elseif ($this->user_exist($this->url_controller)) {
 
-        if (!empty($this->url_params)) {
-          call_user_func(array($this->url_controller_obj, $this->url_action), $this->url_params);
-        } else {
-          $this->url_controller_obj->{$this->url_action}();
-        }
-
-      } else {
-
-        if (strlen($this->url_action) == 0) {
-          $this->url_controller_obj->index();
-        } else {
-          echo $this->url_controller . ' controller and ' . $this->url_action . ' action not found';
-        }
-
-      }
+      // load user profile page
+      require APP . 'controller/user_controller.php';
+      $page = new UserController();
+      $page->profile($this->url_controller);
 
     } else {
 
+      echo $this->url_controller . ' user not found, and ';
       echo $this->url_controller . ' controller not found';
 
     }
 
+  }
+
+  private function call_controller_action($controller, $action_or_id)
+  {
+    require_once APP . 'controller/' . $this->url_controller . '_controller.php';
+    $controller = ucfirst($this->url_controller) . 'Controller';
+    $url_controller_obj = new $controller();
+
+
+    if (strlen($action_or_id) == 0)
+    {
+      // no action, show index
+      $url_controller_obj->index();
+
+    } elseif (method_exists($url_controller_obj, $action_or_id)) {
+
+      // action after controller
+      $url_controller_obj->{$action_or_id}();
+
+    } else {
+
+      // id after controller
+      $url_controller_obj->view($action_or_id);
+
+    }
+  }
+
+  private function user_exist($userID)
+  {
+    require APP . 'model/user.php';
+    $model = new User();
+    $user = $model->find_by_id($userID);
+    return ($user != NULL);
   }
 
   private function splitURL()

@@ -3,7 +3,7 @@
     <h2>View Image</h2>
     <p>
       Image at <?= $photo->path ?> in
-      <a href="<?= URL; ?>collection/browse/<?= $photo->collectionID ?>">collection <?= $photo->collectionID ?></a>,
+      <a href="<?= URL; ?>collection/<?= $photo->collectionID ?>">collection <?= $photo->collectionID ?></a>,
        uploaded by userID = <?= $photo->userID ?>
 
        <p>Number of comments: <?= count($photo_comments) ?></p>

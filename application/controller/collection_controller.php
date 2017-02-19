@@ -28,10 +28,9 @@ class CollectionController
 
   }
 
-  public function browse($collectionID)
+  public function view($collectionID)
   {
     // display photos from single collection
-    $collectionID = $collectionID[0];
     $model = new Collection();
     $collection = $model->find_by_id($collectionID);
 
@@ -41,7 +40,7 @@ class CollectionController
     }
 
     require APP . 'view/_templates/header.php';
-    require APP . 'view/collections/browse.php';
+    require APP . 'view/collections/view.php';
     require APP . 'view/_templates/footer.php';
   }
 
