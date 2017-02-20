@@ -50,7 +50,6 @@ class PhotoController
         if (!$this->in_array_field($this->current_userID, 'userID', $users_with_view_accesss)) {
           $_SESSION['message'] = 'You dont have rights to view photo ' . $photo->photoID;
           Redirect(URL);
-          die();
         }
       }
 
@@ -79,35 +78,13 @@ class PhotoController
       $collectionID = $_POST['collectionID'];
       $uploadFile = $_FILES['uploadFile'];
 
-      // TODO: Check if user has upload access to photo collection
-      // TODO validate file format, size
-      // TODO rename file if already exist
+      // TODO: Check if user has upload access to photo collectiont
 
-      $targetDirectory = "uploads/users/" . $this->current_userID . '/';
-      // create user's directory if it does not exist
-      if (!file_exists($targetDirectory)) {
-          mkdir($targetDirectory, 0777, true);
-      }
+      $result = $this->upload_photo($collectionID, $uploadFile);
 
-      $targetFile = $targetDirectory . basename($uploadFile["name"]);
-      $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
-
-      if ($uploadResult) {
-        // insert into database
-        $model = new Photo();
-        $result = $model->create($this->current_userID,
-                                $collectionID,
-                                $targetFile);
-        if ($result) {
-          $_SESSION['message'] = 'Photo uploaded successfully';
-          Redirect(URL . 'collection/' . $collectionID);
-        } else {
-          $_SESSION['message'] = 'Photo upload failed';
-          unlink($targetFile); // remove uploaded file
-          Redirect(URL . 'photo/upload?collectionID=' . $collectionID);
-        }
-
-
+      if ($result) {
+        $_SESSION['message'] = 'Photo uploaded successfully';
+        Redirect(URL . 'collection/' . $collectionID);
       } else {
         $_SESSION['message'] = 'Photo upload failed';
         Redirect(URL . 'photo/upload?collectionID=' . $collectionID);
@@ -118,6 +95,36 @@ class PhotoController
       Redirect(URL);
     }
 
+  }
+
+
+  private function upload_photo($collectionID, $uploadFile)
+  {
+    $targetDirectory = "uploads/users/" . $this->current_userID . '/';
+    // create user's directory if it does not exist
+    if (!file_exists($targetDirectory)) {
+        mkdir($targetDirectory, 0777, true);
+    }
+
+    // TODO validate file format, size
+    // TODO rename file if already exits
+
+    $targetFile = $targetDirectory . basename($uploadFile["name"]);
+    $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
+
+    if ($uploadResult) {
+      // insert into database
+      $model = new Photo();
+      $result = $model->create($this->current_userID,
+                              $collectionID,
+                              $targetFile);
+
+      if (!$result) { unlink($targetFile); }
+      return $result;
+
+    } else {
+      return FALSE;
+    }
   }
 
 }
