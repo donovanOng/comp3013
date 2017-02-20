@@ -6,7 +6,10 @@ class Collection extends Model
 {
   public function find_user_collection($userID)
   {
-    $sql = "SELECT * FROM photoCollection WHERE userID = :userID";
+    $sql = "SELECT *
+            FROM photoCollection
+            WHERE userID = :userID";
+
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);
@@ -15,7 +18,10 @@ class Collection extends Model
 
   public function find_by_id($collectionID)
   {
-    $sql = "SELECT * FROM photoCollection WHERE collectionID = :collectionID";
+    $sql = "SELECT *
+            FROM photoCollection
+            WHERE collectionID = :collectionID";
+
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
     $query->execute($params);
@@ -34,6 +40,7 @@ class Collection extends Model
                 WHEN R.userID_2 = :collection_userdID THEN R.userID = U.userID
               END
               AND status = 0";
+
       $query = $this->db->prepare($sql);
       $params = array(':collection_userdID' => $collection_userdID);
       $query->execute($params);
@@ -49,7 +56,9 @@ class Collection extends Model
 
   public function find_colllection_photos($collectionID)
   {
-    $sql = "SELECT * FROM photo WHERE collectionID = :collectionID";
+    $sql = "SELECT * FROM photo
+            WHERE collectionID = :collectionID";
+
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
     $query->execute($params);
@@ -58,7 +67,9 @@ class Collection extends Model
 
   public function create($userID)
   {
-    $sql = "INSERT INTO photoCollection (userID) VALUES (:userID)";
+    $sql = "INSERT INTO photoCollection (userID)
+            VALUES (:userID)";
+
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     return $query->execute($params); // boolean result
@@ -66,7 +77,9 @@ class Collection extends Model
 
   public function delete($collectionID, $userID)
   {
-    $sql = "DELETE FROM photoCollection WHERE collectionID = :collectionID AND userID = :userID";
+    $sql = "DELETE FROM photoCollection
+            WHERE collectionID = :collectionID AND userID = :userID";
+
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID,
                     ':userID' => $userID);
@@ -75,7 +88,10 @@ class Collection extends Model
 
   public function update_collection_rights($collectionID, $userID, $uploadRights, $viewRights)
   {
-    $sql = "UPDATE photoCollection SET uploadRights = :uploadRights, viewRights = :viewRights WHERE userID = :userID AND collectionID = :collectionID";
+    $sql = "UPDATE photoCollection
+            SET uploadRights = :uploadRights, viewRights = :viewRights
+            WHERE userID = :userID AND collectionID = :collectionID";
+            
     $query = $this->db->prepare($sql);
     $params = array(':uploadRights' => $uploadRights,
                     ':viewRights' => $viewRights,

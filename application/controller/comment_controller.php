@@ -16,6 +16,7 @@ class CommentController
   public function create()
   {
     if (isset($_POST['submit'])) {
+      
       $photoID = $_POST['photoID'];
       $content = $_POST['content'];
 

@@ -78,7 +78,7 @@ class AuthController
                                  $_POST["last_name"],
                                  $_POST["email"],
                                  $_POST["password"]);
-        if ($result == True) {
+        if ($result) {
           $_SESSION['message'] = 'Sign Up successfully';
           Redirect(URL . 'login');
         } else {
