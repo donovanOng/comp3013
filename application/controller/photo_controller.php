@@ -97,7 +97,6 @@ class PhotoController
 
   }
 
-
   private function upload_photo($collectionID, $uploadFile)
   {
     $targetDirectory = "uploads/users/" . $this->current_userID . '/';

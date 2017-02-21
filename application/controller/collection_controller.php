@@ -60,8 +60,7 @@ class CollectionController
     require APP . 'view/_templates/header.php';
     require APP . 'view/collections/view.php';
     require APP . 'view/_templates/footer.php';
-
-
+    
   }
 
   public function create()

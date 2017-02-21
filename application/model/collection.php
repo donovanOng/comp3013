@@ -56,7 +56,8 @@ class Collection extends Model
 
   public function find_colllection_photos($collectionID)
   {
-    $sql = "SELECT * FROM photo
+    $sql = "SELECT *
+            FROM photo
             WHERE collectionID = :collectionID";
 
     $query = $this->db->prepare($sql);
@@ -91,7 +92,7 @@ class Collection extends Model
     $sql = "UPDATE photoCollection
             SET uploadRights = :uploadRights, viewRights = :viewRights
             WHERE userID = :userID AND collectionID = :collectionID";
-            
+
     $query = $this->db->prepare($sql);
     $params = array(':uploadRights' => $uploadRights,
                     ':viewRights' => $viewRights,
