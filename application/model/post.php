@@ -12,11 +12,23 @@ class Post extends Model
             WHERE postID = :postID";
 
     // TODO: Join user and blog to get detailed information
-    
+
     $query = $this->db->prepare($sql);
     $params = array(':postID' => $postID);
     $query->execute($params);
     return $query->fetch();
+  }
+
+  public function create($blogID, $title, $body)
+  {
+    $sql = "INSERT INTO post (blogID, title, body)
+            VALUES (:blogID, :title, :body)";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':blogID' => $blogID,
+                    ':title' => $title,
+                    ':body' => $body);
+    return $query->execute($params); // boolean result
   }
 
 }
