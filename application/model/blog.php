@@ -29,6 +29,18 @@ class Blog extends Model
     return $query->fetch();
   }
 
+  public function find_by_name($name)
+  {
+    $sql = "SELECT *
+            FROM blog
+            WHERE name LIKE :name";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':name' => "%" . $name . "%");
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
   public function find_blog_posts($blogID)
   {
     $sql = "SELECT *
