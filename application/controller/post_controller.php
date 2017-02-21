@@ -69,12 +69,39 @@ class PostController
       }
 
     } else {
-
       $_SESSION['message'] = 'No Blog ID';
       Redirect(URL);
-
     }
 
+  }
+
+  public function delete()
+  {
+    if (isset($_GET['postID']) && strlen($_GET['postID']) > 0 ) {
+
+      $postID = $_GET['postID'];
+
+      // TODO: check if current_userID is the owner of postID
+
+      $model = new Post();
+      $result = $model->delete($postID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Post deleted!';
+      } else {
+        $_SESSION['message'] = 'Fail to delete post!';
+      }
+
+      if (isset($_GET['blogID']) && strlen($_GET['blogID']) > 0 ) {
+        Redirect(URL . 'blog/' . $_GET['blogID']);
+      } else {
+        Redirect(URL . 'blog');
+      }
+
+    } else {
+      $_SESSION['message'] = 'No post ID';
+      Redirect(URL);
+    }
   }
 
 }

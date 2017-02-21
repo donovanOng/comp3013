@@ -31,6 +31,16 @@ class Post extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function delete($postID)
+  {
+    $sql = "DELETE FROM post
+            WHERE postID = :postID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':postID' => $postID);
+    return $query->execute($params); // boolean result
+  }
+
 }
 
 ?>
