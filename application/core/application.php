@@ -102,22 +102,15 @@ class Application
 
   }
 
-  private function call_controller_action($controller, $action_or_id)
+  private function call_controller_action($controller_name, $action_or_id)
   {
-    require_once APP . 'controller/' . $controller . '_controller.php';
-    $controller = ucfirst($controller) . 'Controller';
+    require_once APP . 'controller/' . $controller_name . '_controller.php';
+    $controller = ucfirst($controller_name) . 'Controller';
     $url_controller_obj = new $controller();
 
+    if (strlen($action_or_id) == 0) {
 
-    if (strlen($action_or_id) == 0)
-    {
-
-      if (method_exists($url_controller_obj, 'index')) {
-        // no action, show index
-        $url_controller_obj->index();
-      } else {
-        echo $controller . ' index method not found.';
-      }
+      Redirect(URL . $_SESSION['current_user']->userID . '/' . $controller_name);
 
     } elseif (method_exists($url_controller_obj, $action_or_id)) {
 
