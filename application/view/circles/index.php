@@ -1,8 +1,10 @@
 <div class="container">
-  <h2>List of Circle</h2>
 
-  <p>Number of circles: <?= count($circles) ?></p>
-  <? if (count($circles) > 0) { ?>
+  <h2>List of <?= $circle_userID ?>'s Circle</h2>
+
+  <h3>Admin of</h3>
+  <p>Number of circles: <?= count($circlesAdmin) ?></p>
+  <? if (count($circlesAdmin) > 0) { ?>
     <table>
       <tbody>
         <tr>
@@ -11,7 +13,35 @@
           <td>Name</td>
           <td>Created At</td>
         </tr>
-        <?php foreach ($circles as $circle) { ?>
+        <?php foreach ($circlesAdmin as $circle) { ?>
+            <tr>
+                <td><?= $circle->circleID ?></td>
+                <td><?= $circle->userID ?></td>
+                <td><?= $circle->name ?></td>
+                <td><?= $circle->CREATED_AT ?></td>
+                <td>
+                  <a href="<?= URL; ?>circle/<?= $circle->circleID ?>">
+                    View Circle
+                  </a>
+                </td>
+            </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  <? } ?>
+
+  <h3>Member of</h3>
+  <p>Number of circles: <?= count($circlesMember) ?></p>
+  <? if (count($circlesMember) > 0) { ?>
+    <table>
+      <tbody>
+        <tr>
+          <td>circleID</td>
+          <td>userID</td>
+          <td>Name</td>
+          <td>Created At</td>
+        </tr>
+        <?php foreach ($circlesMember as $circle) { ?>
             <tr>
                 <td><?= $circle->circleID ?></td>
                 <td><?= $circle->userID ?></td>
