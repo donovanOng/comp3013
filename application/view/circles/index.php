@@ -2,7 +2,7 @@
 
   <h2>List of <?= $circle_userID ?>'s Circle</h2>
 
-  <? require APP . 'view\circles\new.php'; ?>
+  <? require APP . 'view/circles/new.php'; ?>
 
   <h3>Admin of</h3>
   <p>Number of circles: <?= count($circlesAdmin) ?></p>

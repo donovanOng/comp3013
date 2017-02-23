@@ -19,7 +19,7 @@ class Circle extends Model
 
   public function find_user_circle_member($userID)
   {
-    //Circles that User belong to but do not manage
+    // Circles that User belong to but do not manage
     $sql = "SELECT c.*
             FROM circle as c, circlefriends as cf
             WHERE cf.userID = :userID
@@ -36,7 +36,20 @@ class Circle extends Model
     return $query->fetchAll();
   }
 
-  public function find_message_by_circleID($circleID){
+  public function find_circle_by_ID($circleID)
+  {
+    $sql = "SELECT *
+            FROM circle
+            WHERE circleID = :circleID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':circleID' => $circleID);
+    $query->execute($params);
+    return $query->fetch();
+  }
+
+  public function find_messages_by_circleID($circleID)
+  {
     $sql = "SELECT *
             FROM message
             WHERE circleID = :circleID";
@@ -48,6 +61,20 @@ class Circle extends Model
     $query->execute($params);
     return $query->fetchAll();
   }
+
+  public function find_members_by_circleID($circleID){
+    $sql = "SELECT *
+            FROM circlefriends
+            WHERE circleID = :circleID";
+
+    // TODO: Join user and blog to get detailed information
+
+    $query = $this->db->prepare($sql);
+    $params = array(':circleID' => $circleID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
 
   public function create($name, $userID)
   {

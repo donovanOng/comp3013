@@ -34,7 +34,9 @@ class CircleController
   {
     // display photos from single collection
     $model = new Circle();
-    $message = $model->find_message_by_circleID($circleID);
+    $circle = $model->find_circle_by_ID($circleID);
+    $messages = $model->find_messages_by_circleID($circleID);
+    $members = $model->find_members_by_circleID($circleID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/circles/view.php';
