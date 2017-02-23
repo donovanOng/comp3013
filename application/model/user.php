@@ -55,6 +55,20 @@ class User extends Model
     return $query->fetch();
   }
 
+  public function find_by_name($name)
+  {
+    $sql = "SELECT *
+            FROM user
+            WHERE first_name LIKE :name
+            OR last_name LIKE :name
+            OR CONCAT(first_name, ' ', last_name) LIKE :name";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':name' => $name . '%');
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
   public function create($first_name, $last_name, $email, $password)
   {
     $sql = "INSERT INTO user (first_name, last_name, email, password)

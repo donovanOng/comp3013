@@ -22,7 +22,7 @@ class FriendController
   public function user_index($friend_userID)
   {
     $model = new Friend();
-    $friends = $model->find_user_friend($friend_userID);
+    $friends = $model->find_user_friend($friend_userID, 0);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/friends/index.php';

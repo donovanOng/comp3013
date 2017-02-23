@@ -28,6 +28,18 @@ class UserController
     require APP . 'view/_templates/footer.php';
   }
 
+  public function search()
+  {
+    if (isset($_GET['query']) && strlen($_GET['query']) > 0) {
+      $query = $_GET['query'];
+      $model = new User();
+      $users = $model->find_by_name($query);
+
+      require APP . 'view/_templates/header.php';
+      require APP . 'view/users/result.php';
+      require APP . 'view/_templates/footer.php';
+    }
+  }
 }
 
 ?>
