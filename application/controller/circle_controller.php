@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/circle.php';
+require_once APP . 'model/friend.php';
 
 class CircleController
 {
@@ -38,6 +39,16 @@ class CircleController
     $messages = $model->find_messages_by_circleID($circleID);
     $members = $model->find_members_by_circleID($circleID);
 
+    $friend_model = new Friend();
+    $friends = $friend_model->find_user_friend($this->current_userID, 0);
+
+    $friends_id  = array_column($friends, 'userID');
+    $members_id = array_column($members, 'userID');
+
+    if ($friends != NULL) {
+      $friends_not_members = array_diff($friends_id, $members_id);
+    }
+
     require APP . 'view/_templates/header.php';
     require APP . 'view/circles/view.php';
     require APP . 'view/_templates/footer.php';
@@ -45,7 +56,6 @@ class CircleController
 
   public function new()
   {
-
     if (isset($_GET['name'])) {
 
       $circle_name = $_GET['name'];
@@ -58,16 +68,40 @@ class CircleController
       } else {
         $_SESSION['message'] = 'Fail to create circle!';
       }
-
     }
 
     Redirect(URL . 'circle');
   }
 
+  public function add_member()
+  {
+    if (isset($_POST['add'])) {
+
+      $userID = $_POST['userID'];
+      $circleID = $_POST['circleID'];
+
+      $model = new Circle();
+      $result = $model->add_circle_member($circleID,
+                                          $userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'User ' . $userID . ' added!';
+      } else {
+        $_SESSION['message'] = 'Fail to add user ' . $userID;
+      }
+
+      Redirect(URL . 'circle/' . $circleID);
+
+    } else {
+        Redirect(URL . 'circle');
+    }
+  }
+
+
   public function remove_member()
   {
-    if (isset($_GET['circleID']) && isset($_GET['userID']))
-    {
+    if (isset($_GET['circleID']) && isset($_GET['userID'])) {
+
       $model = new Circle();
       $circleID = $_GET['circleID'];
       $userID = $_GET['userID'];

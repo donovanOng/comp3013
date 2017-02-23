@@ -2,7 +2,6 @@
 
   <h2><?= $circle->name ?> by <?= $circle->userID ?></h2>
 
-<<<<<<< Updated upstream
   <? if ($messages != NULL) { ?>
     <h3>Messages</h3>
      <p>Number of messages: <?= count($messages) ?></p>
@@ -12,6 +11,10 @@
        <?php } ?>
      <? } ?>
   <? } ?>
+
+  <br>
+  
+  <? require APP . 'view/messages/form.php'; ?>
 
   <? if ($members != NULL) { ?>
     <h3>Members</h3>
@@ -32,13 +35,6 @@
        <?php } ?>
      <? } ?>
 
-=======
-       <? require APP . 'view/messages/form.php'; ?>
-
-    </p>
-  <? } else { ?>
-      <p>Circle with id = <?= $circleID ?> doesn't exist!</p>
->>>>>>> Stashed changes
   <? } ?>
 
 </div>
