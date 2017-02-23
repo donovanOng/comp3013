@@ -64,6 +64,28 @@ class CircleController
     Redirect(URL . 'circle');
   }
 
+  public function remove_member()
+  {
+    if (isset($_GET['circleID']) && isset($_GET['userID']))
+    {
+      $model = new Circle();
+      $circleID = $_GET['circleID'];
+      $userID = $_GET['userID'];
+      $result = $model->remove_circle_member($circleID, $userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'User ' .  $userID . ' removed!';
+      } else {
+        $_SESSION['message'] = 'Fail to remove user ' . $useID;
+      }
+
+      Redirect(URL . 'circle/' . $circleID);
+
+    } else {
+      Redirect(URL . 'circle');
+    }
+  }
+
   public function delete()
   {
     if (isset($_GET['circleID'])) {

@@ -23,7 +23,12 @@
        <p>Number of members: <?= count($members) ?></p>
        <? if (count($members) > 0) { ?>
          <?php foreach ($members as $member) { ?>
-           <li>User <?= $member->userID ?></li>
+           <li>
+             User <?= $member->userID ?>
+             <a href="<?= URL . 'circle/remove_member?userID=' . $member->userID . '&circleID=' . $circleID ?>">
+               Remove
+             </a>
+           </li>
          <?php } ?>
        <? } ?>
     </p>

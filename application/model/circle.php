@@ -110,9 +110,9 @@ class Circle extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function removeCircleMember($circleID, $userID)
+  public function remove_circle_member($circleID, $userID)
   {
-    $sql = "DELETE FROM circlefriends 
+    $sql = "DELETE FROM circlefriends
             WHERE circleID = :circleID
             AND userID = :userID";
 
