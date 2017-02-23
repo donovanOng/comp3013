@@ -30,6 +30,17 @@ class CircleController
     require APP . 'view/_templates/footer.php';
   }
 
+  public function view($circleID)
+  {
+    // display photos from single collection
+    $model = new Circle();
+    $message = $model->find_message_by_circleID($circleID);
+
+    require APP . 'view/_templates/header.php';
+    require APP . 'view/circles/view.php';
+    require APP . 'view/_templates/footer.php';
+  }
+
   public function new()
   {
 
@@ -37,7 +48,7 @@ class CircleController
 
       $circle_name = $_GET['name'];
       $model = new Circle();
-      $result = $model->create($circle_name, 
+      $result = $model->create($circle_name,
                                $this->current_userID);
 
       if ($result) {
