@@ -23,6 +23,8 @@ class FriendController
   {
     $model = new Friend();
     $friends = $model->find_user_friend($friend_userID, 0);
+    $friend_req_sent = $model->find_friend_req_sent($friend_userID);
+    $friend_req_received = $model->find_friend_req_received($friend_userID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/friends/index.php';
