@@ -69,6 +69,21 @@ class User extends Model
     return $query->fetchAll();
   }
 
+  public function is_friend($userID,$userID_2)
+  {
+    $sql = "SELECT status
+            FROM relationship
+            WHERE (userID = :userID AND userID_2 = :userID_2)
+            OR (userID = :userID_2  AND userID_2 = :userID)
+          ";
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID,
+                    ':userID_2' => $userID_2);
+    $query->execute($params);
+    return $query->fetch();
+  }
+
+
   public function create($first_name, $last_name, $email, $password)
   {
     $sql = "INSERT INTO user (first_name, last_name, email, password)

@@ -1,6 +1,6 @@
 <div class="container">
   <h2>List of Users Found</h2>
-  
+
   <p>Number of users found: <?= count($users) ?></p>
   <? if (count($users) > 0) { ?>
     <table>
@@ -20,7 +20,7 @@
                 <td><?= $user->email ?></td>
                 <td><?= $user->CREATED_AT ?></td>
                 <td>
-                  <a href="<?= URL; ?>/<?= $user->userID ?>">
+                  <a href="<?= URL . $user->userID ?>">
                     View Profile
                   </a>
                 </td>
