@@ -87,13 +87,38 @@ class Circle extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function delete($circleID)
+  public function delete($circleID, $userID)
   {
     $sql = "DELETE FROM circle
-            WHERE circleID = :circleID";
+            WHERE circleID = :circleID
+            AND userID = :userID";
 
     $query = $this->db->prepare($sql);
-    $params = array(':circleID' => $circleID);
+    $params = array(':circleID' => $circleID,
+                    ':userID' => $userID);
+    return $query->execute($params); // boolean result
+  }
+
+  public function addCircleMember($circleID, $userID)
+  {
+    $sql = "INSERT INTO circlefriends (circleID, userID)
+            VALUES (:circleID, :userID)";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':circleID' => $circleID,
+                    ':userID' => $userID);
+    return $query->execute($params); // boolean result
+  }
+
+  public function removeCircleMember($circleID, $userID)
+  {
+    $sql = "DELETE FROM circlefriends 
+            WHERE circleID = :circleID
+            AND userID = :userID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':circleID' => $circleID,
+                    ':userID' => $userID);
     return $query->execute($params); // boolean result
   }
 
