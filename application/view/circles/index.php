@@ -2,8 +2,11 @@
 
   <h2>List of <?= $circle_userID ?>'s Circle</h2>
 
+  <? require APP . 'view\circles\new.php'; ?>
+
   <h3>Admin of</h3>
   <p>Number of circles: <?= count($circlesAdmin) ?></p>
+
   <? if (count($circlesAdmin) > 0) { ?>
     <table>
       <tbody>
@@ -22,6 +25,11 @@
                 <td>
                   <a href="<?= URL; ?>circle/<?= $circle->circleID ?>">
                     View Circle
+                  </a>
+                </td>
+                <td>
+                  <a href="<?= URL; ?>circle/delete?circleID=<?= $circle->circleID ?>">
+                    Delete Circle
                   </a>
                 </td>
             </tr>

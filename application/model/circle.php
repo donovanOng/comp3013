@@ -6,7 +6,7 @@ class Circle extends Model
 {
   public function find_user_circle_admin($userID)
   {
-    // Circles that I manage
+    // Circles that User manage
     $sql = "SELECT *
             FROM circle
             WHERE userID = :userID";
@@ -19,7 +19,7 @@ class Circle extends Model
 
   public function find_user_circle_member($userID)
   {
-    //Circles that I belong to but do not manage
+    //Circles that User belong to but do not manage
     $sql = "SELECT c.* 
             FROM circle as c, circlefriends as cf 
             WHERE cf.userID = :userID 
@@ -34,6 +34,27 @@ class Circle extends Model
     $params = array(':userID' => $userID);
     $query->execute($params);
     return $query->fetchAll();
+  }
+
+  public function create($name, $userID)
+  {
+    $sql = "INSERT INTO circle (userID, name)
+            VALUES (:userID, :name)";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID,
+                    ':name' => $name);
+    return $query->execute($params); // boolean result
+  }
+
+  public function delete($circleID)
+  {
+    $sql = "DELETE FROM circle
+            WHERE circleID = :circleID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':circleID' => $circleID);
+    return $query->execute($params); // boolean result
   }
 
 }

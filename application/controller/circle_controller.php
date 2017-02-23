@@ -30,6 +30,49 @@ class CircleController
     require APP . 'view/_templates/footer.php';
   }
 
+  public function new()
+  {
+
+    if (isset($_GET['name'])) {
+
+      $circle_name = $_GET['name'];
+      $model = new Circle();
+      $result = $model->create($circle_name, 
+                               $this->current_userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Circle created!';
+      } else {
+        $_SESSION['message'] = 'Fail to create circle!';
+      }
+
+    }
+
+    Redirect(URL . 'circle');
+  }
+
+  public function delete()
+  {
+    if (isset($_GET['circleID'])) {
+        $circleID = $_GET['circleID'];
+
+        $model = new Circle();
+        $result = $model->delete($circleID);
+
+        if ($result) {
+          $_SESSION['message'] = 'Circle deleted!';
+        } else {
+          $_SESSION['message'] = 'Fail to delete circle!';
+        }
+
+        Redirect(URL . 'circle');
+
+    } else {
+      $_SESSION['message'] = 'No Circle ID';
+      Redirect(URL . 'circle');
+    }
+  }
+
 }
 
 ?>
