@@ -13,10 +13,16 @@ class MessageController
     }
   }
 
+  public function user_index($message_userID)
+  {
+    $_SESSION['message'] = URL . 'message does not exist.';
+    Redirect(URL);
+  }
+
   public function create()
   {
     if (isset($_POST['submit'])) {
-      
+
       $circleID = $_POST['circleID'];
       $content = $_POST['content'];
 

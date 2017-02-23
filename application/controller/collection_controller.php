@@ -13,12 +13,6 @@ class CollectionController
     }
   }
 
-  public function index()
-  {
-    // diplay list of user's collection if logged in
-    $this->user_index($this->current_userID);
-  }
-
   public function user_index($collection_userID)
   {
     $model = new Collection();
@@ -60,7 +54,7 @@ class CollectionController
     require APP . 'view/_templates/header.php';
     require APP . 'view/collections/view.php';
     require APP . 'view/_templates/footer.php';
-    
+
   }
 
   public function create()

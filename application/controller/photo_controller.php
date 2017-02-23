@@ -14,12 +14,6 @@ class PhotoController
     }
   }
 
-  public function index()
-  {
-    // list of user's photos if logged in
-    $this->user_index($this->current_userID);
-  }
-
   public function user_index($photo_userID)
   {
     $model = new Photo();

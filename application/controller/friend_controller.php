@@ -13,12 +13,6 @@ class FriendController
     }
   }
 
-  public function index()
-  {
-    // list of user's photos if logged in
-    $this->user_index($this->current_userID);
-  }
-
   public function user_index($friend_userID)
   {
     $model = new Friend();
