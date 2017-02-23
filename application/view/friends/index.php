@@ -19,7 +19,7 @@
                 <td><?= $friend->email ?></td>
                 <td><?= $friend->CREATED_AT ?></td>
                 <td>
-                  <a href="<?= URL; ?>/<?= $friend->userID ?>">
+                  <a href="<?= URL; ?><?= $friend->userID ?>">
                     View Profile
                   </a>
                 </td>
