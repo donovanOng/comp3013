@@ -11,7 +11,7 @@ class UserController
     $users = $model->get_all();
 
     // TODO: ONLY admin can view
-    
+
     require APP . 'view/_templates/header.php';
     require APP . 'view/users/index.php';
     require APP . 'view/_templates/footer.php';
@@ -38,6 +38,9 @@ class UserController
       require APP . 'view/_templates/header.php';
       require APP . 'view/users/result.php';
       require APP . 'view/_templates/footer.php';
+    } else {
+      $_SESSION['message'] = 'No search query';
+      Redirect(URL);
     }
   }
 }
