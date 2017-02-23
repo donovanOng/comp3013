@@ -99,7 +99,7 @@ class Circle extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function addCircleMember($circleID, $userID)
+  public function add_circle_member($circleID, $userID)
   {
     $sql = "INSERT INTO circlefriends (circleID, userID)
             VALUES (:circleID, :userID)";
