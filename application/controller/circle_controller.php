@@ -68,7 +68,7 @@ class CircleController
         $circleID = $_GET['circleID'];
 
         $model = new Circle();
-        $result = $model->delete($circleID);
+        $result = $model->delete($circleID, $this->current_userID);
 
         if ($result) {
           $_SESSION['message'] = 'Circle deleted!';
