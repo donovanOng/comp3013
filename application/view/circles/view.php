@@ -2,8 +2,8 @@
 
   <h2><?= $circle->name ?> by <?= $circle->userID ?></h2>
 
+  <h3>Messages</h3>
   <? if ($messages != NULL) { ?>
-    <h3>Messages</h3>
      <p>Number of messages: <?= count($messages) ?></p>
      <? if (count($messages) > 0) { ?>
        <?php foreach ($messages as $message) { ?>
@@ -13,14 +13,13 @@
   <? } ?>
 
   <br>
-  
+
   <? require APP . 'view/messages/form.php'; ?>
 
+  <h3>Members</h3>
+  <? require APP . 'view/circles/add_member.php'; ?>
+
   <? if ($members != NULL) { ?>
-    <h3>Members</h3>
-
-    <? require APP . 'view/circles/add_member.php'; ?>
-
      <p>Number of members: <?= count($members) ?></p>
      <? if (count($members) > 0) { ?>
        <?php foreach ($members as $member) { ?>
@@ -34,7 +33,6 @@
          </li>
        <?php } ?>
      <? } ?>
-
   <? } ?>
 
 </div>
