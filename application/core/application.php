@@ -110,7 +110,11 @@ class Application
 
     if (strlen($action_or_id) == 0) {
 
-      Redirect(URL . $_SESSION['current_user']->userID . '/' . $controller_name);
+      if ($controller_name == 'user') {
+        $url_controller_obj->index();
+      } else {
+        Redirect(URL . $_SESSION['current_user']->userID . '/' . $controller_name);
+      }
 
     } elseif (method_exists($url_controller_obj, $action_or_id)) {
 
