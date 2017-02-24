@@ -30,8 +30,10 @@ class UserController
   {
 
     $model = new User();
+    $friendModel = new Friend();
     $user = $model->find_by_id($userID);
     $isFriend = $model->is_friend($this->current_userID,$userID);
+    $initiator = $friendModel->friendship_initiator($this->current_userID,$userID);
     if($this->current_userID == $userID){
       $isUser = true;
     } else {
@@ -42,6 +44,7 @@ class UserController
     require APP . 'view/users/profile.php';
     require APP . 'view/_templates/footer.php';
   }
+
 
   public function search()
   {
@@ -64,20 +67,54 @@ class UserController
         $model = new Friend();
         $result = $model->add_friends($this->current_userID,$userID,1);
         if ($result) {
-          $_SESSION['message'] = 'Add Successfully!' . $this->current_userID;
+          $_SESSION['message'] = 'Add Successfully!';
         } else {
-          $_SESSION['message'] = 'Fail to add friend!'. $this->current_userID;
+          $_SESSION['message'] = 'Fail to add friend!';
         }
 
         // TODO: Remove image files in public directory
 
         Redirect(URL . $userID);
-
+      }
     }
 
+    public function accept_friendships()
+    {
+      if (isset($_GET['userID'])) {
+          $userID = $_GET['userID'];
 
-      // Redirect(URL . $userID);
-  }
+          $model = new Friend();
+          $result = $model->accept_friendship($this->current_userID,$userID);
+          if ($result) {
+            $_SESSION['message'] = 'You are now friends!!';
+          } else {
+            $_SESSION['message'] = 'I`m sorry I can`t be your friend :(';
+          }
+
+          // TODO: Remove image files in public directory
+
+          Redirect(URL . $userID);
+        }
+    }
+
+    public function reject_friendships()
+    {
+      if (isset($_GET['userID'])) {
+          $userID = $_GET['userID'];
+
+          $model = new Friend();
+          $result = $model->reject_friendship($this->current_userID,$userID);
+          if ($result) {
+            $_SESSION['message'] = 'I`m sorry I can`t be your friend :(';
+          } else {
+            $_SESSION['message'] = 'One more chance to reconsider...';
+          }
+
+          // TODO: Remove image files in public directory
+
+          Redirect(URL . $userID);
+        }
+    }
 }
 
 ?>
