@@ -13,6 +13,9 @@
 <div class="navigation">
     <a href="<?php echo URL; ?>">Home</a>
     <? if(isset($_SESSION['current_user']))  { ?>
+      <a href="<?php echo URL . $this->current_userID ?>">
+        <?= $this->current_user->first_name . ' ' . $this->current_user->last_name ?>
+      </a>
       <a href="<?php echo URL; ?>logout">Log Out</a>
     <? } else { ?>
       <a href="<?php echo URL; ?>signup">Sign Up</a>

@@ -13,10 +13,16 @@ class CommentController
     }
   }
 
+  public function user_index($comment_userID)
+  {
+    $_SESSION['message'] = URL . 'comment does not exist.';
+    Redirect(URL);
+  }
+
   public function create()
   {
     if (isset($_POST['submit'])) {
-      
+
       $photoID = $_POST['photoID'];
       $content = $_POST['content'];
 

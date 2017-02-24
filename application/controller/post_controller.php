@@ -13,15 +13,10 @@ class PostController
     }
   }
 
-  public function index()
-  {
-    // TODO: show list of all posts for admon
-    // otherwise 404 page
-  }
-
   public function user_index($post_userID)
   {
-    // TODO: show 404 page
+    $_SESSION['message'] = URL . 'post does not exist.';
+    Redirect(URL);
   }
 
   public function view($postID)

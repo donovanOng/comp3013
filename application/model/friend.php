@@ -28,6 +28,40 @@ class Friend extends Model
     return $query->fetchAll();
   }
 
+  public function find_friend_req_sent($userID)
+  {
+    $sql = "SELECT *
+            FROM user
+            WHERE userID IN (
+              SELECT userID_2
+              FROM relationship
+              WHERE STATUS = 1
+              AND userID = :userID
+            )";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
+  public function find_friend_req_received($userID)
+  {
+    $sql = "SELECT *
+            FROM user
+            WHERE userID IN (
+              SELECT userID
+              FROM relationship
+              WHERE STATUS = 1
+              AND userID_2 = :userID
+            )";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
   public function find_user_friend_ID($userID, $status)
   {
     $sql = "SELECT userID
