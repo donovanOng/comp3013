@@ -2,32 +2,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>COMP3013 Coursework</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Social Media</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 
-<!-- navigation -->
-<div class="navigation">
-    <a href="<?php echo URL; ?>">Home</a>
-    <? if(isset($_SESSION['current_user']))  { ?>
-      <a href="<?php echo URL . $this->current_userID ?>">
-        <?= $this->current_user->first_name . ' ' . $this->current_user->last_name ?>
-      </a>
-      <a href="<?php echo URL; ?>logout">Log Out</a>
-    <? } else { ?>
-      <a href="<?php echo URL; ?>signup">Sign Up</a>
-      <a href="<?php echo URL; ?>login">Log In</a>
-    <? } ?>
+<div class="bg-inverse">
+  <div class="container">
+  <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo URL; ?>">Home</a>
+        </li>
+        <?php if (isset($_SESSION['current_user'])) { ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= URL . $this->current_userID ?>">
+              <?= $this->current_user->first_name . ' ' . $this->current_user->last_name ?>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= URL; ?>logout">Log Out</a>
+          </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        <?php } else { ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= URL; ?>signup">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= URL; ?>login">Log In</a>
+          </li>
+          </ul>
+        <?php } ?>
+    </div>
+  </nav>
+  </div>
 </div>
 
-<div>
-  <?php
-    if (isset($_SESSION['message'])) {
-      echo $_SESSION['message'];
-      unset($_SESSION['message']);
-    }
-   ?>
-</div>
+<div class="container" style="padding-top: 20px">
+
+<? if (isset($_SESSION['message'])) { ?>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <?= $_SESSION['message']; ?>
+    <? unset($_SESSION['message']); ?>
+  </div>
+<? } ?>
