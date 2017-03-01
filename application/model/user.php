@@ -31,7 +31,7 @@ class User extends Model
 
   public function find_by_id($userID)
   {
-    $sql = "SELECT first_name, last_name
+    $sql = "SELECT first_name, last_name, userID
             FROM user
             WHERE userID = :userID
             LIMIT 1";

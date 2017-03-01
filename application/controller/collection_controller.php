@@ -1,5 +1,6 @@
 <?php
 
+require_once APP . 'model/user.php';
 require_once APP . 'model/collection.php';
 
 class CollectionController
@@ -15,6 +16,9 @@ class CollectionController
 
   public function user_index($collection_userID)
   {
+    $model = new User();
+    $user = $model->find_by_id($collection_userID);
+
     $model = new Collection();
     $collections = $model->find_user_collection($collection_userID);
 

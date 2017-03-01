@@ -1,5 +1,6 @@
 <?php
 
+require_once APP . 'model/user.php';
 require_once APP . 'model/photo.php';
 require_once APP . 'model/collection.php';
 
@@ -16,6 +17,9 @@ class PhotoController
 
   public function user_index($photo_userID)
   {
+    $model = new User();
+    $user = $model->find_by_id($photo_userID);
+
     $model = new Photo();
     $photos = $model->find_user_photos($photo_userID);
 
@@ -32,21 +36,6 @@ class PhotoController
 
     $photo_comments = NULL;
     if ($photo != NULL) {
-
-      $collectionID = $photo->collectionID;
-      $collection_model = new Collection();
-      $collection = $collection_model->find_by_id($collectionID);
-
-      if ($collection->viewRights < 2
-          && $this->current_userID != $collection->userID
-          && $photo->userID != $this->current_userID) {
-        $users_with_view_accesss = $collection_model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
-        if (!$this->in_array_field($this->current_userID, 'userID', $users_with_view_accesss)) {
-          $_SESSION['message'] = 'You dont have rights to view photo ' . $photo->photoID;
-          Redirect(URL);
-        }
-      }
-
       $photo_comments = $model->find_photo_comments($photoID);
     }
 

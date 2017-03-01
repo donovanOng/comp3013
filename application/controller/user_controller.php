@@ -30,8 +30,9 @@ class UserController
   {
 
     $model = new User();
-    $friendModel = new Friend();
     $user = $model->find_by_id($userID);
+
+    $friendModel = new Friend();
     $isFriend = $model->is_friend($this->current_userID,$userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID,$userID);
     if($this->current_userID == $userID){

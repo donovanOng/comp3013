@@ -1,5 +1,6 @@
 <?php
 
+require_once APP . 'model/user.php';
 require_once APP . 'model/friend.php';
 
 class FriendController
@@ -15,6 +16,9 @@ class FriendController
 
   public function user_index($friend_userID)
   {
+    $model = new User();
+    $user = $model->find_by_id($friend_userID);
+
     $model = new Friend();
     $friends = $model->find_user_friend($friend_userID, 0);
     $friend_req_sent = $model->find_friend_req_sent($friend_userID);

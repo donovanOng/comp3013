@@ -1,5 +1,6 @@
 <?php
 
+require_once APP . 'model/user.php';
 require_once APP . 'model/circle.php';
 require_once APP . 'model/friend.php';
 
@@ -16,6 +17,9 @@ class CircleController
 
   public function user_index($circle_userID)
   {
+    $model = new User();
+    $user = $model->find_by_id($circle_userID);
+
     $model = new Circle();
     $circlesAdmin = $model->find_user_circle_admin($circle_userID);
     $circlesMember = $model->find_user_circle_member($circle_userID);
