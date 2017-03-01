@@ -1,22 +1,37 @@
-<div class="container">
-  <? if ($photo != NULL) { ?>
-    <h2>View Image</h2>
-    <p>
-      Image at <?= $photo->path ?> in
-      <a href="<?= URL; ?>collection/<?= $photo->collectionID ?>">collection <?= $photo->collectionID ?></a>,
-       uploaded by userID = <?= $photo->userID ?>
-
-       <p>Number of comments: <?= count($photo_comments) ?></p>
-       <? if (count($photo_comments) > 0) { ?>
-         <?php foreach ($photo_comments as $comment) { ?>
-           <li><?= $comment->content ?> written by userID = <?= $comment->userID ?></li>
-         <?php } ?>
-       <? } ?>
-
-       <? require APP . 'view/comments/form.php'; ?>
-
+<? if ($photo != NULL) { ?>
+<div class="row">
+  <div class="col-8">
+    <img style="width:100%" src="<?= URL . $photo->path ?>" onError="this.src ='<?= URL; ?>images/missing.jpg'"  />
+  </div>
+  <div class="col-4">
+    <p style="min-height: 150px;">
+       <a href="<?= URL . $photo->userID ?>">User <?= $photo->userID ?></a>
+      <br>
+      <small>
+        Under <a href="<?= URL; ?>collection/<?= $photo->collectionID ?>">Collection <?= $photo->collectionID ?></a>
+         .
+        <?= $photo->CREATED_AT ?>
+      </small>
     </p>
-  <? } else { ?>
-      <p>Photo with id = <?= $photoID ?> doesn't exist!</p>
-  <? } ?>
-</div>
+    <div class="m-2 p-2" style="border-top: 1px solid #DDD;">
+      <a class="mr-2" href="#"><i class="fa fa-heart" aria-hidden="true"></i>  Love</a>
+      <a href="#"><i class="fa fa-comment" aria-hidden="true"></i>  Comment</a>
+    </div>
+    <div class="bg-faded pr-2 pl-2 pb-2" style="border-top: 1px solid #DDD;">
+      <div class="p-2 mb-2" style="border-bottom: 1px solid #DDD;">
+      <i class="fa fa-heart" aria-hidden="true"></i> <a href="#">User 1, User 2 and # others</a>
+      </div>
+    <? if (count($photo_comments) > 0) { ?>
+      <div class="list-group mb-2">
+      <?php foreach ($photo_comments as $comment) { ?>
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+          <p class="mb-1"><a href="<?= URL . $comment->userID ?>">User <?= $comment->userID ?></a> <?= $comment->content ?></p>
+          <small><?= $comment->CREATED_AT ?></small>
+        </div>
+      <?php } ?>
+      </div>
+    <? } ?>
+    <? require APP . 'view/comments/form.php'; ?>
+    </div>
+  </div>
+<? } ?>

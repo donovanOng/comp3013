@@ -37,7 +37,6 @@ class CollectionController
         if (!in_array_field($this->current_userID, 'userID', $users_with_view_accesss)) {
           $_SESSION['message'] = 'You dont have rights to view Collection ' . $collection->collectionID;
           Redirect(URL . $collection->userID);
-          die();
         }
       }
 
@@ -49,12 +48,15 @@ class CollectionController
       }
 
       $collection_photos = $model->find_colllection_photos($collectionID);
+
+      require APP . 'view/_templates/header.php';
+      require APP . 'view/collections/view.php';
+      require APP . 'view/_templates/footer.php';
+
+    } else {
+      $_SESSION['message'] = 'Collection ' . $collectionID . ' does not exist.';
+      Redirect(URL);
     }
-
-    require APP . 'view/_templates/header.php';
-    require APP . 'view/collections/view.php';
-    require APP . 'view/_templates/footer.php';
-
   }
 
   public function create()

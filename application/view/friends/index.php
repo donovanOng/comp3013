@@ -1,93 +1,73 @@
-<div class="container">
-
-  <h2>List of Friends</h2>
-  <p>Number of friends: <?= count($friends) ?></p>
-  <? if (count($friends) > 0) { ?>
-    <table>
-      <tbody>
-        <tr>
-          <td>UserID</td>
-          <td>First Name</td>
-          <td>Last Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-        </tr>
+<div class="card mb-3">
+  <div class="card-block">
+    <h4 class="card-title">List of Friends</h4>
+    <h6 class="card-subtitle mb-3 text-muted">Number of friends: <?= count($friends) ?></h6>
+    <? if (count($friends) > 0) { ?>
+      <div class="row">
         <?php foreach ($friends as $friend) { ?>
-            <tr>
-                <td><?= $friend->userID ?></td>
-                <td><?= $friend->first_name ?></td>
-                <td><?= $friend->last_name ?></td>
-                <td><?= $friend->email ?></td>
-                <td><?= $friend->CREATED_AT ?></td>
-                <td>
-                  <a href="<?= URL; ?><?= $friend->userID ?>">
-                    View Profile
+          <div class="col-6" >
+            <div class="card mb-2">
+              <div class="card-block">
+                <h5>
+                  <a href="<?= URL; ?><?= $friend->userID ?>"><?= $friend->first_name ?>
+                    <?= $friend->last_name ?>
                   </a>
-                </td>
-            </tr>
+                </h5>
+                <h6 class="text-muted"><?= $friend->email ?></h6>
+              </div>
+            </div>
+          </div>
         <?php } ?>
-      </tbody>
-    </table>
-  <? } ?>
+      </div>
+    <? } ?>
+  </div>
+</div>
 
-  <h2>List of Friend Requests sent</h2>
-  <p>Number of friend requests sent: <?= count($friend_req_sent) ?></p>
-  <? if (count($friend_req_sent) > 0) { ?>
-    <table>
-      <tbody>
-        <tr>
-          <td>UserID</td>
-          <td>First Name</td>
-          <td>Last Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-        </tr>
-        <?php foreach ($friend_req_sent as $friend) { ?>
-            <tr>
-                <td><?= $friend->userID ?></td>
-                <td><?= $friend->first_name ?></td>
-                <td><?= $friend->last_name ?></td>
-                <td><?= $friend->email ?></td>
-                <td><?= $friend->CREATED_AT ?></td>
-                <td>
-                  <a href="<?= URL; ?><?= $friend->userID ?>">
-                    View Profile
-                  </a>
-                </td>
-            </tr>
-        <?php } ?>
-      </tbody>
-    </table>
-  <? } ?>
+<div class="card mb-3">
+  <div class="card-block">
+    <h4 class="card-title">List of Friend Requests sent</h4>
+    <h6 class="card-subtitle mb-3 text-muted">Number of friend requests sent: <?= count($friend_req_sent) ?></h6>
+    <? if (count($friend_req_sent) > 0) { ?>
+      <?php foreach ($friend_req_sent as $friend) { ?>
+        <div class="row rounded bg-faded align-items-center m-0 pt-3 pb-3">
+          <div class="col-8">
+            <h4>
+              <a href="<?= URL; ?><?= $friend->userID ?>"><?= $friend->first_name ?>
+                <?= $friend->last_name ?>
+              </a>
+            </h4>
+            <h6 class="text-muted"><?= $friend->email ?></h6>
+          </div>
+          <div class="col-4 text-right">
+            <a href="#" class="btn">Delete Request</a>
+          </div>
+        </div>
+      <?php } ?>
+    <? } ?>
+  </div>
+</div>
 
-  <h2>List of Friend Requests received</h2>
-  <p>Number of friend requests received: <?= count($friend_req_received) ?></p>
-  <? if (count($friend_req_received) > 0) { ?>
-    <table>
-      <tbody>
-        <tr>
-          <td>UserID</td>
-          <td>First Name</td>
-          <td>Last Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-        </tr>
-        <?php foreach ($friend_req_received as $friend) { ?>
-            <tr>
-                <td><?= $friend->userID ?></td>
-                <td><?= $friend->first_name ?></td>
-                <td><?= $friend->last_name ?></td>
-                <td><?= $friend->email ?></td>
-                <td><?= $friend->CREATED_AT ?></td>
-                <td>
-                  <a href="<?= URL; ?><?= $friend->userID ?>">
-                    View Profile
-                  </a>
-                </td>
-            </tr>
-        <?php } ?>
-      </tbody>
-    </table>
-  <? } ?>
-
+<div class="card mb-3">
+  <div class="card-block">
+    <h4 class="card-title">List of Friend Requests received</h4>
+    <h6 class="card-subtitle mb-3 text-muted">Number of friend requests received: <?= count($friend_req_received) ?></h6>
+    <? if (count($friend_req_received) > 0) { ?>
+      <?php foreach ($friend_req_received as $friend) { ?>
+        <div class="row rounded bg-faded align-items-center m-0 pt-3 pb-3">
+          <div class="col-8">
+            <h4>
+              <a href="<?= URL; ?><?= $friend->userID ?>"><?= $friend->first_name ?>
+                <?= $friend->last_name ?>
+              </a>
+            </h4>
+            <h6 class="text-muted"><?= $friend->email ?></h6>
+          </div>
+          <div class="col-4 text-right">
+            <a href="#" class="btn btn-primary">Accept</a>
+            <a href="#" class="btn">Delete Request</a>
+          </div>
+        </div>
+      <?php } ?>
+    <? } ?>
+  </div>
 </div>

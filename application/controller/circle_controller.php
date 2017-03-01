@@ -39,6 +39,7 @@ class CircleController
     $friends_id  = array_column($friends, 'userID');
     $members_id = array_column($members, 'userID');
 
+    $friends_not_members = NULL;
     if ($friends != NULL) {
       $friends_not_members = array_diff($friends_id, $members_id);
     }

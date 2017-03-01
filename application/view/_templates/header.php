@@ -9,7 +9,8 @@
   <title>Social Media</title>
 
   <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= URL ?>css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= URL ?>fonts/font-awesome/css/font-awesome.min.css">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +32,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo URL; ?>">Home</a>
+          <a class="nav-link" href="<?= URL ?>">Home</a>
         </li>
         <?php if (isset($_SESSION['current_user'])) { ?>
           <li class="nav-item">
@@ -40,19 +41,16 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL; ?>logout">Log Out</a>
+            <a class="nav-link" href="<?= URL ?>logout">Log Out</a>
           </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <? require APP . 'view/users/search.php' ?>
         <?php } else { ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL; ?>signup">Sign Up</a>
+            <a class="nav-link" href="<?= URL ?>signup">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL; ?>login">Log In</a>
+            <a class="nav-link" href="<?= URL ?>login">Log In</a>
           </li>
           </ul>
         <?php } ?>
@@ -61,14 +59,14 @@
   </div>
 </div>
 
-<div class="container" style="padding-top: 20px">
+<div class="container" style="padding: 31px">
 
 <? if (isset($_SESSION['message'])) { ?>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <?= $_SESSION['message']; ?>
-    <? unset($_SESSION['message']); ?>
-  </div>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <?= $_SESSION['message'] ?>
+  <? unset($_SESSION['message']) ?>
+</div>
 <? } ?>

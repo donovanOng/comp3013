@@ -1,18 +1,22 @@
-<div class="container">
-  <h2>Photos of userID = <?= $photo_userID ?></h2>
-
-  <? if ($photos != NULL) { ?>
-    <p>Number of photos: <?= count($photos) ?></p>
-    <? if (count($photos) > 0) { ?>
-      <?php foreach ($photos as $photo) { ?>
-        <li>
-          <a href="<?= URL; ?>photo/<?= $photo->photoID ?>"><?= $photo->path ?></a> in
-          <a href="<?= URL; ?>collection/<?= $photo->collectionID ?>">collection <?= $photo->collectionID ?></a>,
-          uploaded by userID = <?= $photo->userID ?></li>
-      <?php } ?>
-    <? } ?>
-  <? } else { ?>
-      <p>No photos found.</p>
-  <? } ?>
-
+<div class="row mb-3">
+  <div class="col-12">
+    <h4>Photos</h4>
+  </div>
 </div>
+
+<? if (count($photos) > 0) { ?>
+  <div class="row">
+  <?php foreach ($photos as $photo) { ?>
+    <div class="col-3">
+      <a href="<?= URL; ?>photo/<?= $photo->photoID ?>">
+      <div class="card mb-3">
+        <img class="card-img-top" src="<?= URL; ?><?= $photo->path ?>" onError="this.src ='<?= URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
+        <div class="card-block">
+          <p class="card-text text-muted">Under Collection <?= $photo->collectionID ?></p>
+        </div>
+      </div>
+      </a>
+    </div>
+  <?php } ?>
+  </div>
+<? } ?>

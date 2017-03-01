@@ -1,68 +1,47 @@
-<div class="container">
+<div class="row align-items-center mb-3">
+<div class="col-10">
+  <h4>Circles</h4>
+</div>
+<div class="col-2 text-right">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCircleModal">
+    New Circle
+  </button>
+</div>
+</div>
 
-  <h2>List of <?= $circle_userID ?>'s Circle</h2>
+<? require APP . 'view/circles/new.php'; ?>
 
-  <? require APP . 'view/circles/new.php'; ?>
-
-  <h3>Admin of</h3>
-  <p>Number of circles: <?= count($circlesAdmin) ?></p>
-
-  <? if (count($circlesAdmin) > 0) { ?>
-    <table>
-      <tbody>
-        <tr>
-          <td>circleID</td>
-          <td>userID</td>
-          <td>Name</td>
-          <td>Created At</td>
-        </tr>
-        <?php foreach ($circlesAdmin as $circle) { ?>
-            <tr>
-                <td><?= $circle->circleID ?></td>
-                <td><?= $circle->userID ?></td>
-                <td><?= $circle->name ?></td>
-                <td><?= $circle->CREATED_AT ?></td>
-                <td>
-                  <a href="<?= URL; ?>circle/<?= $circle->circleID ?>">
-                    View Circle
-                  </a>
-                </td>
-                <td>
-                  <a href="<?= URL; ?>circle/delete?circleID=<?= $circle->circleID ?>">
-                    Delete Circle
-                  </a>
-                </td>
-            </tr>
-        <?php } ?>
-      </tbody>
-    </table>
-  <? } ?>
-
-  <h3>Member of</h3>
-  <p>Number of circles: <?= count($circlesMember) ?></p>
-  <? if (count($circlesMember) > 0) { ?>
-    <table>
-      <tbody>
-        <tr>
-          <td>circleID</td>
-          <td>userID</td>
-          <td>Name</td>
-          <td>Created At</td>
-        </tr>
-        <?php foreach ($circlesMember as $circle) { ?>
-            <tr>
-                <td><?= $circle->circleID ?></td>
-                <td><?= $circle->userID ?></td>
-                <td><?= $circle->name ?></td>
-                <td><?= $circle->CREATED_AT ?></td>
-                <td>
-                  <a href="<?= URL; ?>circle/<?= $circle->circleID ?>">
-                    View Circle
-                  </a>
-                </td>
-            </tr>
-        <?php } ?>
-      </tbody>
-    </table>
-  <? } ?>
+<div class="row">
+<? if (count($circlesAdmin) > 0) { ?>
+<?php foreach ($circlesAdmin as $circle) { ?>
+  <div class="col-3">
+    <div class="card mt-1 mb-1 bg-faded">
+      <div class="card-block">
+        <h5 class="card-title"><?= $circle->name ?></h5>
+        <p class="card-text text-muted">
+          # members
+        </p>
+        <a href="<?= URL; ?>circle/<?= $circle->circleID ?>" class="card-link">View Circle</a>
+        <a href="<?= URL; ?>circle/delete?circleID=<?= $circle->circleID?>" class="card-link">Delete</a>
+      </div>
+    </div>
+  </div>
+<?php } ?>
+<? } ?>
+<? if (count($circlesMember) > 0) { ?>
+<?php foreach ($circlesMember as $circle) { ?>
+  <div class="col-3">
+    <div class="card mb-3">
+      <div class="card-block">
+        <h5 class="card-title"><?= $circle->name ?></h5>
+        <p class="card-text text-muted">
+          # members
+        </p>
+        <a href="<?= URL; ?>circle/<?= $circle->circleID ?>" class="card-link">View Circle</a>
+        <a href="<?= URL; ?>circle/delete?circleID=<?= $circle->circleID ?>" class="card-link">Delete</a>
+      </div>
+    </div>
+  </div>
+<?php } ?>
+<? } ?>
 </div>

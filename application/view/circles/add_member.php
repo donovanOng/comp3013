@@ -1,14 +1,20 @@
-<? if ($friends_not_members != NULL && count($friends_not_members > 0)) { ?> 
-<form action="<?php echo URL; ?>circle/add_member" method="POST">
+<? if ($friends_not_members != NULL && count($friends_not_members > 0)) { ?>
 
-  <select name="userID">
+  <div class="row pl-2 pr-2 mt-2">
+    <div class="col-12 text-muted small">ADD MEMBERS</div>
+  </div>
+  <div class="mt-2 mb-2" style="border-bottom: 1px solid #DDD;"></div>
+
+  <form class="form-inline mt-3 mb-3" action="<?= URL ?>circle/add_member" method="POST">
+
+  <select class="form-control w-75" name="userID">
     <? foreach($friends_not_members as $friend) { ?>
-      <option value="<?= $friend ?>"><?=  $friend ?></option>
+      <option value="<?= $friend ?>">User <?=  $friend ?></option>
     <? } ?>
   </select>
 
   <input type="hidden" name="circleID" value="<?= $circleID ?>" >
-  <input type="submit" name="add" value="Add Member" />
+  <input class="btn btn-primary w-25" type="submit" name="add" value="Add" />
 
 </form>
 <? } ?>

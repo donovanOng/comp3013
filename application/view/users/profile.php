@@ -1,32 +1,23 @@
-<div class="container">
-  <h2><?= $user->first_name ?> <?= $user->last_name ?>'s Profile</h2>
-  <? if($isUser) { ?>
-        <h3> This is my profile </h3>
-  <? } else {?>
-    <? if($isFriend != NULL) { ?>
+<? require APP . 'view/users/profile_header.php'; ?>
 
-        <? if($isFriend->status == 0) { ?>
-          <h3> We are friends! </h3>
-        <? } else if($isFriend->status == 1) { ?>
-              <? if($initiator->userID == $this->current_userID) { ?>
-                  <h3>Waiting for <?= $user->first_name . ' ' .  $user->last_name ?> to accept </h3>
-              <? } else { ?>
-                  <a href="<?= URL; ?>user/accept_friendships?userID=<?= $userID; ?>" >Accept Friend Request</a></p>
-                  <a href="<?= URL; ?>user/reject_friendships?userID=<?= $userID; ?>" >Reject Friend Request</a></p>
-              <? } ?>
-        <? } ?>
+<? if($isUser) { ?>
+      <h3> This is my profile </h3>
+<? } else {?>
+  <? if($isFriend != NULL) { ?>
 
-    <? } else {?>
-          <h3> Not friend </h3>
-          <a href="<?= URL; ?>user/add_friend?userID=<?= $userID; ?>" >Add Friend</a></p>
+      <? if($isFriend->status == 0) { ?>
+        <h3> We are friends! </h3>
+      <? } else if($isFriend->status == 1) { ?>
+            <? if($initiator->userID == $this->current_userID) { ?>
+                <h3>Waiting for <?= $user->first_name . ' ' .  $user->last_name ?> to accept </h3>
+            <? } else { ?>
+                <a href="<?= URL; ?>user/accept_friendships?userID=<?= $userID; ?>" >Accept Friend Request</a></p>
+                <a href="<?= URL; ?>user/reject_friendships?userID=<?= $userID; ?>" >Reject Friend Request</a></p>
+            <? } ?>
       <? } ?>
-  <? } ?>
 
-
-
-  <li><a href="<?php echo URL . $userID; ?>/blog">Blog</a></li>
-  <li><a href="<?php echo URL . $userID; ?>/friend">Friends</a></li>
-  <li><a href="<?php echo URL . $userID; ?>/circle">Circles</a></li>
-  <li><a href="<?php echo URL . $userID; ?>/collection">Collections</a></li>
-  <li><a href="<?php echo URL . $userID; ?>/photo">Photos</a></li>
-</div>
+  <? } else {?>
+        <h3> Not friend </h3>
+        <a href="<?= URL; ?>user/add_friend?userID=<?= $userID; ?>" >Add Friend</a></p>
+    <? } ?>
+<? } ?>

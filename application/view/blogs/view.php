@@ -1,26 +1,27 @@
-<div class="container">
 <? if ($blog != NULL) { ?>
-  <h2>
-    <?= $blog->name ?> by userID = <?= $blog->userID ?>
-    <? if ($this->current_userID == $blog->userID ) { ?> (me)<? } ?>
-  </h2>
 
-  <? if ($this->current_userID == $blog->userID ) { ?>
-    <a href="<?= URL . 'post/new?blogID=' . $blog->blogID ?>">New Post</a>
-  <? } ?>
-
-  <p>Number of posts: <?= count($blog_posts) ?></p>
-  <? if (count($blog_posts) > 0) { ?>
-    <?php foreach ($blog_posts as $post) { ?>
-      <li>
-          <a href="<?= URL; ?>post/<?= $post->postID ?>">
-            <?= $post->title ?>
-          </a>
-      </li>
-    <?php } ?>
-  <? } ?>
-
-<? } else { ?>
-    <p>Blog <?= $blogID ?> doesn't exist!</p>
-<? } ?>
+<div class="row align-items-center mb-3">
+  <div class="col-10">
+    <h4><?= $blog->name ?></h4>
+  </div>
+  <div class="col-2 text-right">
+    <? if ($this->current_userID == $blog->userID ) { ?>
+      <a class="btn btn-primary" href="<?= URL . 'post/new?blogID=' . $blog->blogID ?>">New Post</a>
+    <? } ?>
+  </div>
 </div>
+<? if (count($blog_posts) > 0) { ?>
+  <?php foreach ($blog_posts as $post) { ?>
+    <div class="card mb-3">
+      <div class="card-block">
+        <h6 class="card-title">
+          <a href="<?= URL . 'post/' . $post->postID ?>"><?= $post->title ?></a>
+          <br><small class="text-muted"><?= $post->body ?></small>
+        </h6>
+        <p class="card-text"><?= $post->body ?></p>
+      </div>
+    </div>
+  <?php } ?>
+<? } ?>
+
+<? } ?>

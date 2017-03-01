@@ -1,7 +1,5 @@
-<h4>Leave a comment</h4>
-
-<form action="<?php echo URL; ?>comment/create" method="POST">
-  <input type="text" name="content" value="" required /> 
+<form class="form-inline justify-content-end" action="<?php echo URL; ?>comment/create" method="POST">
+  <input class="form-control w-100 mb-2" type="text" name="content" value="" placeholder="Write a comment..." required />
   <input type="hidden" name="photoID" value="<?= $photoID ?>" />
-  <input type="submit" name="submit" value="Submit" />
+  <input class="btn btn-primary pull-right" type="submit" name="submit" value="Submit" />
 </form>
