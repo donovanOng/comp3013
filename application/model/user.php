@@ -97,6 +97,17 @@ class User extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function fetch_profile($userID)
+  {
+    $sql = "SELECT *
+            FROM profile
+            WHERE (userID = :userID)";
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetch();
+  }
+
   public function update()
   {
 

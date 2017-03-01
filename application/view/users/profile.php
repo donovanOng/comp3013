@@ -1,7 +1,15 @@
 <? require APP . 'view/users/profile_header.php'; ?>
 
 <? if($isUser) { ?>
-      <h3> This is my profile </h3>
+      <p> About : <?= $profile->about ?></p>
+      <p> Gender : <?= $profile->gender ?></p>
+      <p> Birthdate : <?= $profile->birthdate ?></p>
+      <p> Current city : <?= $profile->current_city ?></p>
+      <p> Home city : <?= $profile->home_city ?></p>
+      <p> Address : <?= $profile->address ?></p>
+      <p> Languages : <?= $profile->languages ?></p>
+      <p> Work place : <?= $profile->workplace ?></p>
+
 <? } else {?>
   <? if($isFriend != NULL) { ?>
 

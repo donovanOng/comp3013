@@ -31,6 +31,7 @@ class UserController
 
     $model = new User();
     $user = $model->find_by_id($userID);
+    $profile = $model->fetch_profile($userID);
 
     $friendModel = new Friend();
     $isFriend = $model->is_friend($this->current_userID,$userID);

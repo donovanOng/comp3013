@@ -643,3 +643,30 @@ VALUES ('19', '3', '5', 'comment 19', '0000-00-00 00:00:00.000000', CURRENT_TIME
 INSERT INTO `group8`.`comment`
 (`commentID`, `userID`, `photoID`, `content`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('20', '1', '22', 'comment 20', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+
+INSERT INTO `group8`.`profile`
+(`userID`, `about`, `gender`, `birthdate`, `current_city`, `home_city`, `address`, `languages`, `workplace`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('1', 'Computer Science student in UCL',	'Male',	'1992-07-10',	'London',	'Singapore',	'1 Gower Street',
+  'English, Chinese, Basic Korean and Japanese', 'UCL', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`profile`
+(`userID`, `about`, `gender`, `birthdate`, `current_city`, `home_city`, `address`, `languages`, `workplace`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('2', 'Computer Science student in UCL',	'Female',	'1995-07-21',	'London',	'Singapore',	'1 Bedford Street',
+  'English, Chinese', 'Bed', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`profile`
+(`userID`, `about`, `gender`, `birthdate`, `current_city`, `home_city`, `address`, `languages`, `workplace`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('3', 'Computer Science student in UCL',	'Male',	'1992-09-04',	'London',	'Singapore',	'1 Regent Street',
+  'English, Chinese', 'UCL', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+
+INSERT INTO `group8`.`profile`
+(`userID`, `about`, `gender`, `birthdate`, `current_city`, `home_city`, `address`, `languages`, `workplace`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', 'Econs student in UCL',	'Male',	'1992-07-10',	'London',	'Singapore',	'1 Charlotte Street',
+  'English, Chinese', 'UCL', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`profile`
+(`userID`, `about`, `gender`, `birthdate`, `current_city`, `home_city`, `address`, `languages`, `workplace`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('5', 'Computer Science student in UCL',	'Female',	'1992-07-10',	'London',	'Azerbaijan',	'1 Malet Street',
+  'English, Azerbaijani', 'UCL', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
