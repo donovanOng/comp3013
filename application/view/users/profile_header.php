@@ -5,9 +5,6 @@
   <div class="col-8">
     <ul class="nav nav-fill">
       <li class="nav-item">
-        <a class="nav-link" href="<?= URL . $user->userID ?>">Profile</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="<?= URL . $user->userID ?>/friend">Friends</a>
       </li>
       <li class="nav-item">
