@@ -59,7 +59,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container pb-5">
 
 <? if (isset($_SESSION['message'])) { ?>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
