@@ -108,6 +108,56 @@ class User extends Model
     return $query->fetch();
   }
 
+  public function new_profile($userID, $about, $gender, $birthdate, $current_city,
+                              $home_city, $address, $languages, $workplace)
+  {
+    $sql = "INSERT INTO profile (userID, about, gender, birthdate, current_city,
+                        home_city, address, languages, workplace)
+            VALUES (:userID, :about, :gender, :birthdate, :current_city, :home_city,
+                    :address, :languages, :workplace)";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID,
+                    ':about' => $about,
+                    ':gender' => $gender,
+                    ':birthdate' => $birthdate,
+                    ':current_city' => $current_city,
+                    ':home_city' => $home_city,
+                    ':address' => $address,
+                    ':languages' => $languages,
+                    ':workplace' => $workplace);
+    return $query->execute($params); // boolean result
+}
+
+public function update_profile($userID, $about, $gender, $birthdate, $current_city,
+                               $home_city, $address, $languages, $workplace)
+{
+  $sql = "UPDATE profile
+          SET about = :about,
+              gender = :gender,
+              birthdate = :birthdate,
+              current_city = :current_city,
+              home_city = :home_city,
+              address = :address,
+              languages = :languages,
+              workplace = :workplace
+          WHERE (userID = :userID)";
+
+
+  $query = $this->db->prepare($sql);
+  $params = array(':userID' => $userID,
+                  ':about' => $about,
+                  ':gender' => $gender,
+                  ':birthdate' => $birthdate,
+                  ':current_city' => $current_city,
+                  ':home_city' => $home_city,
+                  ':address' => $address,
+                  ':languages' => $languages,
+                  ':workplace' => $workplace);
+  return $query->execute($params); // boolean result
+}
+
+
   public function update()
   {
 
