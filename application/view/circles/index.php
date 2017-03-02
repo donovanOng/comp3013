@@ -22,7 +22,7 @@
         <? if (count($circlesAdmin) > 0) { ?>
         <?php foreach ($circlesAdmin as $circle) { ?>
           <div class="col-3">
-            <div class="card mt-1 mb-1 bg-faded">
+            <div class="card mb-3 bg-faded">
               <div class="card-block">
                 <h5 class="card-title"><?= $circle->name ?></h5>
                 <p class="card-text text-muted">
@@ -40,7 +40,7 @@
         <? if (count($circlesMember) > 0) { ?>
         <?php foreach ($circlesMember as $circle) { ?>
           <div class="col-3">
-            <div class="card mt-1 mb-1">
+            <div class="card mb-3">
               <div class="card-block">
                 <h5 class="card-title"><?= $circle->name ?></h5>
                 <p class="card-text text-muted">
