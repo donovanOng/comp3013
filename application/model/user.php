@@ -31,7 +31,7 @@ class User extends Model
 
   public function find_by_id($userID)
   {
-    $sql = "SELECT first_name, last_name, userID
+    $sql = "SELECT first_name, last_name, userID, privacy
             FROM user
             WHERE userID = :userID
             LIMIT 1";
@@ -158,6 +158,17 @@ class User extends Model
                     ':address' => $address,
                     ':languages' => $languages,
                     ':workplace' => $workplace);
+    return $query->execute($params); // boolean result
+  }
+
+  public function update_settings($privacy, $userID) {
+    $sql = "UPDATE user 
+            SET privacy = :privacy 
+            WHERE userID = :userID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':privacy' => $privacy,
+                    ':userID' => $userID,);
     return $query->execute($params); // boolean result
   }
 

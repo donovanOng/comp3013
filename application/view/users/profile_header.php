@@ -36,7 +36,10 @@
       </li>
       <? } else { ?>
         <li class="nav-item">
-          <a class="btn btn-secondary">Settings</a>
+          <? require APP . 'view/users/form_edit_settings.php'; ?>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
+            Settings
+          </button>
         </li>
       <? } ?>
 

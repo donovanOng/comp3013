@@ -8,11 +8,11 @@ VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', '1', CURRENT_T
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '2', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '2', '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '0', '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
@@ -39,71 +39,71 @@ VALUES ('4', '1', 'Just Smile', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', '4', 'Title 1', 'Body 1', 2017-01-22 11:31:02, CURRENT_TIMESTAMP);
+VALUES ('1', '4', 'Title 1', 'Body 1', '2017-01-22 11:31:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', '4', 'Title 2', 'Body 2', 2017-01-22 12:31:02, CURRENT_TIMESTAMP);
+VALUES ('2', '4', 'Title 2', 'Body 2', '2017-01-22 12:31:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', '1', 'Title 3', 'Body 3', 2017-01-23 21:31:02, CURRENT_TIMESTAMP);
+VALUES ('3', '1', 'Title 3', 'Body 3', '2017-01-23 21:31:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', '3', 'Title 4', 'Body 4', 2017-01-23 21:36:02, CURRENT_TIMESTAMP);
+VALUES ('4', '3', 'Title 4', 'Body 4', '2017-01-23 21:36:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', '4', 'Title 5', 'Body 5', 2017-02-11 15:36:02, CURRENT_TIMESTAMP);
+VALUES ('5', '4', 'Title 5', 'Body 5', '2017-02-11 15:36:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('6', '3', 'Title 6', 'Body 6', 2017-02-13 13:36:02, CURRENT_TIMESTAMP);
+VALUES ('6', '3', 'Title 6', 'Body 6', '2017-02-13 13:36:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('7', '3', 'Title 7', 'Body 7', 2017-02-15 16:36:02, CURRENT_TIMESTAMP);
+VALUES ('7', '3', 'Title 7', 'Body 7', '2017-02-15 16:36:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('8', '2', 'Title 8', 'Body 8', 2017-02-21 17:16:02, CURRENT_TIMESTAMP);
+VALUES ('8', '2', 'Title 8', 'Body 8', '2017-02-21 17:16:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('9', '2', 'Title 9', 'Body 9', 2017-02-23 18:16:02, CURRENT_TIMESTAMP);
+VALUES ('9', '2', 'Title 9', 'Body 9', '2017-02-23 18:16:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('10', '1', 'Title 10', 'Body 10', 2017-02-23 18:18:02, CURRENT_TIMESTAMP);
+VALUES ('10', '1', 'Title 10', 'Body 10', '2017-02-23 18:18:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('11', '1', 'Title 11', 'Body 11', 2017-02-24 13:23:02, CURRENT_TIMESTAMP);
+VALUES ('11', '1', 'Title 11', 'Body 11', '2017-02-24 13:23:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('12', '4', 'Title 12', 'Body 12', 2017-02-26 19:23:02, CURRENT_TIMESTAMP);
+VALUES ('12', '4', 'Title 12', 'Body 12', '2017-02-26 19:23:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('13', '1', 'Title 13', 'Body 13', 2017-02-26 19:54:02, CURRENT_TIMESTAMP);
+VALUES ('13', '1', 'Title 13', 'Body 13', '2017-02-26 19:54:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('14', '4', 'Title 14', 'Body 14', 2017-02-27 22:45:02, CURRENT_TIMESTAMP);
+VALUES ('14', '4', 'Title 14', 'Body 14', '2017-02-27 22:45:02', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('15', '1', 'Title 15', 'Body 15', 2017-03-01 12:00:00, CURRENT_TIMESTAMP);
+VALUES ('15', '1', 'Title 15', 'Body 15', '2017-03-01 12:00:00', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('16', '2', 'Title 16', 'Body 16', 2017-03-01 12:15:00, CURRENT_TIMESTAMP);
+VALUES ('16', '2', 'Title 16', 'Body 16', '2017-03-01 12:15:00', CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`post`
 (`postID`, `blogID`, `title`, `body`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('17', '1', 'Title 17', 'Body 17', 2017-03-01 23:59:59, CURRENT_TIMESTAMP);
+VALUES ('17', '1', 'Title 17', 'Body 17', '2017-03-01 23:59:59', CURRENT_TIMESTAMP);
 
 
 
