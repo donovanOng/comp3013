@@ -372,86 +372,60 @@ VALUES ('29', '6', '3', 'blablabla 29', '0000-00-00 00:00:00.000000', CURRENT_TI
 
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', '1', '0', '0', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('1', '1',  '0', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', '1', '1', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('2', '1', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', '2', '0', '0', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('3', '2',  '0', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', '4', '2', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', '4', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', '3', '1', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('5', '3', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('6', '4', '0', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('6', '4', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('7', '5', '1', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('7', '5', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `uploadRights`, `viewRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('8', '2', '1', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('8', '2', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 
-INSERT INTO `group8`.`photoCollectionAccessUploadRights`
-(`uploadRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', '1', '6', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
-
-INSERT INTO `group8`.`photoCollectionAccessUploadRights`
-(`uploadRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', '2', '3', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
-
-INSERT INTO `group8`.`photoCollectionAccessUploadRights`
-(`uploadRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', '5', '2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
-
-INSERT INTO `group8`.`photoCollectionAccessUploadRights`
-(`uploadRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', '6', '5', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
-
-INSERT INTO `group8`.`photoCollectionAccessUploadRights`
-(`uploadRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', '7', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
-
-INSERT INTO `group8`.`photoCollectionAccessUploadRights`
-(`uploadRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('6', '8', '3', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
-
-
-
-INSERT INTO `group8`.`photoCollectionAccessViewRights`
-(`viewRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
+INSERT INTO `group8`.`photoCollectionAccessRights`
+(`rightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('1', '1', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
 
-INSERT INTO `group8`.`photoCollectionAccessViewRights`
-(`viewRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
+INSERT INTO `group8`.`photoCollectionAccessRights`
+(`rightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('2', '1', '7', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
 
-INSERT INTO `group8`.`photoCollectionAccessViewRights`
-(`viewRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
+INSERT INTO `group8`.`photoCollectionAccessRights`
+(`rightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('3', '7', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
 
-INSERT INTO `group8`.`photoCollectionAccessViewRights`
-(`viewRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
+INSERT INTO `group8`.`photoCollectionAccessRights`
+(`rightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('4', '1', '6', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
 
-INSERT INTO `group8`.`photoCollectionAccessViewRights`
-(`viewRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
+INSERT INTO `group8`.`photoCollectionAccessRights`
+(`rightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('5', '5', '2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
 
-INSERT INTO `group8`.`photoCollectionAccessViewRights`
-(`viewRightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
+INSERT INTO `group8`.`photoCollectionAccessRights`
+(`rightsID`, `collectionID`, `circleID`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('6', '7', '2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
 
 
