@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/user.php';
+require_once APP . 'model/friend.php';
 require_once APP . 'model/photo.php';
 require_once APP . 'model/collection.php';
 
@@ -20,6 +21,10 @@ class PhotoController
     $model = new User();
     $user = $model->find_by_id($photo_userID);
 
+    $friendModel = new Friend();
+    $is_friend = $model->is_friend($this->current_userID, $photo_userID);
+    $initiator = $friendModel->friendship_initiator($this->current_userID, $photo_userID);
+
     $model = new Photo();
     $photos = $model->find_user_photos($photo_userID);
 
@@ -37,6 +42,7 @@ class PhotoController
     $photo_comments = NULL;
     if ($photo != NULL) {
       $photo_comments = $model->find_photo_comments($photoID);
+      $photo_annotations = $model->get_annotations($photoID);
     }
 
     require APP . 'view/_templates/header.php';
@@ -106,6 +112,31 @@ class PhotoController
 
     } else {
       return FALSE;
+    }
+  }
+
+  public function set_photo_annotation()
+  {
+    if (isset($_GET['photoID'])) {
+
+      $photoID = $_GET['photoID'];
+      $userID = $_GET['userID'];
+
+      // insert into database
+      $model = new Photo();
+      $result = $model->set_annotation($photoID,
+                                       $userID);
+      if ($result) {
+        $_SESSION['message'] = 'Annotation added successfully';
+        Redirect(URL . 'photo/' . $photoID);
+      } else {
+        $_SESSION['message'] = 'Fail to add Annotation';
+        Redirect(URL . 'photo/' . $photoID);
+      }
+
+    } else {
+      $_SESSION['message'] = 'Missing required POST header';
+      Redirect(URL);
     }
   }
 

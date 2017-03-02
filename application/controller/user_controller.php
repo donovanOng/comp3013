@@ -27,13 +27,8 @@ class UserController
     $profile = $model->fetch_profile($userID);
 
     $friendModel = new Friend();
-    $isFriend = $model->is_friend($this->current_userID,$userID);
-    $initiator = $friendModel->friendship_initiator($this->current_userID,$userID);
-    if($this->current_userID == $userID){
-      $isUser = true;
-    } else {
-      $isUser = false;
-    };
+    $is_friend = $model->is_friend($this->current_userID, $userID);
+    $initiator = $friendModel->friendship_initiator($this->current_userID, $userID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/users/profile.php';
@@ -185,7 +180,7 @@ class UserController
       Redirect(URL);
     }
   }
-  
+
 }
 
 ?>

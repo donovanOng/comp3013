@@ -28,7 +28,6 @@ class PostController
     require APP . 'view/_templates/header.php';
     require APP . 'view/posts/view.php';
     require APP . 'view/_templates/footer.php';
-
   }
 
   public function new()

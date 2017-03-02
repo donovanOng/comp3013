@@ -1,8 +1,9 @@
 <?php
 
 require_once APP . 'model/user.php';
-require_once APP . 'model/circle.php';
 require_once APP . 'model/friend.php';
+
+require_once APP . 'model/circle.php';
 
 class CircleController
 {
@@ -19,6 +20,10 @@ class CircleController
   {
     $model = new User();
     $user = $model->find_by_id($circle_userID);
+
+    $friendModel = new Friend();
+    $is_friend = $model->is_friend($this->current_userID, $circle_userID);
+    $initiator = $friendModel->friendship_initiator($this->current_userID, $circle_userID);
 
     $model = new Circle();
     $circlesAdmin = $model->find_user_circle_admin($circle_userID);
