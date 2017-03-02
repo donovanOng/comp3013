@@ -14,21 +14,14 @@ class UserController
     }
   }
 
-  public function index()
+  public function user_index($post_userID)
   {
-    $model = new User();
-    $users = $model->get_all();
-
-    // TODO: ONLY admin can view
-
-    require APP . 'view/_templates/header.php';
-    require APP . 'view/users/index.php';
-    require APP . 'view/_templates/footer.php';
+    $_SESSION['message'] = URL . 'user does not exist.';
+    Redirect(URL);
   }
 
   public function profile($userID)
   {
-
     $model = new User();
     $user = $model->find_by_id($userID);
     $profile = $model->fetch_profile($userID);
