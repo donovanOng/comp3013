@@ -3,7 +3,7 @@
 <div class="card">
   <div class="card-block">
     <div class="row mb-3">
-      <div class="col-12"><h4>Photos</h4></div>
+      <div class="col-12"><h4><i class="fa fa-picture-o mr-1 text-muted" aria-hidden="true"></i> Photos</h4></div>
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
     <? if (count($photos) > 0) { ?>

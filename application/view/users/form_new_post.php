@@ -5,6 +5,6 @@
     <input class="form-control mb-2" type="text" name="title" value="" placeholder="Title" required />
     <textarea class="form-control mb-2" type="text" name="body" value="" rows="4" cols="50" required ></textarea>
     <input type="hidden" name="blogID" value="<?= $blogs[0]->blogID ?>" />
-    <input class="btn btn-primary" type="submit" name="submit" value="Submit" />
+    <input class="btn btn-primary" type="submit" name="submit" value="Post" />
   </form>
 </div>

@@ -3,7 +3,7 @@
 <div class="card">
   <div class="card-block">
     <div class="row align-items-center mb-3">
-      <div class="col-10"><h4>Photo Collections</h4></div>
+      <div class="col-10"><h4><i class="fa fa-folder mr-1 text-muted" aria-hidden="true"></i> Photo Collections</h4></div>
       <div class="col-2 text-right">
         <? if ($user->userID == $this->current_userID) { ?>
         <a class="btn btn-sm btn-secondary" href="<?= URL; ?>collection/create">New Collection</a>

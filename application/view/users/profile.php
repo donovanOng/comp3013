@@ -15,21 +15,42 @@
   <? if($profile != NULL) { ?>
   <div class="col-4">
     <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">Intro</h4>
+      <div class="card-block bg-faded">
+        <h5 class="card-title"><i class="fa fa-globe mr-1 text-muted" aria-hidden="true"></i> Intro</h5>
         <p class="card-text"><?= $profile->about ?></p>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Gender: <?= $profile->gender ?></li>
-        <li class="list-group-item">Birthdate: <?= $profile->birthdate ?></li>
-        <li class="list-group-item">Current City: <?= $profile->current_city ?></li>
-        <li class="list-group-item">Home City: <?= $profile->home_city ?></li>
-        <li class="list-group-item">Address: <?= $profile->address ?></li>
-        <li class="list-group-item">Languages: <?= $profile->languages ?></li>
-        <li class="list-group-item">Workplace: <?= $profile->workplace ?></li>
+      <ul class="list-group list-group-flush small">
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Gender</span>
+          <span class="col-8"><?= $profile->gender ?></span>
+        </li>
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Birth Date</span>
+          <span class="col-8"><?= $profile->birthdate ?></span>
+        </li>
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Current City</span>
+          <span class="col-8"><?= $profile->current_city ?></span>
+        </li>
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Home City</span>
+          <span class="col-8"><?= $profile->home_city ?></span>
+        </li>
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Address</span>
+          <span class="col-8"><?= $profile->address ?></span>
+        </li>
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Languages</span>
+          <span class="col-8"><?= $profile->languages ?></span>
+        </li>
+        <li class="list-group-item">
+          <span class="text-muted col-4 pl-0">Workplace</span>
+          <span class="col-8"><?= $profile->workplace ?></span>
+        </li>
       </ul>
       <? if($this->current_userID == $user->userID) { ?>
-        <div class="card-block">
+        <div class="card-block bg-faded">
           <? require APP . 'view/users/form_edit_profile.php'; ?>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">
             Edit Profile
@@ -47,7 +68,13 @@
       </div>
     <? } ?>
     <? if ($blogs != NULL) { ?>
-      <p class="text-muted small">BLOG: <?= $blogs[0]->name ?></p>
+      <h6>
+        <span class="text-muted">
+          <i class="fa fa-pencil-square-o mr-1 text-muted" aria-hidden="true"></i> <?= $user->first_name ?>'s Blog:
+        </span>
+          <?= $blogs[0]->name ?>
+      </h6>
+      <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
       <? if ($this->current_userID == $userID) {?>
         <? require APP . 'view/users/form_new_post.php'; ?>
       <? } ?>

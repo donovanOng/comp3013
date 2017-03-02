@@ -4,7 +4,7 @@
   <div class="card-block">
 
     <div class="row align-items-center">
-      <div class="col-10"><h4>Circles</h4></div>
+      <div class="col-10"><h4><i class="fa fa-users mr-1 text-muted" aria-hidden="true"></i> Circles</h4></div>
       <div class="col-2 text-right">
         <? if ($user->userID == $this->current_userID) { ?>
         <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#newCircleModal">
