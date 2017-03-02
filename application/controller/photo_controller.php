@@ -42,6 +42,7 @@ class PhotoController
     $photo_comments = NULL;
     if ($photo != NULL) {
       $photo_comments = $model->find_photo_comments($photoID);
+      $photo_annotations = $model->get_annotations($photoID);
     }
 
     require APP . 'view/_templates/header.php';
@@ -111,6 +112,31 @@ class PhotoController
 
     } else {
       return FALSE;
+    }
+  }
+
+  public function set_photo_annotation()
+  {
+    if (isset($_GET['photoID'])) {
+
+      $photoID = $_GET['photoID'];
+      $userID = $_GET['userID'];
+
+      // insert into database
+      $model = new Photo();
+      $result = $model->set_annotation($photoID,
+                                       $userID);
+      if ($result) {
+        $_SESSION['message'] = 'Annotation added successfully';
+        Redirect(URL . 'photo/' . $photoID);
+      } else {
+        $_SESSION['message'] = 'Fail to add Annotation';
+        Redirect(URL . 'photo/' . $photoID);
+      }
+
+    } else {
+      $_SESSION['message'] = 'Missing required POST header';
+      Redirect(URL);
     }
   }
 

@@ -46,15 +46,16 @@ class CollectionController
     if ($collection != NULL) {
 
       if ($collection->accessRights < 2 && $this->current_userID != $collection->userID) {
-        if ($collection->accessRights == 0){          //Friends
-          $access_by_relationship = $model->get_friends($collection->userID);
+        if ($collection->accessRights == 0){    //Friends
+          $access_by_relationship = $model->find_friends($collection->userID);
         }
-        else{          //Friends of friends
-          $access_by_relationship = $model->get_friends_of_friends($collection->userID);
+        else{   //Friends of friends
+          $access_by_relationship = $model->find_friends_of_friends($collection->userID);
         }
-        $access_by_circle = $model->get_circle_members_access($collectionID);
+        $access_by_circle = $model->find_circle_members_access($collectionID);
 
-        if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) && !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
+        if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) && 
+            !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
           $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
           Redirect(URL . $collection->userID);
         }
@@ -89,42 +90,37 @@ class CollectionController
 
   public function update()
   {
-
     if (isset($_POST["update"])) {
-
       $accessRights = $_POST["accessRights"];
       $collectionID = $_POST["collectionID"];
 
       if(!empty($_POST['accessCircles'])) {
-        $newAccessCircles=$_POST['accessCircles'];
-      }
-      else{
-        $newAccessCircles=[''];
+        $newAccessCircles = $_POST['accessCircles'];
+      } else{
+        $newAccessCircles = [];
       }
 
       $model = new Collection();
-      $oldAccessCircles=array_column ($model->find_access_circles($collectionID), 'circleID');
+      $oldAccessCircles = array_column($model->find_access_circles($collectionID), 'circleID');
 
       $circleInsert = array_diff($newAccessCircles, $oldAccessCircles);
       $circleDelete = array_diff($oldAccessCircles, $newAccessCircles);
 
       $error = [];
 
-      foreach($circleInsert as $insert)
-      {
-        $result = $model -> insert_access_circles($collectionID, $insert);
-        $error[]=$result;
+      foreach($circleInsert as $insert) {
+        $result = $model->insert_access_circles($collectionID, $insert);
+        $error[] = $result;
       }
-      foreach($circleDelete as $delete)
-      {
-        $result = $model -> delete_access_circles($collectionID, $delete);
-        $error[]=$result;
+      foreach($circleDelete as $delete) {
+        $result = $model->delete_access_circles($collectionID, $delete);
+        $error[] = $result;
       }
 
       $result = $model->update_collection_rights($collectionID,
                                                  $this->current_userID,
                                                  $accessRights);
-      $error[]=$result;
+      $error[] = $result;
 
       
       if (!in_array(0, $error)) {
