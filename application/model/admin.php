@@ -53,6 +53,17 @@ class Admin extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function profiles()
+  {
+    // TODO: limit field retrieved
+    $sql = "SELECT *
+            FROM profile";
+
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
   public function circles()
   {
     $sql = "SELECT *
@@ -116,6 +127,37 @@ class Admin extends Model
                     ':messageID' => $messageID);
     return $query->execute($params); // boolean result
   }
+
+  public function collections()
+  {
+    $sql = "SELECT *
+            FROM photoCollection";
+
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
+  public function photos()
+  {
+    $sql = "SELECT *
+            FROM photo";
+
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
+  public function comments()
+  {
+    $sql = "SELECT *
+            FROM comment";
+
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
 }
 
 ?>
