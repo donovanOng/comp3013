@@ -5,9 +5,6 @@
   <div class="col-8">
     <ul class="nav nav-fill">
       <li class="nav-item">
-        <a class="nav-link" href="<?= URL . $user->userID ?>/blog">Blog</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="<?= URL . $user->userID ?>/friend">Friends</a>
       </li>
       <li class="nav-item">
@@ -19,6 +16,30 @@
       <li class="nav-item">
         <a class="nav-link" href="<?= URL . $user->userID ?>/photo">Photos</a>
       </li>
+
+      <? if ($this->current_userID != $user->userID) { ?>
+      <li class="nav-item">
+      <? if($is_friend != NULL) { ?>
+        <? if($is_friend->status == 0) { ?>
+          <button class="btn btn-secondary">Friends</button>
+        <? } else if($is_friend->status == 1) { ?>
+          <? if($initiator->userID == $this->current_userID) { ?>
+              <button class="btn btn-secondary">Friend Request sent</button>
+          <? } else { ?>
+              <a class="btn btn-primary" href="<?= URL ?>user/accept_friendships?userID=<?= $user->userID ?>">Accept Friend Request</a>
+              <a class="btn btn-secondary" href="<?= URL ?>user/reject_friendships?userID=<?= $user->userID ?>">Reject</a>
+          <? } ?>
+        <? } ?>
+      <? } else {?>
+          <a class="btn btn-primary" href="<?= URL ?>user/add_friend?userID=<?= $user->userID ?>">Add Friend</a>
+      <? } ?>
+      </li>
+      <? } else { ?>
+        <li class="nav-item">
+          <a class="btn btn-secondary">Settings</a>
+        </li>
+      <? } ?>
+
     </ul>
   </div>
 </div>
