@@ -1,7 +1,7 @@
 <? require APP . 'view/users/profile_header.php'; ?>
 
 <div class="row">
-  <? if($profile == NULL && $this->current_userID == $userID) { ?>
+  <? if($profile == NULL && $this->current_userID == $user->userID) { ?>
   <div class="col-4 p-2 text-center">
     <div class="bg-faded rounded mb-3 p-4">
       <span>Hi! You do not have a profile yet.</span>
@@ -28,7 +28,7 @@
         <li class="list-group-item">Languages: <?= $profile->languages ?></li>
         <li class="list-group-item">Workplace: <?= $profile->workplace ?></li>
       </ul>
-      <? if($this->current_userID == $userID) { ?>
+      <? if($this->current_userID == $user->userID) { ?>
         <div class="card-block">
           <? require APP . 'view/users/form_edit_profile.php'; ?>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">
@@ -40,7 +40,7 @@
   </div>
   <? } ?>
   <div class="col-8">
-    <? if ($blogs == NULL && $this->current_userID == $userID) { ?>
+    <? if ($blogs == NULL && $this->current_userID == $user->userID) { ?>
       <div class="bg-faded rounded mb-3 p-4">
         <span>Please give your blog a name: </span>
         <? require APP . 'view/users/form_new_blog.php'; ?>
