@@ -63,10 +63,10 @@
 
 <? if (isset($_SESSION['message'])) { ?>
 <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <button type="button" class="close pl-1 pr-1" style="top:0;right:0;padding:0;" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-  <?= $_SESSION['message'] ?>
+  <?=  $_SESSION['message'] ?>
   <? unset($_SESSION['message']) ?>
 </div>
 <? } ?>
