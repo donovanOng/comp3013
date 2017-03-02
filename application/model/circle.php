@@ -77,8 +77,9 @@ class Circle extends Model
 
   public function create($name, $userID)
   {
-    $sql = "INSERT INTO circle (userID, name)
-            VALUES (:userID, :name)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO circle (userID, name, CREATED_AT)
+            VALUES (:userID, :name, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
@@ -100,8 +101,10 @@ class Circle extends Model
 
   public function update_circle($name, $circleID, $userID)
   {
+    $timestamp = date("Y-m-d H:i:s");
     $sql = "UPDATE circle
-            SET name = :name
+            SET name = :name,
+                UPDATED_AT = '$timestamp'
             WHERE circleID = :circleID
             AND userID = :userID ";
 
@@ -114,8 +117,9 @@ class Circle extends Model
 
   public function add_circle_member($circleID, $userID)
   {
-    $sql = "INSERT INTO circlefriends (circleID, userID)
-            VALUES (:circleID, :userID)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO circlefriends (circleID, userID, CREATED_AT)
+            VALUES (:circleID, :userID, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID,

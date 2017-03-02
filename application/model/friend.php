@@ -103,8 +103,9 @@ class Friend extends Model
 
   public function add_friends($userID, $userID_2, $status)
   {
-    $sql = "INSERT INTO relationship (userID, userID_2, status)
-            VALUES (:userID, :userID_2, :status)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO relationship (userID, userID_2, status, CREATED_AT)
+            VALUES (:userID, :userID_2, :status, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
@@ -115,13 +116,15 @@ class Friend extends Model
 
   public function accept_friendship($userID, $userID_2)
   {
+    $timestamp = date("Y-m-d H:i:s");
     $sql = " UPDATE relationship AS r,
               (SELECT relationshipID
                 FROM relationship
                 WHERE (userID = :userID AND userID_2 = :userID_2)
                 OR (userID = :userID_2  AND userID_2 =:userID)
      					) AS  q
-             SET status = 0
+             SET status = 0,
+             UPDATED_AT = '$timestamp'
              WHERE r.relationshipID = q.relationshipID
           ";
 

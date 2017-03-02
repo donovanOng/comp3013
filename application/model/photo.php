@@ -45,8 +45,9 @@ class Photo extends Model
 
   public function create($userID, $collectionID,  $path)
   {
-    $sql = "INSERT INTO photo (userID, collectionID, path)
-            VALUES (:userID, :collectionID, :path)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO photo (userID, collectionID, path, CREATED_AT)
+            VALUES (:userID, :collectionID, :path, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
@@ -69,8 +70,9 @@ class Photo extends Model
 
   public function set_annotation($photoID,$userID)
   {
-    $sql = "INSERT INTO annotation (photoID, userID)
-            VALUES (:photoID, :userID)" ;
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO annotation (photoID, userID, CREATED_AT)
+            VALUES (:photoID, :userID, '$timestamp')" ;
 
     $query = $this->db->prepare($sql);
     $params = array(':photoID' => $photoID,
