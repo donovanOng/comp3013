@@ -10,14 +10,19 @@ class AdminController
     if (isset($_SESSION['current_user'])) {
       $this->current_user = $_SESSION['current_user'];
       $this->current_userID = $_SESSION['current_user']->userID;
+      $model = new Admin();
+      if ($model->is_admin($this->current_userID) == NULL) {
+        $_SESSION['message'] = 'You do not have the administrative privilege';
+        Redirect(URL);
+      }
     }
+
   }
 
   public function index()
   {
     $model = new Admin();
     $users = $model->users();
-
     require APP . 'view/_templates/header.php';
     require APP . 'view/admin/index.php';
     require APP . 'view/_templates/footer.php';

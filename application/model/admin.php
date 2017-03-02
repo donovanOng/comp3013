@@ -5,6 +5,19 @@ require_once APP . 'core/model.php';
 class Admin extends Model
 {
 
+  public function is_admin($userID)
+  {
+    $sql = "SELECT userID
+            FROM user
+            WHERE userID = :userID AND admin = '1'
+            LIMIT 1";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetch();
+  }
+
   public function users()
   {
     // TODO: limit field retrieved
