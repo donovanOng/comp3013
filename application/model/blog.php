@@ -17,16 +17,15 @@ class Blog extends Model
     return $query->fetchAll();
   }
 
-  public function find_by_id($blogID)
+  public function create($userID, $name)
   {
-    $sql = "SELECT *
-            FROM blog
-            WHERE blogID = :blogID";
+    $sql = "INSERT INTO blog (userID, name)
+            VALUES (:userID, :name)";
 
     $query = $this->db->prepare($sql);
-    $params = array(':blogID' => $blogID);
-    $query->execute($params);
-    return $query->fetch();
+    $params = array(':userID' => $userID,
+                    ':name' => $name);
+    return $query->execute($params); // boolean result
   }
 
   public function find_by_name($name)

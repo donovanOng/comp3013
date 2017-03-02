@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/user.php';
+require_once APP . 'model/blog.php';
 require_once APP . 'model/friend.php';
 
 class UserController
@@ -34,6 +35,18 @@ class UserController
         $_SESSION['message'] = 'You dont have rights to view profile of user ' . $user->userID;
         Redirect(URL . $this->current_userID);
       }
+    }
+
+    $blog_model = new Blog();
+    $blogs = $blog_model->find_user_blog($userID);
+    if ($blogs != NULL) {
+      $blog_posts = $blog_model->find_blog_posts($blogs[0]->blogID);
+
+      // Sort dates in descending order
+      function date_sort($a, $b) {
+          return strtotime($a->CREATED_AT) < strtotime($b->CREATED_AT);
+      }
+      usort($blog_posts, "date_sort");
     }
 
     $friendModel = new Friend();

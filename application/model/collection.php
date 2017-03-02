@@ -44,8 +44,8 @@ class Collection extends Model
   }
 
   public function find_circle_members_access($collectionID){
-    $sql = "SELECT DISTINCT c.userID 
-            FROM circleFriends AS c, photoCollectionAccessRights AS p 
+    $sql = "SELECT DISTINCT c.userID
+            FROM circleFriends AS c, photoCollectionAccessRights AS p
             WHERE c.circleID = p.circleID AND p.collectionID = :collectionID";
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
@@ -55,59 +55,59 @@ class Collection extends Model
 
   public function access_collection($userID)
   {
-    $sql = "SELECT *  
+    $sql = "SELECT *
             FROM photocollection
             WHERE (
               accessRights = 0 AND userID IN (
-                SELECT U.userID 
-                FROM relationship R, user U 
-                WHERE 
-                CASE 
-                  WHEN R.userID = :userID THEN R.userID_2 = U.userID 
-                  WHEN R.userID_2 = :userID THEN R.userID = U.userID 
-                END 
+                SELECT U.userID
+                FROM relationship R, user U
+                WHERE
+                CASE
+                  WHEN R.userID = :userID THEN R.userID_2 = U.userID
+                  WHEN R.userID_2 = :userID THEN R.userID = U.userID
+                END
                 AND status = 0
               )
-            ) 
+            )
             OR (
               accessRights = :userID AND userID IN (
-                SELECT userID 
-                FROM relationship 
-                WHERE STATUS = 0 AND userID_2 = :userID 
-                UNION 
-                SELECT userID_2 
-                FROM relationship 
-                WHERE STATUS = 0 AND userID = :userID 
-                UNION 
-                SELECT userID 
-                FROM relationship 
+                SELECT userID
+                FROM relationship
+                WHERE STATUS = 0 AND userID_2 = :userID
+                UNION
+                SELECT userID_2
+                FROM relationship
+                WHERE STATUS = 0 AND userID = :userID
+                UNION
+                SELECT userID
+                FROM relationship
                 WHERE userID != :userID AND status = 0 AND userID_2 IN (
-                  SELECT userID 
-                  FROM relationship 
-                  WHERE STATUS = 0 AND userID_2 = :userID 
-                  UNION 
-                  SELECT userID_2 
-                  FROM relationship 
+                  SELECT userID
+                  FROM relationship
+                  WHERE STATUS = 0 AND userID_2 = :userID
+                  UNION
+                  SELECT userID_2
+                  FROM relationship
                   WHERE STATUS = 0 AND userID = :userID
-                ) 
-                UNION 
-                SELECT userID_2 
-                FROM relationship 
+                )
+                UNION
+                SELECT userID_2
+                FROM relationship
                 WHERE userID_2 != :userID AND STATUS = 0 AND userID IN (
-                  SELECT userID 
-                  FROM relationship 
-                  WHERE STATUS = 0 AND userID_2 = :userID 
-                  UNION 
-                  SELECT userID_2 
-                  FROM relationship 
+                  SELECT userID
+                  FROM relationship
+                  WHERE STATUS = 0 AND userID_2 = :userID
+                  UNION
+                  SELECT userID_2
+                  FROM relationship
                   WHERE STATUS = 0 AND userID = :userID
                 )
               )
-            ) 
-            OR (accessRights = 2) 
+            )
+            OR (accessRights = 2)
             AND userID != :userID
             UNION
-            SELECT DISTINCT pc.* 
+            SELECT DISTINCT pc.*
             FROM photocollectionaccessrights AS pcar, circlefriends AS cf, photocollection as pc
             WHERE cf.circleID = pcar.circleID AND pc.collectionID = pcar.collectionID AND cf.userID = :userID AND pc.userID != :userID
             ORDER BY collectionID";
@@ -133,8 +133,8 @@ class Collection extends Model
 
   public function find_all_user_circles($userID)
   {
-    $sql = "SELECT DISTINCT c.* 
-            FROM circle AS c, circlefriends AS cf, photocollection as pc 
+    $sql = "SELECT DISTINCT c.*
+            FROM circle AS c, circlefriends AS cf, photocollection as pc
             WHERE cf.circleID = c.circleID AND pc.userID = cf.userID AND cf.userID = :userID";
 
     $query = $this->db->prepare($sql);
@@ -145,8 +145,8 @@ class Collection extends Model
 
   public function find_access_circles($collectionID)
   {
-    $sql = "SELECT * 
-            FROM photocollectionaccessrights 
+    $sql = "SELECT *
+            FROM photocollectionaccessrights
             WHERE collectionID = :collectionID";
 
     $query = $this->db->prepare($sql);
@@ -157,8 +157,9 @@ class Collection extends Model
 
   public function create($userID)
   {
-    $sql = "INSERT INTO photoCollection (userID)
-            VALUES (:userID)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO photoCollection (userID,CREATED_AT)
+            VALUES (:userID, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
@@ -178,8 +179,10 @@ class Collection extends Model
 
   public function update_collection_rights($collectionID, $userID, $accessRights)
   {
+    $timestamp = date("Y-m-d H:i:s");
     $sql = "UPDATE photoCollection
-            SET accessRights = :accessRights
+            SET accessRights = :accessRights,
+            UPDATED_AT = '$timestamp'
             WHERE userID = :userID AND collectionID = :collectionID";
 
     $query = $this->db->prepare($sql);
@@ -191,8 +194,9 @@ class Collection extends Model
 
   public function insert_access_circles($collectionID, $circleID)
   {
-    $sql = "INSERT INTO photocollectionaccessrights (collectionID, circleID) 
-            VALUES (:collectionID, :circleID)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO photocollectionaccessrights (collectionID, circleID, CREATED_AT)
+            VALUES (:collectionID, :circleID, $timestamp)";
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID,
@@ -202,7 +206,7 @@ class Collection extends Model
 
   public function delete_access_circles($collectionID, $circleID)
   {
-    $sql = "DELETE FROM photocollectionaccessrights 
+    $sql = "DELETE FROM photocollectionaccessrights
             WHERE collectionID=:collectionID AND circleID = :circleID";
 
     $query = $this->db->prepare($sql);

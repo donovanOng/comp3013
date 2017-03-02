@@ -15,25 +15,34 @@ class BlogController
 
   public function user_index($blog_userID)
   {
-    $model = new Blog();
-    $blogs = $model->find_user_blog($blog_userID);
-
-    require APP . 'view/_templates/header.php';
-    require APP . 'view/blogs/index.php';
-    require APP . 'view/_templates/footer.php';
+    $_SESSION['message'] = URL . 'blog does not exist.';
+    Redirect(URL);
   }
 
   public function view($blogID)
   {
-    // display photos from single collection
-    $model = new Blog();
-    $blog = $model->find_by_id($blogID);
-    $blog_posts = $model->find_blog_posts($blogID);
+    $_SESSION['message'] = URL . 'blog does not exist.';
+    Redirect(URL);
+  }
 
-    require APP . 'view/_templates/header.php';
-    require APP . 'view/blogs/view.php';
-    require APP . 'view/_templates/footer.php';
+  public function create()
+  {
+    if (isset($_POST['submit'])) {
+      $name = $_POST['name'];
 
+      $model = new Blog();
+      $result = $model->create($this->current_userID,
+                               $name);
+      if ($result) {
+        $_SESSION['message'] = 'Blog created successfully';
+      } else {
+        $_SESSION['message'] = 'Fail to create blog';
+      }
+      Redirect(URL . $this->current_userID);
+
+    } else {
+      Redirect(URL);
+    }
   }
 
   public function search()

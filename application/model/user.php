@@ -86,8 +86,9 @@ class User extends Model
 
   public function create($first_name, $last_name, $email, $password)
   {
-    $sql = "INSERT INTO user (first_name, last_name, email, password)
-            VALUES (:first_name, :last_name, :email, :password)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO user (first_name, last_name, email, password, CREATED_AT)
+            VALUES (:first_name, :last_name, :email, :password, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':first_name' => $first_name,
@@ -111,10 +112,11 @@ class User extends Model
   public function new_profile($userID, $about, $gender, $birthdate, $current_city,
                               $home_city, $address, $languages, $workplace)
   {
+    $timestamp = date("Y-m-d H:i:s");
     $sql = "INSERT INTO profile (userID, about, gender, birthdate, current_city,
-                        home_city, address, languages, workplace)
+                        home_city, address, languages, workplace, CREATED_AT)
             VALUES (:userID, :about, :gender, :birthdate, :current_city, :home_city,
-                    :address, :languages, :workplace)";
+                    :address, :languages, :workplace, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
@@ -132,6 +134,7 @@ class User extends Model
   public function update_profile($userID, $about, $gender, $birthdate, $current_city,
                                $home_city, $address, $languages, $workplace)
   {
+    $timestamp = date("Y-m-d H:i:s");
     $sql = "UPDATE profile
             SET about = :about,
                 gender = :gender,
@@ -140,7 +143,8 @@ class User extends Model
                 home_city = :home_city,
                 address = :address,
                 languages = :languages,
-                workplace = :workplace
+                workplace = :workplace,
+                UPDATED_AT = '$timestamp'
             WHERE (userID = :userID)";
 
 
