@@ -43,6 +43,8 @@ class PhotoController
     if ($photo != NULL) {
       $photo_comments = $model->find_photo_comments($photoID);
       $photo_annotations = $model->get_annotations($photoID);
+      $photo_annotations_userID = array_column($photo_annotations, 'userID');
+      $photo_user_Liked_photo = in_array($this->current_userID, $photo_annotations_userID);
     }
 
     require APP . 'view/_templates/header.php';
@@ -131,6 +133,31 @@ class PhotoController
         Redirect(URL . 'photo/' . $photoID);
       } else {
         $_SESSION['message'] = 'Fail to add Annotation';
+        Redirect(URL . 'photo/' . $photoID);
+      }
+
+    } else {
+      $_SESSION['message'] = 'Missing required POST header';
+      Redirect(URL);
+    }
+  }
+
+  public function delete_photo_annotation()
+  {
+    if (isset($_GET['photoID'])) {
+
+      $photoID = $_GET['photoID'];
+      $userID = $_GET['userID'];
+
+      // insert into database
+      $model = new Photo();
+      $result = $model->delete_annotation($photoID,
+                                       $userID);
+      if ($result) {
+        $_SESSION['message'] = 'Annotation deleted successfully';
+        Redirect(URL . 'photo/' . $photoID);
+      } else {
+        $_SESSION['message'] = 'Fail to delete Annotation';
         Redirect(URL . 'photo/' . $photoID);
       }
 

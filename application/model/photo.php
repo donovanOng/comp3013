@@ -78,6 +78,18 @@ class Photo extends Model
 
     return $query->execute($params); // boolean result
   }
+
+  public function delete_annotation($photoID,$userID)
+  {
+    $sql = "DELETE FROM annotation
+            WHERE (photoID = :photoID AND userID = :userID)" ;
+
+    $query = $this->db->prepare($sql);
+    $params = array(':photoID' => $photoID,
+                    ':userID' => $userID);
+
+    return $query->execute($params); // boolean result
+  }
 }
 
 ?>
