@@ -52,9 +52,8 @@ class Circle extends Model
   {
     $sql = "SELECT *
             FROM message
-            WHERE circleID = :circleID";
-
-    // TODO: Join user and blog to get detailed information
+            WHERE circleID = :circleID
+            ORDER BY UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID);

@@ -53,23 +53,19 @@ class Application
       } else {
 
         // Route auth's action to AuthController
+        require_once APP . 'controller/auth.php';
+        $page = new AuthController();
 
         if ($this->url_controller == 'login') {
 
-          require_once APP . 'controller/auth.php';
-          $page = new AuthController();
           $page->login();
 
         } elseif ($this->url_controller == 'logout') {
 
-          require_once APP . 'controller/auth.php';
-          $page = new AuthController();
           $page->logout();
 
         } elseif ($this->url_controller == 'signup') {
 
-          require_once APP . 'controller/auth.php';
-          $page = new AuthController();
           $page->signup();
 
         } else {
@@ -110,7 +106,7 @@ class Application
 
     if (strlen($action_or_id) == 0) {
 
-      if ($controller_name == 'user') {
+      if ($controller_name == 'admin') {
         $url_controller_obj->index();
       } else {
         Redirect(URL . $_SESSION['current_user']->userID . '/' . $controller_name);

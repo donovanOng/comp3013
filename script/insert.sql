@@ -1,22 +1,22 @@
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', 'Chevy', 'Ng', 'chevyng@gmail.com', 'pw1', '0', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('1', 'Chevy', 'Ng', 'chevyng@gmail.com', 'pw1', '0', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '2', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '2', '1',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', 'Nigel', 'Ng', 'nigelng@gmail.com', 'pw5', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('5', 'Nigel', 'Ng', 'nigelng@gmail.com', 'pw5', '1', '0',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 
 INSERT INTO `group8`.`blog`
