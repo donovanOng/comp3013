@@ -53,6 +53,38 @@ class Admin extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function circles()
+  {
+    $sql = "SELECT *
+            FROM circle";
+
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
+  public function delete_circle($circleID)
+  {
+    $sql = "DELETE FROM circle
+            WHERE circleID = :circleID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':circleID' => $circleID);
+    return $query->execute($params); // boolean result
+  }
+
+  public function update_circle($circleID, $name)
+  {
+    $sql = "UPDATE circle
+            SET name = :name
+            WHERE circleID = :circleID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':name' => $name,
+                    ':circleID' => $circleID);
+    return $query->execute($params); // boolean result
+  }
+
 }
 
 ?>
