@@ -5,16 +5,13 @@
       <small class="text-muted">Created By <a href="<?= URL . $collection->userID ?>">User <?= $collection->userID ?></a></small>
     </div>
     <div class="col-6 text-right">
-      <? if ($user_upload_rights) { ?>
-        <!-- Check if user has upload rights for collection -->
-        <a class="btn btn-primary" href="<?= URL; ?>photo/upload?collectionID=<?= $collectionID ?>">Upload Photo</a>
-      <? } ?>
+      <a class="btn btn-primary" href="<?= URL; ?>photo/upload?collectionID=<?= $collectionID ?>">Upload Photo</a>
     </div>
   </div>
   <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
   <div class="mb-3 bg-faded p-3">
     <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
-    <p>Upload: <?= $privacy[$collection->uploadRights] ?>,  View: <?= $privacy[$collection->viewRights] ?></p>
+    <p>Privacy: <?= $privacy[$collection->accessRights] ?></p>
     <? require APP . 'view/collections/edit.php'; ?>
   </div>
   <? if (count($collection_photos) > 0) { ?>

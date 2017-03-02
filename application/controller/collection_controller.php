@@ -25,7 +25,8 @@ class CollectionController
     $initiator = $friendModel->friendship_initiator($this->current_userID, $collection_userID);
 
     $model = new Collection();
-    $collections = $model->find_user_collection($collection_userID);
+    $collections_owned = $model->find_user_collection($collection_userID);
+    $collections_access = $model->access_collection($collection_userID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/collections/index.php';
@@ -38,22 +39,25 @@ class CollectionController
     $model = new Collection();
     $collection = $model->find_by_id($collectionID);
 
+    $all_user_circles = $model->find_all_user_circles($collectionID);
+    $current_access_circles = $model->find_access_circles($collectionID);
+
     $collection_photos = NULL;
     if ($collection != NULL) {
 
-      if ($collection->viewRights < 2 && $this->current_userID != $collection->userID) {
-        $users_with_view_accesss = $model->find_users_with_collection_access($collection->userID,  $collection->viewRights);
-        if (!in_array_field($this->current_userID, 'userID', $users_with_view_accesss)) {
-          $_SESSION['message'] = 'You dont have rights to view Collection ' . $collection->collectionID;
+      if ($collection->accessRights < 2 && $this->current_userID != $collection->userID) {
+        if ($collection->accessRights == 0){          //Friends
+          $access_by_relationship = $model->get_friends($collection->userID);
+        }
+        else{          //Friends of friends
+          $access_by_relationship = $model->get_friends_of_friends($collection->userID);
+        }
+        $access_by_circle = $model->get_circle_members_access($collectionID);
+
+        if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) && !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
+          $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
           Redirect(URL . $collection->userID);
         }
-      }
-
-      if ($collection->uploadRights < 2 && $this->current_userID != $collection->userID){
-        $users_with_upload_accesss = $model->find_users_with_collection_access($collection->userID,  $collection->uploadRights);
-        $user_upload_rights = in_array_field($this->current_userID, 'userID', $users_with_upload_accesss);
-      } else {
-        $user_upload_rights = True;
       }
 
       $collection_photos = $model->find_colllection_photos($collectionID);
@@ -85,18 +89,45 @@ class CollectionController
 
   public function update()
   {
+
     if (isset($_POST["update"])) {
 
-      $uploadRights = $_POST["uploadRights"];
-      $viewRights = $_POST["viewRights"];
+      $accessRights = $_POST["accessRights"];
       $collectionID = $_POST["collectionID"];
+
+      if(!empty($_POST['accessCircles'])) {
+        $newAccessCircles=$_POST['accessCircles'];
+      }
+      else{
+        $newAccessCircles=[''];
+      }
+
       $model = new Collection();
+      $oldAccessCircles=array_column ($model->find_access_circles($collectionID), 'circleID');
+
+      $circleInsert = array_diff($newAccessCircles, $oldAccessCircles);
+      $circleDelete = array_diff($oldAccessCircles, $newAccessCircles);
+
+      $error = [];
+
+      foreach($circleInsert as $insert)
+      {
+        $result = $model -> insert_access_circles($collectionID, $insert);
+        $error[]=$result;
+      }
+      foreach($circleDelete as $delete)
+      {
+        $result = $model -> delete_access_circles($collectionID, $delete);
+        $error[]=$result;
+      }
+
       $result = $model->update_collection_rights($collectionID,
                                                  $this->current_userID,
-                                                 $uploadRights,
-                                                 $viewRights);
+                                                 $accessRights);
+      $error[]=$result;
 
-      if ($result) {
+      
+      if (!in_array(0, $error)) {
         $_SESSION['message'] = 'Collection updated!';
       } else {
         $_SESSION['message'] = 'Fail to update collection!';
