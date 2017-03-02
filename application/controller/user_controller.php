@@ -117,6 +117,104 @@ class UserController
           Redirect(URL . $userID);
         }
     }
+
+    public function new_profile()
+    {
+
+      if (isset($_GET['userID']) && strlen($_GET['userID']) > 0) {
+
+        $userID = $_GET['userID'];
+
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/users/new_profile.php';
+        require APP . 'view/_templates/footer.php';
+
+      } else if (isset($_POST['submit'])) {
+
+        $userID = $_POST['userID'];
+        $about = $_POST['about'];
+        $gender = $_POST['gender'];
+        $birthdate = $_POST['birthdate'];
+        $current_city = $_POST['current_city'];
+        $home_city = $_POST['home_city'];
+        $address = $_POST['address'];
+        $languages = $_POST['languages'];
+        $workplace = $_POST['workplace'];
+
+        $model = new User();
+        $result = $model->new_profile($userID,
+                                      $about,
+                                      $gender,
+                                      $birthdate,
+                                      $current_city,
+                                      $home_city,
+                                      $address,
+                                      $languages,
+                                      $workplace);
+
+        if ($result) {
+          $_SESSION['message'] = 'Profile is now set!';
+          Redirect(URL . $userID);
+        } else {
+          $_SESSION['message'] = 'Fail to create profile :(';
+          Redirect(URL . $userID );
+        }
+
+      } else {
+        $_SESSION['message'] = 'No User ID';
+        Redirect(URL);
+      }
+
+    }
+
+    public function update_profile()
+    {
+
+      if (isset($_GET['userID']) && strlen($_GET['userID']) > 0) {
+
+        $userID = $_GET['userID'];
+
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/users/update_profile.php';
+        require APP . 'view/_templates/footer.php';
+
+      } else if (isset($_POST['submit'])) {
+
+        $userID = $_POST['userID'];
+        $about = $_POST['about'];
+        $gender = $_POST['gender'];
+        $birthdate = $_POST['birthdate'];
+        $current_city = $_POST['current_city'];
+        $home_city = $_POST['home_city'];
+        $address = $_POST['address'];
+        $languages = $_POST['languages'];
+        $workplace = $_POST['workplace'];
+
+        $model = new User();
+        $result = $model->new_profile($userID,
+                                      $about,
+                                      $gender,
+                                      $birthdate,
+                                      $current_city,
+                                      $home_city,
+                                      $address,
+                                      $languages,
+                                      $workplace);
+
+        if ($result) {
+          $_SESSION['message'] = 'Profile is updated!';
+          Redirect(URL . $userID);
+        } else {
+          $_SESSION['message'] = 'Fail to update profile :(';
+          Redirect(URL . $userID );
+        }
+
+      } else {
+        $_SESSION['message'] = 'No User ID';
+        Redirect(URL);
+      }
+
+    }
 }
 
 ?>
