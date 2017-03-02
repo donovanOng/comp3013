@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/user.php';
+require_once APP . 'model/blog.php';
 require_once APP . 'model/friend.php';
 
 class UserController
@@ -26,6 +27,12 @@ class UserController
     $user = $model->find_by_id($userID);
     $profile = $model->fetch_profile($userID);
 
+    $blog_model = new Blog();
+    $blogs = $blog_model->find_user_blog($userID);
+    if ($blogs != NULL) {
+      $blog_posts = $blog_model->find_blog_posts($blogs[0]->blogID);
+    }
+  
     $friendModel = new Friend();
     $is_friend = $model->is_friend($this->current_userID, $userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID, $userID);

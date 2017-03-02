@@ -5,7 +5,6 @@
   </div>
 </div>
 
-
 <? if (count($users) > 0) { ?>
 <div class="row">
   <?php foreach ($users as $user) { ?>

@@ -32,16 +32,7 @@ class PostController
 
   public function new()
   {
-
-    if (isset($_GET['blogID']) && strlen($_GET['blogID']) > 0) {
-
-      $blogID = $_GET['blogID'];
-
-      require APP . 'view/_templates/header.php';
-      require APP . 'view/posts/new.php';
-      require APP . 'view/_templates/footer.php';
-
-    } else if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
 
       // TODO: check if current_userID is the owner of blogID
 
@@ -56,14 +47,13 @@ class PostController
 
       if ($result) {
         $_SESSION['message'] = 'Post created successfully';
-        Redirect(URL . 'blog/' . $blogID);
       } else {
         $_SESSION['message'] = 'Fail to create post';
-        Redirect(URL . 'post/new?blogID=' . $blogID);
       }
+      
+      Redirect(URL . $this->current_userID);
 
     } else {
-      $_SESSION['message'] = 'No Blog ID';
       Redirect(URL);
     }
 
