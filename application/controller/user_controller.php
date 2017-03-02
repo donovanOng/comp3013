@@ -31,8 +31,14 @@ class UserController
     $blogs = $blog_model->find_user_blog($userID);
     if ($blogs != NULL) {
       $blog_posts = $blog_model->find_blog_posts($blogs[0]->blogID);
+
+      // Sort dates in descending order
+      function date_sort($a, $b) {
+          return strtotime($a->CREATED_AT) < strtotime($b->CREATED_AT);
+      }
+      usort($blog_posts, "date_sort");
     }
-  
+
     $friendModel = new Friend();
     $is_friend = $model->is_friend($this->current_userID, $userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID, $userID);
