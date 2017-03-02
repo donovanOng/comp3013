@@ -85,6 +85,37 @@ class Admin extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function messages()
+  {
+    $sql = "SELECT *
+            FROM message";
+
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
+  public function delete_message($messageID)
+  {
+    $sql = "DELETE FROM message
+            WHERE messageID = :messageID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':messageID' => $circleID);
+    return $query->execute($params); // boolean result
+  }
+
+  public function update_message($messageID, $content)
+  {
+    $sql = "UPDATE message
+            SET content = :content
+            WHERE messageID = :messageID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':content' => $content,
+                    ':messageID' => $messageID);
+    return $query->execute($params); // boolean result
+  }
 }
 
 ?>

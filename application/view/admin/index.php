@@ -40,4 +40,25 @@
     <?php } ?>
   </tbody>
   </table>
+
+  <h4 class="mb-3">List of Messages <span class="text-muted"><?= count($messages) ?></span></h4>
+  <table class="table table-hover">
+  <tbody>
+    <?php foreach ($messages as $message) { ?>
+      <tr>
+        <th scope="row"><?= $message->messageID ?></th>
+        <td><?= $message->circleID ?></td>
+        <td><?= $message->userID ?></td>
+        <td><?= $message->content ?></td>
+        <td class="text-right">
+          <button type="button" class="btn-link" data-toggle="modal" data-target="#editMessage<?= $message->messageID ?>">
+            Edit
+          </button>
+          <a href="<?= URL ?>admin/delete_message?messageID=<?= $message->messageID ?>" class="btn-link">Delete</a>
+        </td>
+      </tr>
+      <? require APP . 'view/admin/edit_message.php'; ?>
+    <?php } ?>
+  </tbody>
+  </table>
 </div>

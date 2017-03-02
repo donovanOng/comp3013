@@ -24,6 +24,7 @@ class AdminController
     $model = new Admin();
     $users = $model->users();
     $circles = $model->circles();
+    $messages = $model->messages();
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/admin/index.php';
@@ -113,6 +114,47 @@ class AdminController
       Redirect(URL . 'admin');
     }
   }
+
+  public function delete_message()
+  {
+    if (isset($_GET['messageID']) && strlen($_GET['messageID'] > 0)) {
+      $messageID = $_GET['messageID'];
+      $model = new Admin();
+      $result = $model->delete_message($messageID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Message ' . $messageID . ' deleted';
+      } else {
+        $_SESSION['message'] = 'Fail to delete Message ' . $circleID;
+      }
+      Redirect(URL . 'admin');
+
+    } else {
+      Redirect(URL . 'admin');
+    }
+  }
+
+  public function update_message()
+  {
+    if (isset($_POST['update'])) {
+      $messageID = $_POST['messageID'];
+      $content = $_POST['content'];
+
+      $model = new Admin();
+      $result = $model->update_message($messageID,
+                                      $content);
+      if ($result) {
+        $_SESSION['message'] = 'Message ' . $messageID . ' updated';
+      } else {
+        $_SESSION['message'] = 'Fail to update Message ' . $messageID;
+      }
+      Redirect(URL . 'admin');
+
+    } else {
+      Redirect(URL . 'admin');
+    }
+  }
+
 
 }
 
