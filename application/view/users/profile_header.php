@@ -1,6 +1,6 @@
-<div class="row bg-faded align-items-center p-3 mb-4">
+<div class="row bg-faded align-items-center p-3 mb-4 ml-0 mr-0">
   <div class="col-4">
-    <h4 class="mb-0"><?= $user->first_name ?> <?= $user->last_name ?></h4>
+    <h4 class="mb-0"><a href="<?= URL . $user->userID ?>"><?= $user->first_name ?> <?= $user->last_name ?></a></h4>
   </div>
   <div class="col-8">
     <ul class="nav nav-fill">
