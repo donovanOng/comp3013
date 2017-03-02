@@ -5,14 +5,18 @@
       <small class="text-muted">Created By <a href="<?= URL . $circle->userID ?>">User <?= $circle->userID ?></a></small>
     </div>
     <div class="col-6 text-right">
-      <button type="button" class="btn">
-        Leave Circle
-      </button>
-      <button type="button" class="btn">
-        Edit Circle Name
-      </button>
+      <? if ($this->current_userID == $circle->userID) { ?>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editCircle<?= $circle->circleID ?>">
+          Edit Name
+        </button>
+      <? } else { ?>
+        <a class="btn btn-secondary" href="<?= URL . 'circle/leave_circle?userID=' . $this->current_userID . '&circleID=' . $circleID ?>">
+          Leave Circle
+        </a>
+      <? } ?>
     </div>
   </div>
+  <? require APP . 'view/circles/edit_circle.php'; ?>
   <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
   <div class="row">
     <div class="col-8">

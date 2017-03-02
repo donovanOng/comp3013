@@ -52,9 +52,8 @@ class Circle extends Model
   {
     $sql = "SELECT *
             FROM message
-            WHERE circleID = :circleID";
-
-    // TODO: Join user and blog to get detailed information
+            WHERE circleID = :circleID
+            ORDER BY UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID);
@@ -95,6 +94,20 @@ class Circle extends Model
 
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID,
+                    ':userID' => $userID);
+    return $query->execute($params); // boolean result
+  }
+
+  public function update_circle($name, $circleID, $userID)
+  {
+    $sql = "UPDATE circle
+            SET name = :name
+            WHERE circleID = :circleID
+            AND userID = :userID ";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':name' => $name,
+                    ':circleID' => $circleID,
                     ':userID' => $userID);
     return $query->execute($params); // boolean result
   }

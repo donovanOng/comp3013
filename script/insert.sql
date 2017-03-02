@@ -1,22 +1,22 @@
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', 'Chevy', 'Ng', 'chevyng@gmail.com', 'pw1', '0', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('1', 'Chevy', 'Ng', 'chevyng@gmail.com', 'pw1', '0', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '2', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '2', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '2', '1',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
-`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', 'Nigel', 'Ng', 'nigelng@gmail.com', 'pw5', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+`userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('5', 'Nigel', 'Ng', 'nigelng@gmail.com', 'pw5', '1', '0',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 
 INSERT INTO `group8`.`blog`
@@ -644,3 +644,127 @@ INSERT INTO `group8`.`profile`
 (`userID`, `about`, `gender`, `birthdate`, `current_city`, `home_city`, `address`, `languages`, `workplace`, `CREATED_AT`, `UPDATED_AT`)
 VALUES ('5', 'Computer Science student in UCL',	'Female',	'1992-07-10',	'London',	'Azerbaijan',	'1 Malet Street',
   'English, Azerbaijani', 'UCL', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('1','2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('1', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('2', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('3', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', '2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('6', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('6', '5', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('7', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('8', '2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('8', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('10', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('11', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('11', '5', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('12', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('13', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('14', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('15', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('16', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('17', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('18', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('19', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('21', '2', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('21', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('22', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('22', '5', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('23', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('24', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('25', '1', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('25', '5', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
+
+INSERT INTO `group8`.`annotation`
+(`photoID`,`userID`,`CREATED_AT`, `UPDATED_AT`)
+VALUES ('26', '4', '0000-00-00 00:00:00.000000', CURRENT_TIMESTAMP);
