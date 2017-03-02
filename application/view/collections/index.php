@@ -11,21 +11,39 @@
       </div>
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-    <? if ($collections != NULL) { ?>
+    <h3>Collections I own</h3>
+    <? if ($collections_owned != NULL) { ?>
     <div class="row">
     <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
-    <?php foreach ($collections as $collection) { ?>
+    <?php foreach ($collections_owned as $collection) { ?>
       <div class="col-3">
         <div class="card mb-3">
           <img class="card-img-top" src="<?= URL; ?>images/missing.jpg" style="object-fit: cover; height: 200px;">
           <div class="card-block">
             <h5 class="card-title">Collection <?= $collection->collectionID ?></h5>
             <p class="card-text text-muted">
-              <?= $collection->uploadRights . ' - ' . $privacy[$collection->uploadRights] ?>
-              <?= $collection->uploadRights . ' - ' . $privacy[$collection->viewRights] ?>
+              <?= $collection->accessRights . ' - ' . $privacy[$collection->accessRights] ?>
             </p>
             <a href="<?= URL; ?>collection/<?= $collection->collectionID ?>" class="card-link">View Collection</a>
             <a href="<?= URL; ?>collection/delete?collectionID=<?= $collection->collectionID ?>" class="card-link">Delete</a>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+    </div>
+    <? } ?>
+
+    <h3>Collections I can view</h3>
+    <? if ($collections_access != NULL) { ?>
+    <div class="row">
+    <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
+    <?php foreach ($collections_access as $collection) { ?>
+      <div class="col-3">
+        <div class="card mb-3">
+          <img class="card-img-top" src="<?= URL; ?>images/missing.jpg" style="object-fit: cover; height: 200px;">
+          <div class="card-block">
+            <h5 class="card-title">Collection <?= $collection->collectionID ?></h5>
+            <a href="<?= URL; ?>collection/<?= $collection->collectionID ?>" class="card-link">View Collection</a>
           </div>
         </div>
       </div>
