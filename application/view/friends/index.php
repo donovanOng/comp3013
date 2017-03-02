@@ -33,7 +33,7 @@
     <h6 class="card-subtitle mb-3 text-muted">Number of friend requests sent: <?= count($friend_req_sent) ?></h6>
     <? if (count($friend_req_sent) > 0) { ?>
       <?php foreach ($friend_req_sent as $friend) { ?>
-        <div class="row rounded bg-faded align-items-center m-0 pt-3 pb-3">
+        <div class="row rounded bg-faded align-items-center mr-0 ml-0 mb-2 pt-3 pb-3">
           <div class="col-8">
             <h4>
               <a href="<?= URL; ?><?= $friend->userID ?>"><?= $friend->first_name ?>
@@ -57,7 +57,7 @@
     <h6 class="card-subtitle mb-3 text-muted">Number of friend requests received: <?= count($friend_req_received) ?></h6>
     <? if (count($friend_req_received) > 0) { ?>
       <?php foreach ($friend_req_received as $friend) { ?>
-        <div class="row rounded bg-faded align-items-center m-0 pt-3 pb-3">
+        <div class="row rounded bg-faded align-items-center mr-0 ml-0 mb-2 pt-3 pb-3">
           <div class="col-8">
             <h4>
               <a href="<?= URL; ?><?= $friend->userID ?>"><?= $friend->first_name ?>
