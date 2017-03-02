@@ -7,8 +7,9 @@
         <th scope="row"><?= $user->userID ?></th>
         <td><?= $user->first_name ?></td>
         <td><?= $user->last_name ?></td>
-        <td><?= @$user->email ?></td>
-        <td><?= @$user->privacy ?></td>
+        <td><?= $user->email ?></td>
+        <td><?= $user->privacy ?></td>
+        <td><?= $user->admin ?></td>
         <td class="text-right">
           <button type="button" class="btn-link" data-toggle="modal" data-target="#edit<?= $user->userID ?>">
             Edit
@@ -27,7 +28,7 @@
     <?php foreach ($circles as $circle) { ?>
       <tr>
         <th scope="row"><?= $circle->circleID ?></th>
-        <td><?= $circle->userID ?></td>
+        <td>User <?= $circle->userID ?></td>
         <td><?= $circle->name ?></td>
         <td class="text-right">
           <button type="button" class="btn-link" data-toggle="modal" data-target="#editCircle<?= $circle->circleID ?>">
@@ -47,8 +48,8 @@
     <?php foreach ($messages as $message) { ?>
       <tr>
         <th scope="row"><?= $message->messageID ?></th>
-        <td><?= $message->circleID ?></td>
-        <td><?= $message->userID ?></td>
+        <td>Circle <?= $message->circleID ?></td>
+        <td>User <?= $message->userID ?></td>
         <td><?= $message->content ?></td>
         <td class="text-right">
           <button type="button" class="btn-link" data-toggle="modal" data-target="#editMessage<?= $message->messageID ?>">
