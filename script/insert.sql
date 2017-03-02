@@ -8,11 +8,11 @@ VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', '1', CURRENT_T
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '2', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '1', '1', CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '2', '1',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
+VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '0', '1',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)

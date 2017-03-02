@@ -28,6 +28,44 @@ class Friend extends Model
     return $query->fetchAll();
   }
 
+  public function find_friends_of_friends($userID){
+    $sql = "SELECT userID 
+            FROM relationship 
+            WHERE STATUS = 0 AND userID_2 = :userID
+            UNION 
+            SELECT userID_2 
+            FROM relationship 
+            WHERE STATUS = 0 AND userID = :userID 
+            UNION
+            SELECT userID 
+            FROM relationship 
+            WHERE userID != :userID AND status = 0 AND userID_2 IN (
+                SELECT userID 
+                FROM relationship 
+                WHERE STATUS = 0 AND userID_2 = :userID 
+                UNION
+                SELECT userID_2 
+                FROM relationship 
+                WHERE STATUS = 0 AND userID = :userID
+                )
+            UNION 
+            SELECT userID_2 
+            FROM relationship 
+            WHERE userID_2 != :userID AND STATUS = 0 AND userID IN ( 
+                SELECT userID 
+                FROM relationship 
+                WHERE STATUS=0 AND userID_2 = :userID 
+                UNION
+                SELECT userID_2 
+                FROM relationship 
+                WHERE STATUS = 0 AND userID = :userID
+                )";
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
   public function find_friend_req_sent($userID)
   {
     $sql = "SELECT *

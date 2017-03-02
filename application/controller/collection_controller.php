@@ -46,11 +46,12 @@ class CollectionController
     if ($collection != NULL) {
 
       if ($collection->accessRights < 2 && $this->current_userID != $collection->userID) {
+        $modelFriends = new Friend();
         if ($collection->accessRights == 0){    //Friends
-          $access_by_relationship = $model->find_friends($collection->userID);
+          $access_by_relationship = $modelFriends->find_user_friend($collection->userID, 0);
         }
         else{   //Friends of friends
-          $access_by_relationship = $model->find_friends_of_friends($collection->userID);
+          $access_by_relationship = $modelFriends->find_friends_of_friends($collection->userID);
         }
         $access_by_circle = $model->find_circle_members_access($collectionID);
 

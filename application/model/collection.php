@@ -43,44 +43,6 @@ class Collection extends Model
     return $query->fetchAll();
   }
 
-  public function find_friends_of_friends($collection_userID){
-    $sql = "SELECT userID 
-            FROM relationship 
-            WHERE STATUS = 0 AND userID_2 = :collection_userID
-            UNION 
-            SELECT userID_2 
-            FROM relationship 
-            WHERE STATUS = 0 AND userID = :collection_userID 
-            UNION
-            SELECT userID 
-            FROM relationship 
-            WHERE userID != :collection_userID AND status = 0 AND userID_2 IN (
-                SELECT userID 
-                FROM relationship 
-                WHERE STATUS = 0 AND userID_2 = :collection_userID 
-                UNION
-                SELECT userID_2 
-                FROM relationship 
-                WHERE STATUS = 0 AND userID = :collection_userID
-                )
-            UNION 
-            SELECT userID_2 
-            FROM relationship 
-            WHERE userID_2 != :collection_userID AND STATUS = 0 AND userID IN ( 
-                SELECT userID 
-                FROM relationship 
-                WHERE STATUS=0 AND userID_2 = :collection_userID 
-                UNION
-                SELECT userID_2 
-                FROM relationship 
-                WHERE STATUS = 0 AND userID = :collection_userID
-                )";
-    $query = $this->db->prepare($sql);
-    $params = array(':collection_userID' => $collection_userID);
-    $query->execute($params);
-    return $query->fetchAll();
-  }
-
   public function find_circle_members_access($collectionID){
     $sql = "SELECT DISTINCT c.userID 
             FROM circleFriends AS c, photoCollectionAccessRights AS p 

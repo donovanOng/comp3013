@@ -25,6 +25,16 @@ class UserController
     $model = new User();
     $user = $model->find_by_id($userID);
     $profile = $model->fetch_profile($userID);
+    $privacy = $user->privacy;
+
+    if ($privacy == 0){
+      $modelFriend = new Friend();
+      $authorised_view = $modelFriend->find_friends_of_friends($userID);
+      if (!in_array_field($this->current_userID, 'userID', $authorised_view) && $this->current_userID != $userID) {
+        $_SESSION['message'] = 'You dont have rights to view profile of user ' . $user->userID;
+        Redirect(URL . $this->current_userID);
+      }
+    }
 
     $friendModel = new Friend();
     $is_friend = $model->is_friend($this->current_userID, $userID);
@@ -102,6 +112,27 @@ class UserController
         $_SESSION['message'] = 'Profile is updated!';
       } else {
         $_SESSION['message'] = 'Fail to update profile';
+      }
+
+      Redirect(URL . $userID);
+
+    } else {
+      Redirect(URL);
+    }
+  }
+
+  public function update_settings(){
+    if(isset($_POST['submitSettings'])) {
+      $privacy = $_POST["profilePrivacy"];
+      $userID = $_POST["userID"];
+
+      $model = new User();
+      $result = $model->update_settings($privacy,$userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Settings is updated!';
+      } else {
+        $_SESSION['message'] = 'Fail to update settings';
       }
 
       Redirect(URL . $userID);
