@@ -68,14 +68,14 @@ class UserController
         $userID = $_GET['userID'];
 
         $model = new Friend();
-        $result = $model->add_friends($this->current_userID,$userID,1);
+        $result = $model->add_friends($this->current_userID,
+                                      $userID,
+                                      1);
         if ($result) {
-          $_SESSION['message'] = 'Add Successfully!';
+          $_SESSION['message'] = 'Friendship request for User ' . $userID . ' sent.';
         } else {
-          $_SESSION['message'] = 'Fail to add friend!';
+          $_SESSION['message'] = 'Fail to send friendship request for User ' . $userID;
         }
-
-        // TODO: Remove image files in public directory
 
         Redirect(URL . $userID);
       }
@@ -84,39 +84,37 @@ class UserController
     public function accept_friendships()
     {
       if (isset($_GET['userID'])) {
-          $userID = $_GET['userID'];
+        $userID = $_GET['userID'];
 
-          $model = new Friend();
-          $result = $model->accept_friendship($this->current_userID,$userID);
-          if ($result) {
-            $_SESSION['message'] = 'You are now friends!!';
-          } else {
-            $_SESSION['message'] = 'I`m sorry I can`t be your friend :(';
-          }
-
-          // TODO: Remove image files in public directory
-
-          Redirect(URL . $userID);
+        $model = new Friend();
+        $result = $model->accept_friendship($this->current_userID,
+                                            $userID);
+        if ($result) {
+          $_SESSION['message'] = 'Friendship request from User ' . $userID . ' accepted.';
+        } else {
+          $_SESSION['message'] = 'Accept friendship request from User ' . $userID . ' failed.';
         }
+
+        Redirect(URL . $userID);
+      }
     }
 
     public function reject_friendships()
     {
       if (isset($_GET['userID'])) {
-          $userID = $_GET['userID'];
+        $userID = $_GET['userID'];
 
-          $model = new Friend();
-          $result = $model->reject_friendship($this->current_userID,$userID);
-          if ($result) {
-            $_SESSION['message'] = 'I`m sorry I can`t be your friend :(';
-          } else {
-            $_SESSION['message'] = 'One more chance to reconsider...';
-          }
-
-          // TODO: Remove image files in public directory
-
-          Redirect(URL . $userID);
+        $model = new Friend();
+        $result = $model->reject_friendship($this->current_userID,
+                                            $userID);
+        if ($result) {
+          $_SESSION['message'] = 'Friendship request from User ' . $userID . ' rejected.';
+        } else {
+          $_SESSION['message'] = 'Reject friendship request from User ' . $userID . ' failed.';
         }
+
+        Redirect(URL . $userID);
+      }
     }
 }
 
