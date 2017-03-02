@@ -2,10 +2,13 @@
 
 <div class="row">
   <? if($profile == NULL && $this->current_userID == $userID) { ?>
-    <div class="col-12 p-2">
-      <div class="bg-faded rounded mb-3 p-4 align-items-center">
+    <div class="col-4 p-2 text-center">
+      <div class="bg-faded rounded mb-3 p-4">
         <span>Hi! You do not have a profile yet.</span>
-        <a class="btn btn-sm btn-secondary" href="<?= URL; ?> user/new_profile?userID= <?=$userID; ?>">Create Profile</a>
+        <? require APP . 'view/users/form_new_profile.php'; ?>
+        <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" data-target="#newProfile">
+          New Profile
+        </button>
       </div>
     </div>
   <? } ?>
