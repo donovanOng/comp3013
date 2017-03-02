@@ -22,6 +22,26 @@
   </tbody>
   </table>
 
+  <h4 class="mb-3">List of Profiles <span class="text-muted"><?= count($profiles) ?></span></h4>
+  <table class="table table-hover">
+  <tbody>
+    <?php foreach ($profiles as $profile) { ?>
+      <tr>
+        <th scope="row"><?= $profile->userID ?></th>
+        <td><?= $profile->about ?></td>
+        <td><?= $profile->gender ?></td>
+        <td><?= $profile->birthdate ?></td>
+        <td><?= $profile->current_city ?></td>
+        <td><?= $profile->home_city ?></td>
+        <td><?= $profile->address ?></td>
+        <td><?= $profile->languages ?></td>
+        <td><?= $profile->workplace ?></td>
+      </tr>
+    <?php } ?>
+  </tbody>
+  </table>
+
+
   <h4 class="mb-3">List of Circles <span class="text-muted"><?= count($circles) ?></span></h4>
   <table class="table table-hover">
   <tbody>
@@ -59,6 +79,48 @@
         </td>
       </tr>
       <? require APP . 'view/admin/edit_message.php'; ?>
+    <?php } ?>
+  </tbody>
+  </table>
+
+  <h4 class="mb-3">List of Photo Collections <span class="text-muted"><?= count($collections) ?></span></h4>
+  <table class="table table-hover">
+  <tbody>
+    <?php foreach ($collections as $collection) { ?>
+      <tr>
+        <th scope="row"><?= $collection->collectionID ?></th>
+        <td>User <?= $collection->userID ?></td>
+        <td><?= $collection->uploadRights ?></td>
+        <td><?= $collection->viewRights ?></td>
+      </tr>
+    <?php } ?>
+  </tbody>
+  </table>
+
+  <h4 class="mb-3">List of Photos <span class="text-muted"><?= count($photos) ?></span></h4>
+  <table class="table table-hover">
+  <tbody>
+    <?php foreach ($photos as $photo) { ?>
+      <tr>
+        <th scope="row"><?= $photo->photoID ?></th>
+        <td>Collection <?= $photo->collectionID ?></td>
+        <td>User <?= $photo->userID ?></td>
+        <td><?= $photo->path ?></td>
+      </tr>
+    <?php } ?>
+  </tbody>
+  </table>
+
+  <h4 class="mb-3">List of Comment <span class="text-muted"><?= count($comments) ?></span></h4>
+  <table class="table table-hover">
+  <tbody>
+    <?php foreach ($comments as $comment) { ?>
+      <tr>
+        <th scope="row"><?= $comment->commentID ?></th>
+        <td>User <?= $comment->userID ?></td>
+        <td>Photo <?= $comment->photoID ?></td>
+        <td><?= $comment->content ?></td>
+      </tr>
     <?php } ?>
   </tbody>
   </table>

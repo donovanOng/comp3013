@@ -23,8 +23,12 @@ class AdminController
   {
     $model = new Admin();
     $users = $model->users();
+    $profiles = $model->profiles();
     $circles = $model->circles();
     $messages = $model->messages();
+    $collections = $model->collections();
+    $photos = $model->photos();
+    $comments = $model->comments();
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/admin/index.php';
