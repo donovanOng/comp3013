@@ -21,8 +21,9 @@ class Post extends Model
 
   public function create($blogID, $title, $body)
   {
-    $sql = "INSERT INTO post (blogID, title, body)
-            VALUES (:blogID, :title, :body)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO post (blogID, title, body, CREATED_AT)
+            VALUES (:blogID, :title, :body, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':blogID' => $blogID,

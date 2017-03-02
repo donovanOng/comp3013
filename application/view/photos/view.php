@@ -13,7 +13,11 @@
         </small>
       </p>
       <div class="small m-2 p-2" style="border-top: 1px solid #DDD;">
-        <a class="mr-2" href="<?= URL; ?>photo/set_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>"><i class="fa fa-heart mr-1" aria-hidden="true"></i>Love</a>
+        <? if ($photo_user_Liked_photo) { ?>
+            <a class="mr-2 text-danger" href="<?= URL; ?>photo/delete_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>"><i class="fa fa-heart mr-1 text-danger" aria-hidden="true"></i>Unlike</a>
+        <? } else { ?>
+            <a class="mr-2" href="<?= URL; ?>photo/set_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>"><i class="fa fa-heart mr-1" aria-hidden="true"></i>Like</a>
+        <? } ?>
         <a class="mr-2" href="#"><i class="fa fa-comment mr-1" aria-hidden="true"></i>Comment</a>
         <a href="#"><i class="fa fa-share mr-1" aria-hidden="true"></i>Share</a>
       </div>
