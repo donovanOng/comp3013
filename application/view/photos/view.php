@@ -13,13 +13,15 @@
         </small>
       </p>
       <div class="small m-2 p-2" style="border-top: 1px solid #DDD;">
-        <a class="mr-2" href="#"><i class="fa fa-heart mr-1" aria-hidden="true"></i>Love</a>
+        <a class="mr-2" href="<?= URL; ?>photo/set_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>"><i class="fa fa-heart mr-1" aria-hidden="true"></i>Love</a>
         <a class="mr-2" href="#"><i class="fa fa-comment mr-1" aria-hidden="true"></i>Comment</a>
         <a href="#"><i class="fa fa-share mr-1" aria-hidden="true"></i>Share</a>
       </div>
       <div class="bg-faded pr-2 pl-2 pb-2" style="border-top: 1px solid #DDD;">
         <div class="p-2 mb-2 small" style="border-bottom: 1px solid #DDD;">
-          <i class="fa fa-heart mr-1" aria-hidden="true"></i> <a href="#">User 1, User 2 and # others</a>
+          <? if (count($photo_annotations) > 0) { ?>
+            <i class="fa fa-heart mr-1" aria-hidden="true"></i> <a href="#">User <?= $photo_annotations[0]->userID?> and <?=(count($photo_annotations) -1)?> others</a>
+          <? } ?>
         </div>
         <? if (count($photo_comments) > 0) { ?>
           <div class="list-group mb-2">
