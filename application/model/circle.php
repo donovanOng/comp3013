@@ -98,6 +98,20 @@ class Circle extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function update_circle($name, $circleID, $userID)
+  {
+    $sql = "UPDATE circle
+            SET name = :name
+            WHERE circleID = :circleID
+            AND userID = :userID ";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':name' => $name,
+                    ':circleID' => $circleID,
+                    ':userID' => $userID);
+    return $query->execute($params); // boolean result
+  }
+
   public function add_circle_member($circleID, $userID)
   {
     $sql = "INSERT INTO circlefriends (circleID, userID)

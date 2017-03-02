@@ -34,19 +34,29 @@ class CircleController
     // display photos from single collection
     $model = new Circle();
     $circle = $model->find_circle_by_ID($circleID);
-    $messages = $model->find_messages_by_circleID($circleID);
+
+    if ($circle == NULL) {
+      $_SESSION['message'] = 'Circle ' . $circleID . ' does not exist';
+      Redirect(URL . 'circle');
+    }
+
     $members = $model->find_members_by_circleID($circleID);
+    $members_id = array_column($members, 'userID');
+    if (!in_array($this->current_userID, $members_id)) {
+      $_SESSION['message'] = 'You are not member of Circle ' . $circleID;
+      Redirect(URL . 'circle');
+    }
 
     $friend_model = new Friend();
     $friends = $friend_model->find_user_friend($this->current_userID, 0);
-
     $friends_id  = array_column($friends, 'userID');
-    $members_id = array_column($members, 'userID');
 
     $friends_not_members = NULL;
     if ($friends != NULL) {
       $friends_not_members = array_diff($friends_id, $members_id);
     }
+
+    $messages = $model->find_messages_by_circleID($circleID);
 
     require APP . 'view/_templates/header.php';
     require APP . 'view/circles/view.php';
@@ -70,6 +80,32 @@ class CircleController
     }
 
     Redirect(URL . 'circle');
+  }
+
+  public function update_circle()
+  {
+    if (isset($_POST['update'])) {
+
+      $name = $_POST['name'];
+      $circleID = $_POST['circleID'];
+
+      $model = new Circle();
+      $result = $model->update_circle($name,
+                                    $circleID,
+                                    $this->current_userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Circle name updated!';
+      } else {
+        $_SESSION['message'] = 'Fail to update circle name!';
+      }
+
+      Redirect(URL . 'circle/' . $circleID);
+
+    } else {
+      Redirect(URL . 'circle');
+    }
+
   }
 
   public function add_member()
@@ -96,7 +132,6 @@ class CircleController
     }
   }
 
-
   public function remove_member()
   {
     if (isset($_GET['circleID']) && isset($_GET['userID'])) {
@@ -113,6 +148,28 @@ class CircleController
       }
 
       Redirect(URL . 'circle/' . $circleID);
+
+    } else {
+      Redirect(URL . 'circle');
+    }
+  }
+
+  public function leave_circle()
+  {
+    if (isset($_GET['circleID']) && isset($_GET['userID'])) {
+
+      $model = new Circle();
+      $circleID = $_GET['circleID'];
+      $userID = $_GET['userID'];
+      $result = $model->remove_circle_member($circleID, $userID);
+
+      if ($result) {
+        $_SESSION['message'] = 'Left Circle ' . $circleID;
+      } else {
+        $_SESSION['message'] = 'Fail to leave Circle ' . $circleID;
+      }
+
+      Redirect(URL . 'circle');
 
     } else {
       Redirect(URL . 'circle');
