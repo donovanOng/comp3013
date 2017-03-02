@@ -1,46 +1,39 @@
 <? require APP . 'view/users/profile_header.php'; ?>
 
-<? if($this->current_userID == $userID) { ?>
-
-  <div>
-  <? if($profile != NULL) { ?>
-    <? require APP . 'view/users/form_edit_profile.php'; ?>
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">
-      Edit Profile
-    </button>
-  <? } else { ?>
-    <div class="col-0 text-right">
-      <a class="btn btn-primary" href="<?= URL; ?> user/new_profile?userID= <?=$userID; ?>">New Profile</a>
+<div class="row">
+  <? if($profile == NULL && $this->current_userID == $userID) { ?>
+    <div class="col-12 p-2">
+      <div class="bg-faded rounded mb-3 p-4 align-items-center">
+        <span>Hi! You do not have a profile yet.</span>
+        <a class="btn btn-sm btn-secondary" href="<?= URL; ?> user/new_profile?userID= <?=$userID; ?>">Create Profile</a>
+      </div>
     </div>
+  <? } ?>
+  <div class="col-4">
+    <? if($profile != NULL) { ?>
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Intro</h4>
+          <p class="card-text"><?= $profile->about ?></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Gender: <?= $profile->gender ?></li>
+          <li class="list-group-item">Birthdate: <?= $profile->birthdate ?></li>
+          <li class="list-group-item">Current City: <?= $profile->current_city ?></li>
+          <li class="list-group-item">Home City: <?= $profile->home_city ?></li>
+          <li class="list-group-item">Address: <?= $profile->address ?></li>
+          <li class="list-group-item">Languages: <?= $profile->languages ?></li>
+          <li class="list-group-item">Workplace: <?= $profile->workplace ?></li>
+        </ul>
+        <? if($this->current_userID == $userID) { ?>
+          <div class="card-block">
+            <? require APP . 'view/users/form_edit_profile.php'; ?>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">
+              Edit Profile
+            </button>
+          </div>
+        <? } ?>
+      </div>
     <? } ?>
   </div>
-
-<? } else { ?>
-
-  <? if($isFriend != NULL) { ?>
-    <? if($isFriend->status == 0) { ?>
-      <button class="btn btn-secondary">Friends</button>
-    <? } else if($isFriend->status == 1) { ?>
-      <? if($initiator->userID == $this->current_userID) { ?>
-          <button class="btn btn-secondary">Friend Request sent</button>
-      <? } else { ?>
-          <a class="btn btn-secondary" href="<?= URL; ?>user/accept_friendships?userID=<?= $userID; ?>" >Accept Friend Request</a></p>
-          <a class="btn btn-secondary" href="<?= URL; ?>user/reject_friendships?userID=<?= $userID; ?>" >Reject Friend Request</a></p>
-      <? } ?>
-    <? } ?>
-  <? } else {?>
-      <a class="btn btn-secondary" href="<?= URL; ?>user/add_friend?userID=<?= $userID; ?>">Add Friend</a>
-  <? } ?>
-
-<? } ?>
-
-<? if($profile != NULL) { ?>
-  <p>About : <?= $profile->about ?></p>
-  <p>Gender : <?= $profile->gender ?></p>
-  <p>Birthdate : <?= $profile->birthdate ?></p>
-  <p>Current city : <?= $profile->current_city ?></p>
-  <p>Home city : <?= $profile->home_city ?></p>
-  <p>Address : <?= $profile->address ?></p>
-  <p>Languages : <?= $profile->languages ?></p>
-  <p>Work place : <?= $profile->workplace ?></p>
-<? }?>
+</div>

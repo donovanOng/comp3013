@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/user.php';
+require_once APP . 'model/friend.php';
 require_once APP . 'model/collection.php';
 
 class CollectionController
@@ -18,6 +19,10 @@ class CollectionController
   {
     $model = new User();
     $user = $model->find_by_id($collection_userID);
+
+    $friendModel = new Friend();
+    $is_friend = $model->is_friend($this->current_userID, $collection_userID);
+    $initiator = $friendModel->friendship_initiator($this->current_userID, $collection_userID);
 
     $model = new Collection();
     $collections = $model->find_user_collection($collection_userID);

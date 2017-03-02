@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/user.php';
+require_once APP . 'model/friend.php';
 require_once APP . 'model/photo.php';
 require_once APP . 'model/collection.php';
 
@@ -19,6 +20,10 @@ class PhotoController
   {
     $model = new User();
     $user = $model->find_by_id($photo_userID);
+
+    $friendModel = new Friend();
+    $is_friend = $model->is_friend($this->current_userID, $photo_userID);
+    $initiator = $friendModel->friendship_initiator($this->current_userID, $photo_userID);
 
     $model = new Photo();
     $photos = $model->find_user_photos($photo_userID);
