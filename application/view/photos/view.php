@@ -1,7 +1,7 @@
 <div class="p-4">
   <div class="row">
     <div class="col-8">
-      <img style="width:100%" src="<?= URL . $photo->path ?>" onError="this.src ='<?= URL; ?>images/missing.jpg'"  />
+      <img class="w-100" src="<?= URL . $photo->path ?>" onError="this.src ='<?= URL; ?>images/missing.jpg'"  />
     </div>
     <div class="col-4">
       <p class="p-2" style="min-height:150px;">
@@ -14,9 +14,13 @@
       </p>
       <div class="small m-2 p-2" style="border-top: 1px solid #DDD;">
         <? if ($photo_user_Liked_photo) { ?>
-            <a class="mr-2 text-danger" href="<?= URL; ?>photo/delete_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>"><i class="fa fa-heart mr-1 text-danger" aria-hidden="true"></i>Unlike</a>
+            <a class="mr-2 text-danger" href="<?= URL; ?>photo/delete_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>">
+              <i class="fa fa-heart mr-1 text-danger" aria-hidden="true"></i>Unlike
+            </a>
         <? } else { ?>
-            <a class="mr-2" href="<?= URL; ?>photo/set_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>"><i class="fa fa-heart mr-1" aria-hidden="true"></i>Like</a>
+            <a class="mr-2" href="<?= URL; ?>photo/set_photo_annotation?photoID=<?= $photoID; ?>&userID=<?= $this->current_userID; ?>">
+              <i class="fa fa-heart mr-1" aria-hidden="true"></i>Like
+            </a>
         <? } ?>
         <a class="mr-2" href="#"><i class="fa fa-comment mr-1" aria-hidden="true"></i>Comment</a>
         <a href="#"><i class="fa fa-share mr-1" aria-hidden="true"></i>Share</a>
@@ -24,7 +28,8 @@
       <div class="bg-faded pr-2 pl-2 pb-2" style="border-top: 1px solid #DDD;">
         <div class="p-2 mb-2 small" style="border-bottom: 1px solid #DDD;">
           <? if (count($photo_annotations) > 0) { ?>
-            <i class="fa fa-heart mr-1" aria-hidden="true"></i> <a href="#">User <?= $photo_annotations[0]->userID?> and <?=(count($photo_annotations) -1)?> others</a>
+            <i class="fa fa-heart mr-1" aria-hidden="true"></i>
+            <a href="#">User <?= $photo_annotations[0]->userID?> and <?=(count($photo_annotations) -1)?> others</a>
           <? } ?>
         </div>
         <? if (count($photo_comments) > 0) { ?>
