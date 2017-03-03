@@ -8,19 +8,23 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="<?php echo URL; ?>user/update_settings" method="POST">
-        <div class="form-group" align="left">
-          <label>Allow who to view profile?</label>
-          <br>
-          <input type="radio" name="profilePrivacy" value=0 <? if ($user->privacy == 0) {?> checked <? } ?>>Friends of friends
-          <br>
-          <input type="radio" name="profilePrivacy" value=1 <? if ($user->privacy == 1) {?> checked <? } ?>> Public
-          <br>
-        </div>
-        
-        <input type="hidden" name="userID" value="<?= $userID ?>" />
-        <input class="btn btn-primary" type="submit" name="submitSettings" value="Update" />
-      </form>
+        <form class="text-left" action="<?= URL ?>user/update_settings" method="POST">
+          <p class="mb-2">Who can see my stuff?</p>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="privacy" value=0 <? if ($user->privacy == 0) {?> checked <? } ?>>
+              Friends of Friends
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="privacy" value=1 <? if ($user->privacy == 1) {?> checked <? } ?>>
+              Public
+            </label>
+          </div>
+          <input type="hidden" name="userID" value="<?= $user->userID ?>" />
+          <input class="mt-2 btn btn-primary" type="submit" name="update" value="Update" />
+        </form>
       </div>
     </div>
   </div>

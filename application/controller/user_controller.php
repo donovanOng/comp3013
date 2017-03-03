@@ -134,13 +134,14 @@ class UserController
     }
   }
 
-  public function update_settings(){
-    if(isset($_POST['submitSettings'])) {
-      $privacy = $_POST["profilePrivacy"];
+  public function update_settings()
+  {
+    if (isset($_POST['update'])) {
+      $privacy = $_POST["privacy"];
       $userID = $_POST["userID"];
 
       $model = new User();
-      $result = $model->update_settings($privacy,$userID);
+      $result = $model->update_settings($privacy, $userID);
 
       if ($result) {
         $_SESSION['message'] = 'Settings is updated!';
