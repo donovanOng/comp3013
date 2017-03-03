@@ -24,33 +24,31 @@
 <div class="bg-inverse">
   <div class="container">
   <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= URL ?>">Home</a>
+          <a class="nav-link active" href="<?= URL ?>">Home</a>
         </li>
         <?php if (isset($_SESSION['current_user'])) { ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL . $this->current_userID ?>">
+            <a class="nav-link active" href="<?= URL . $this->current_userID ?>">
               <?= $this->current_user->first_name . ' ' . $this->current_user->last_name ?>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL ?>logout">Log Out</a>
+            <a class="nav-link active" href="<?= URL ?>logout">Log Out</a>
           </li>
           </ul>
           <? require APP . 'view/users/search.php' ?>
         <?php } else { ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL ?>signup">Sign Up</a>
+            <a class="nav-link active" href="<?= URL ?>signup">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL ?>login">Log In</a>
+            <a class="nav-link active" href="<?= URL ?>login">Log In</a>
           </li>
           </ul>
         <?php } ?>
