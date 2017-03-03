@@ -5,16 +5,24 @@
   <div class="col-8">
     <ul class="nav nav-fill">
       <li class="nav-item">
-        <a class="nav-link" href="<?= URL . $user->userID ?>/friend">Friends</a>
+        <a class="nav-link <?= '' . (!isset($friend_userID) ? : 'text-muted') ?>" href="<?= URL . $user->userID ?>/friend">
+          Friends
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?= URL . $user->userID ?>/circle">Circles</a>
+        <a class="nav-link <?= '' . (!isset($circle_userID) ? : 'text-muted') ?>" href="<?= URL . $user->userID ?>/circle">
+          Circles
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?= URL . $user->userID ?>/collection">Collections</a>
+        <a class="nav-link <?= '' . (!isset($collection_userID) ? : 'text-muted') ?>" href="<?= URL . $user->userID ?>/collection">
+          Collections
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?= URL . $user->userID ?>/photo">Photos</a>
+        <a class="nav-link <?= '' . (!isset($photo_userID) ? : 'text-muted') ?>" href="<?= URL . $user->userID ?>/photo">
+          Photos
+        </a>
       </li>
 
       <? if ($this->current_userID != $user->userID) { ?>
