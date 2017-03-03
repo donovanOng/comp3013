@@ -25,7 +25,7 @@ class CollectionController
     $initiator = $friendModel->friendship_initiator($this->current_userID, $collection_userID);
 
     $model = new Collection();
-    $collections_owned = $model->find_user_collection($collection_userID);
+    $collections_owned = $model->find_user_collection($this->current_userID);
     $collections_access = $model->access_collection($collection_userID);
 
     require APP . 'view/_templates/header.php';
@@ -44,8 +44,8 @@ class CollectionController
 
     $collection_photos = NULL;
     if ($collection != NULL) {
-
       if ($collection->accessRights < 2 && $this->current_userID != $collection->userID) {
+
         $modelFriends = new Friend();
         if ($collection->accessRights == 0){    //Friends
           $access_by_relationship = $modelFriends->find_user_friend($collection->userID, 0);
@@ -55,7 +55,7 @@ class CollectionController
         }
         $access_by_circle = $model->find_circle_members_access($collectionID);
 
-        if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) && 
+        if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) || 
             !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
           $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
           Redirect(URL . $collection->userID);

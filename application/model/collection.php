@@ -58,19 +58,30 @@ class Collection extends Model
     $sql = "SELECT *
             FROM photocollection
             WHERE (
-              accessRights = 0 AND userID IN (
-                SELECT U.userID
-                FROM relationship R, user U
-                WHERE
-                CASE
-                  WHEN R.userID = :userID THEN R.userID_2 = U.userID
-                  WHEN R.userID_2 = :userID THEN R.userID = U.userID
-                END
-                AND status = 0
+            accessRights = 0 AND userID IN (
+              SELECT U.userID
+              FROM relationship R, user U
+              WHERE
+              CASE
+                WHEN R.userID = :userID THEN R.userID_2 = U.userID
+                WHEN R.userID_2 = :userID THEN R.userID = U.userID
+              END
+              AND status = 0
               )
             )
             OR (
-              accessRights = :userID AND userID IN (
+            accessRights = 1 AND userID IN (
+              SELECT userID
+              FROM relationship
+              WHERE STATUS = 0 AND userID_2 = :userID
+              UNION
+              SELECT userID_2
+              FROM relationship
+              WHERE STATUS = 0 AND userID = :userID
+              UNION
+              SELECT userID
+              FROM relationship
+              WHERE status = 0 AND userID_2 IN (
                 SELECT userID
                 FROM relationship
                 WHERE STATUS = 0 AND userID_2 = :userID
@@ -78,38 +89,27 @@ class Collection extends Model
                 SELECT userID_2
                 FROM relationship
                 WHERE STATUS = 0 AND userID = :userID
-                UNION
+              )
+              UNION
+              SELECT userID_2
+              FROM relationship
+              WHERE STATUS = 0 AND userID IN (
                 SELECT userID
                 FROM relationship
-                WHERE userID != :userID AND status = 0 AND userID_2 IN (
-                  SELECT userID
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID_2 = :userID
-                  UNION
-                  SELECT userID_2
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID = :userID
-                )
+                WHERE STATUS = 0 AND userID_2 = :userID
                 UNION
                 SELECT userID_2
                 FROM relationship
-                WHERE userID_2 != :userID AND STATUS = 0 AND userID IN (
-                  SELECT userID
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID_2 = :userID
-                  UNION
-                  SELECT userID_2
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID = :userID
+                WHERE STATUS = 0 AND userID = :userID
                 )
               )
             )
             OR (accessRights = 2)
-            AND userID != :userID
+            OR userID = :userID
             UNION
             SELECT DISTINCT pc.*
             FROM photocollectionaccessrights AS pcar, circlefriends AS cf, photocollection as pc
-            WHERE cf.circleID = pcar.circleID AND pc.collectionID = pcar.collectionID AND cf.userID = :userID AND pc.userID != :userID
+            WHERE cf.circleID = pcar.circleID AND pc.collectionID = pcar.collectionID AND cf.userID = :userID 
             ORDER BY collectionID";
 
     $query = $this->db->prepare($sql);

@@ -12,31 +12,12 @@
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
 
-    <? if ($collections_owned != NULL) { ?>
-    <div class="row">
-    <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
-    <?php foreach ($collections_owned as $collection) { ?>
-      <div class="col-3">
-        <div class="card mb-3 bg-faded">
-          <img class="card-img-top" src="<?= URL; ?>images/missing.jpg" style="object-fit: cover; height: 200px;">
-          <div class="card-block">
-            <h5 class="card-title">Collection <?= $collection->collectionID ?></h5>
-            <p class="card-text text-muted">
-              Number of photos
-            </p>
-            <a href="<?= URL; ?>collection/<?= $collection->collectionID ?>" class="card-link">View Collection</a>
-            <a href="<?= URL; ?>collection/delete?collectionID=<?= $collection->collectionID ?>" class="card-link">Delete</a>
-          </div>
-        </div>
-      </div>
-    <?php } ?>
-    <? } ?>
-
     <? if ($collections_access != NULL) { ?>
+    <div class="row">
     <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
     <?php foreach ($collections_access as $collection) { ?>
       <div class="col-3">
-        <div class="card mb-3">
+        <div class="card mb-3 <? if(in_array($collection->collectionID, array_column($collections_owned, "collectionID"))) { ?>bg-faded<? } ?>">
           <img class="card-img-top" src="<?= URL; ?>images/missing.jpg" style="object-fit: cover; height: 200px;">
           <div class="card-block">
             <h5 class="card-title">Collection <?= $collection->collectionID ?></h5>
@@ -44,11 +25,14 @@
               Number of photos
             </p>
             <a href="<?= URL; ?>collection/<?= $collection->collectionID ?>" class="card-link">View Collection</a>
+            <? if (in_array($collection->collectionID, array_column($collections_owned, "collectionID"))) { ?>
+              <a href="<?= URL; ?>collection/delete?collectionID=<?= $collection->collectionID ?>" class="card-link">Delete</a>
+            <? } ?>
           </div>
         </div>
       </div>
     <?php } ?>
-    </div>
     <? } ?>
+    </div>
   </div>
 </div>
