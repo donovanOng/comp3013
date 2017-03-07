@@ -55,16 +55,7 @@ class PhotoController
   public function upload()
   {
 
-    if (isset($_GET['collectionID'])) {
-        $collectionID = $_GET['collectionID'];
-
-        // TODO: Check if user has upload access to photo collection
-
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/photos/upload.php';
-        require APP . 'view/_templates/footer.php';
-
-    } else if (isset($_POST['submit'])) {
+    if (isset($_POST['collectionID'])) {
 
       $collectionID = $_POST['collectionID'];
       $uploadFile = $_FILES['uploadFile'];

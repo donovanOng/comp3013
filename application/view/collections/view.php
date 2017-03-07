@@ -1,19 +1,30 @@
+<? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
 <div class="p-4">
   <div class="row align-items-center mb-3">
     <div class="col-6">
       <h4 class="mb-0">Collection <?= $collectionID ?></h4>
-      <small class="text-muted">Created By <a href="<?= URL . $collection->userID ?>">User <?= $collection->userID ?></a></small>
+      <small class="text-muted">
+        Privacy: <?= $privacy[$collection->accessRights] ?>
+        <strong><span class="align-top">.</span></strong>
+        Created By <a href="<?= URL . $collection->userID ?>">User <?= $collection->userID ?></a>
+      </small>
     </div>
     <div class="col-6 text-right">
-      <a class="btn btn-primary" href="<?= URL; ?>photo/upload?collectionID=<?= $collectionID ?>">Upload Photo</a>
+
+      <? require APP . 'view/collections/edit.php'; ?>
+
+      <form class="align-self-center" action="<?= URL ?>photo/upload" method="post" enctype="multipart/form-data">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
+          Settings
+        </button>
+        <label class="btn btn-primary mb-0">
+            Upload Photo <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
+        </label>
+        <input type="hidden" name="collectionID" value="<?= $collectionID ?>">
+      </form>
     </div>
   </div>
   <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-  <div class="mb-3 bg-faded p-3">
-    <? $privacy = array('Friends', 'Friends of Friends', 'Public'); ?>
-    <p>Privacy: <?= $privacy[$collection->accessRights] ?></p>
-    <? require APP . 'view/collections/edit.php'; ?>
-  </div>
   <? if (count($collection_photos) > 0) { ?>
     <div class="row">
     <?php foreach ($collection_photos as $photo) { ?>
