@@ -1,4 +1,4 @@
-<div class="row bg-faded align-items-center p-3 mb-4 ml-0 mr-0">
+<div class="row bg-faded align-items-center p-3 mb-4 ml-0 mr-0 rounded-bottom">
   <div class="col-4">
     <h4 class="mb-0"><a href="<?= URL . $user->userID ?>"><?= $user->first_name ?> <?= $user->last_name ?></a></h4>
   </div>

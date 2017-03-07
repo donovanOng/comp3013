@@ -9,7 +9,8 @@
         <br>
         <small class="text-muted">
           Under <a href="<?= URL; ?>collection/<?= $photo->collectionID ?>">Collection <?= $photo->collectionID ?></a>
-           . <?= $photo->CREATED_AT ?>
+          <strong><span class="align-top">.</span></strong>
+          <?= $photo->CREATED_AT ?>
         </small>
       </p>
       <div class="small m-2 p-2" style="border-top: 1px solid #DDD;">
@@ -23,13 +24,15 @@
             </a>
         <? } ?>
         <a class="mr-2" href="#"><i class="fa fa-comment mr-1" aria-hidden="true"></i>Comment</a>
-        <a href="#"><i class="fa fa-share mr-1" aria-hidden="true"></i>Share</a>
       </div>
-      <div class="bg-faded pr-2 pl-2 pb-2" style="border-top: 1px solid #DDD;">
+      <div class="bg-faded pr-2 pl-2 pb-3" style="border-top: 1px solid #DDD;">
         <div class="p-2 mb-2 small" style="border-bottom: 1px solid #DDD;">
-          <? if (count($photo_annotations) > 0) { ?>
+          <? if (count($photo_annotations) > 1) { ?>
             <i class="fa fa-heart mr-1" aria-hidden="true"></i>
-            <a href="#">User <?= $photo_annotations[0]->userID?> and <?=(count($photo_annotations) -1)?> others</a>
+            <a href="#">User <?= $photo_annotations[0]->userID?> and <?=(count($photo_annotations)-1)?> others</a>
+          <? } else if (count($photo_annotations) == 1) { ?>
+            <i class="fa fa-heart mr-1" aria-hidden="true"></i>
+            <a href="#">User <?= $photo_annotations[0]->userID?>
           <? } ?>
         </div>
         <? if (count($photo_comments) > 0) { ?>
