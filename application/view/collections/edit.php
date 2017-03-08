@@ -1,7 +1,5 @@
-
 <? if ($this->current_userID == $collection->userID) { ?>
 <!-- Only collection's owner can edit rights -->
-
   <div class="modal fade" id="editSettings">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -41,11 +39,8 @@
             <input type="hidden" name="collectionID" value="<?= $collection->collectionID ?>" >
             <input class="mt-2 btn btn-primary" type="submit" name="update" value="Update" />
           </form>
-
-
         </div>
       </div>
     </div>
   </div>
-
 <? } ?>

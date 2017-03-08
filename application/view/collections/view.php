@@ -6,7 +6,7 @@
       <small class="text-muted">
         Privacy: <?= $privacy[$collection->accessRights] ?>
         <strong><span class="align-top">.</span></strong>
-        Created By <a href="<?= URL . $collection->userID ?>">User <?= $collection->userID ?></a>
+        Created By <a href="<?= URL . $collection->userID ?>"><?= user_name($collection->userID) ?></a>
       </small>
     </div>
     <div class="col-6 text-right">
@@ -34,7 +34,7 @@
           <img class="card-img-top" src="<?= URL; ?><?= $photo->path ?>" onError="this.src ='<?= URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
           <div class="card-block">
             <p class="card-text text-muted small text-right">
-              uploaded by User <?= $photo->userID ?>
+              uploaded by <?= user_name($photo->userID) ?>
             </p>
           </div>
         </div>

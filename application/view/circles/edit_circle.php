@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body text-right">
-        <form action="<?= URL; ?>circle/update_circle" method="POST">
+        <form action="<?= URL ?>circle/update_circle" method="POST">
           <div class="form-group">
             <input class="form-control" type="text" name="name" value="<?= $circle->name ?>" placeholder="Circle Name" required />
           </div>

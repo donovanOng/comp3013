@@ -5,7 +5,7 @@
     </div>
     <div class="col-4">
       <p class="p-2" style="min-height:150px;">
-         <a href="<?= URL . $photo->userID ?>">User <?= $photo->userID ?></a>
+         <a href="<?= URL . $photo->userID ?>"><?= user_name($photo->userID) ?></a>
         <br>
         <small class="text-muted">
           Under <a href="<?= URL; ?>collection/<?= $photo->collectionID ?>">Collection <?= $photo->collectionID ?></a>
@@ -29,10 +29,10 @@
         <div class="p-2 mb-2 small" style="border-bottom: 1px solid #DDD;">
           <? if (count($photo_annotations) > 1) { ?>
             <i class="fa fa-heart mr-1" aria-hidden="true"></i>
-            <a href="#">User <?= $photo_annotations[0]->userID?> and <?=(count($photo_annotations)-1)?> others</a>
+            <a href="#"><?= user_name($photo_annotations[0]->userID) ?> and <?=(count($photo_annotations)-1)?> others</a>
           <? } else if (count($photo_annotations) == 1) { ?>
             <i class="fa fa-heart mr-1" aria-hidden="true"></i>
-            <a href="#">User <?= $photo_annotations[0]->userID?>
+            <a href="#"><?= user_name($photo_annotations[0]->userID) ?>
           <? } ?>
         </div>
         <? if (count($photo_comments) > 0) { ?>
@@ -40,7 +40,7 @@
           <?php foreach ($photo_comments as $comment) { ?>
             <div class="list-group-item list-group-item-action flex-column align-items-start">
               <p class="mb-1">
-                <a href="<?= URL . $comment->userID ?>">User <?= $comment->userID ?></a> <?= $comment->content ?>
+                <a href="<?= URL . $comment->userID ?>"><?= user_name($comment->userID) ?></a> <?= $comment->content ?>
               </p>
               <small class="text-muted"><?= $comment->CREATED_AT ?></small>
             </div>

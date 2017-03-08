@@ -2,7 +2,7 @@
   <div class="row align-items-center mb-3">
     <div class="col-6">
       <h4 class="mb-0"><?= $circle->name ?></h4>
-      <small class="text-muted">Created By <a href="<?= URL . $circle->userID ?>">User <?= $circle->userID ?></a></small>
+      <small class="text-muted">Created By <a href="<?= URL . $circle->userID ?>"><?= user_name($circle->userID) ?></a></small>
     </div>
     <div class="col-6 text-right">
       <? if ($this->current_userID == $circle->userID) { ?>

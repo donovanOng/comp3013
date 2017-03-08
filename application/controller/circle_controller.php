@@ -125,9 +125,9 @@ class CircleController
                                           $userID);
 
       if ($result) {
-        $_SESSION['message'] = 'User ' . $userID . ' added!';
+        $_SESSION['message'] = user_name($userID) . ' added!';
       } else {
-        $_SESSION['message'] = 'Fail to add user ' . $userID;
+        $_SESSION['message'] = 'Fail to add ' . user_name($userID);
       }
 
       Redirect(URL . 'circle/' . $circleID);
@@ -147,9 +147,9 @@ class CircleController
       $result = $model->remove_circle_member($circleID, $userID);
 
       if ($result) {
-        $_SESSION['message'] = 'User ' .  $userID . ' removed!';
+        $_SESSION['message'] = user_name($userID) . ' removed!';
       } else {
-        $_SESSION['message'] = 'Fail to remove user ' . $useID;
+        $_SESSION['message'] = 'Fail to remove ' . user_name($userID);
       }
 
       Redirect(URL . 'circle/' . $circleID);

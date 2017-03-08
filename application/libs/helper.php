@@ -20,4 +20,15 @@ function in_array_field($needle, $needle_field, $haystack, $strict = false) {
     return false;
 }
 
+function user_name($userID) {
+
+  require_once APP . 'model/user.php';
+  $model = new User();
+  $user = $model->find_by_id($userID);
+  if ($user) {
+    return $user->first_name . ' ' . $user->last_name;
+  }
+  return NULL;
+}
+
 ?>

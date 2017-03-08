@@ -9,7 +9,7 @@
 
   <select class="form-control w-75" name="userID">
     <? foreach($friends_not_members as $friend) { ?>
-      <option value="<?= $friend ?>">User <?=  $friend ?></option>
+      <option value="<?= $friend ?>"><?= user_name($friend) ?></option>
     <? } ?>
   </select>
 

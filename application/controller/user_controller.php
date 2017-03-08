@@ -166,9 +166,9 @@ class UserController
                                     $userID,
                                     1);
       if ($result) {
-        $_SESSION['message'] = 'Friendship request for User ' . $userID . ' sent.';
+        $_SESSION['message'] = 'Friendship request for ' . user_name($userID) . ' sent.';
       } else {
-        $_SESSION['message'] = 'Fail to send friendship request for User ' . $userID;
+        $_SESSION['message'] = 'Fail to send friendship request for ' . user_name($userID);
       }
 
       Redirect(URL . $userID);
@@ -184,9 +184,9 @@ class UserController
       $result = $model->accept_friendship($this->current_userID,
                                           $userID);
       if ($result) {
-        $_SESSION['message'] = 'Friendship request from User ' . $userID . ' accepted.';
+        $_SESSION['message'] = 'Friendship request from ' . user_name($userID) . ' accepted.';
       } else {
-        $_SESSION['message'] = 'Accept friendship request from User ' . $userID . ' failed.';
+        $_SESSION['message'] = 'Accept friendship request from ' . user_name($userID) . ' failed.';
       }
 
       Redirect(URL . $userID);
@@ -202,9 +202,9 @@ class UserController
       $result = $model->reject_friendship($this->current_userID,
                                           $userID);
       if ($result) {
-        $_SESSION['message'] = 'Friendship request from User ' . $userID . ' rejected.';
+        $_SESSION['message'] = 'Friendship request from ' . user_name($userID) . ' rejected.';
       } else {
-        $_SESSION['message'] = 'Reject friendship request from User ' . $userID . ' failed.';
+        $_SESSION['message'] = 'Reject friendship request from ' . user_name($userID) . ' failed.';
       }
 
       Redirect(URL . $userID);
