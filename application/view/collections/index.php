@@ -18,11 +18,11 @@
     <?php foreach ($collections_access as $collection) { ?>
       <div class="col-3">
         <div class="card mb-3 <? if(in_array($collection->collectionID, array_column($collections_owned, "collectionID"))) { ?>bg-faded<? } ?>">
-          <img class="card-img-top" src="<?= URL; ?>images/missing.jpg" style="object-fit: cover; height: 200px;">
+          <img class="card-img-top" src="<?= URL . $collection->coverPhoto ?>" onError="this.src='<?= URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
           <div class="card-block">
             <h5 class="card-title">Collection <?= $collection->collectionID ?></h5>
             <p class="card-text text-muted">
-              Number of photos
+              <?= $collection->noOfPhotos ?> photos
             </p>
             <a href="<?= URL; ?>collection/<?= $collection->collectionID ?>" class="card-link">View Collection</a>
             <? if (in_array($collection->collectionID, array_column($collections_owned, "collectionID"))) { ?>

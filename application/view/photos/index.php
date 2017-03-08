@@ -12,7 +12,7 @@
       <div class="col-3">
         <a href="<?= URL; ?>photo/<?= $photo->photoID ?>">
         <div class="card mb-3">
-          <img class="card-img-top" src="<?= URL; ?><?= $photo->path ?>" onError="this.src ='<?= URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
+          <img class="card-img-top" src="<?= URL; ?><?= $photo->path ?>" onError="this.src='<?= URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
           <div class="card-block">
             <p class="card-text text-muted">Collection <?= $photo->collectionID ?></p>
           </div>
