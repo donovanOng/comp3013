@@ -61,23 +61,21 @@
   </div>
   <? } ?>
   <div class="col-8">
-    <? if ($blogs == NULL && $this->current_userID == $user->userID) { ?>
+    <? if ($blog == NULL && $this->current_userID == $user->userID) { ?>
       <div class="bg-faded rounded mb-3 p-4">
         <span>Please give your blog a name: </span>
         <? require APP . 'view/users/form_new_blog.php'; ?>
       </div>
     <? } ?>
-    <? if ($blogs != NULL) { ?>
+    <? if ($blog != NULL) { ?>
       <h6>
         <span class="text-muted">
-          <i class="fa fa-pencil-square-o mr-1 text-muted" aria-hidden="true"></i> <?= $user->first_name ?>'s Blog:
+          <i class="fa fa-pencil-square-o mr-1 text-muted" aria-hidden="true"></i>
+          <?= $user->first_name ?>'s Blog:
         </span>
-          <?= $blogs[0]->name ?>
+        <a href="<?= URL  . 'blog/' . $blog->blogID ?>"><?= $blog->name ?></a>
       </h6>
       <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-      <? if ($this->current_userID == $userID) {?>
-        <? require APP . 'view/users/form_new_post.php'; ?>
-      <? } ?>
       <? if (count($blog_posts) > 0) { ?>
         <?php foreach ($blog_posts as $post) { ?>
           <div class="card mb-3">

@@ -37,9 +37,9 @@ class UserController
     }
 
     $blog_model = new Blog();
-    $blogs = $blog_model->find_user_blog($userID);
-    if ($blogs != NULL) {
-      $blog_posts = $blog_model->find_blog_posts($blogs[0]->blogID);
+    $blog = $blog_model->find_user_blog($userID);
+    if ($blog != NULL) {
+      $blog_posts = $blog_model->find_blog_posts($blog->blogID);
     }
 
     $friendModel = new Friend();

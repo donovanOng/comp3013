@@ -56,7 +56,7 @@ class PostController
         $_SESSION['message'] = 'Fail to create post';
       }
 
-      Redirect(URL . $this->current_userID);
+      Redirect(URL . 'blog/' . $blogID);
 
     } else {
       Redirect(URL);

@@ -21,8 +21,20 @@ class BlogController
 
   public function view($blogID)
   {
-    $_SESSION['message'] = URL . 'blog does not exist.';
-    Redirect(URL);
+    $model = new Blog();
+    $blog = $model->find_by_id($blogID);
+    if (isset($_GET['q']) && strlen($_GET['q']) > 0) {
+      $query = $_GET['q'];
+      $blog_posts = $model->search_blog_posts($blogID, $query);
+    } else if (isset($_GET['q']) && strlen($_GET['q']) == 0) {
+      Redirect(URL . 'blog/' . $blogID);
+    } else {
+      $blog_posts = $model->find_blog_posts($blogID);
+    }
+
+    require APP . 'view/_templates/header.php';
+    require APP . 'view/blogs/view.php';
+    require APP . 'view/_templates/footer.php';
   }
 
   public function create()
@@ -43,22 +55,6 @@ class BlogController
     } else {
       Redirect(URL);
     }
-  }
-
-  public function search()
-  {
-    $query = NULL;
-
-    if (isset($_GET["query"]) && strlen($_GET["query"]) > 0) {
-      $query = $_GET["query"];
-      $model = new Blog();
-      // TODO: Search only friend's blog?
-      $blogs = $model->find_by_name($query);
-    }
-
-    require APP . 'view/_templates/header.php';
-    require APP . 'view/blogs/search.php';
-    require APP . 'view/_templates/footer.php';
   }
 
 }

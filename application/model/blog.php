@@ -14,7 +14,7 @@ class Blog extends Model
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);
-    return $query->fetchAll();
+    return $query->fetch();
   }
 
   public function create($userID, $name)
@@ -28,14 +28,30 @@ class Blog extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function find_by_name($name)
+  public function find_by_id($blogID)
   {
     $sql = "SELECT *
             FROM blog
-            WHERE name LIKE :name";
+            WHERE blogID = :blogID";
 
     $query = $this->db->prepare($sql);
-    $params = array(':name' => "%" . $name . "%");
+    $params = array(':blogID' => $blogID);
+    $query->execute($params);
+    return $query->fetch();
+  }
+
+  public function search_blog_posts($blogID, $search_query)
+  {
+    $sql = "SELECT *
+            FROM post
+            WHERE blogID = :blogID
+            AND (title LIKE :search_query
+                OR body LIKE :search_query)
+            ORDER BY UPDATED_AT DESC";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':blogID' => $blogID,
+                    ':search_query' => "%" . $search_query . "%");
     $query->execute($params);
     return $query->fetchAll();
   }
@@ -44,7 +60,8 @@ class Blog extends Model
   {
     $sql = "SELECT *
             FROM post
-            WHERE blogID = :blogID";
+            WHERE blogID = :blogID
+            ORDER BY UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
     $params = array(':blogID' => $blogID);
