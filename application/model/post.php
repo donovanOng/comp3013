@@ -33,6 +33,38 @@ class Post extends Model
     return $query->fetchAll();
   }
 
+  public function search_post($userID, $search_query)
+  {
+    $sql = "SELECT p.*, u.userID
+            FROM post p
+            JOIN blog b
+                ON b.blogID = p.blogID
+           	JOIN user u
+                ON b.userID = u.userID
+            WHERE
+              p.body LIKE :search_query
+              OR p.title LIKE :search_query
+              AND u.userID IN (
+                SELECT userID
+                FROM relationship
+                WHERE
+                  STATUS = 0
+                  AND userID_2 = :userID
+                UNION
+                SELECT userID_2
+                FROM relationship
+                WHERE
+                  STATUS = 0
+                  AND userID = :userID)
+            ORDER BY p.UPDATED_AT DESC";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':search_query' => "%" . $search_query . "%",
+                    ':userID' => $userID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
   public function find_by_id($postID)
   {
     $sql = "SELECT *

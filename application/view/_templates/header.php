@@ -42,7 +42,7 @@
             <a class="nav-link active" href="<?= URL ?>logout">Log Out</a>
           </li>
           </ul>
-          <? require APP . 'view/users/search.php' ?>
+          <? require APP . 'view/search/form.php' ?>
         <?php } else { ?>
           <li class="nav-item">
             <a class="nav-link active" href="<?= URL ?>signup">Sign Up</a>

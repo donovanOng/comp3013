@@ -9,7 +9,7 @@
                 <h6 class="card-title">
                   <a href="<?= URL . 'post/' . $post->postID ?>"><?= $post->title ?></a>
                   <br>
-                  <small class="text-muted"><a href="<?= URL . 'post/' . $post->userID ?>"><?= user_name($post->userID) ?></a>
+                  <small class="text-muted"><a href="<?= URL . $post->userID ?>"><?= user_name($post->userID) ?></a>
                   <strong><span class="align-top">.</span></strong> <?= $post->CREATED_AT ?></small>
                 </h6>
                 <p class="card-text"><?= $post->body ?></p>

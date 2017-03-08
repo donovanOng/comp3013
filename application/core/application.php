@@ -108,6 +108,8 @@ class Application
 
       if ($controller_name == 'admin') {
         $url_controller_obj->index();
+      } else if ($controller_name == 'search') {
+        $url_controller_obj->index();
       } else {
         Redirect(URL . $_SESSION['current_user']->userID . '/' . $controller_name);
       }
