@@ -60,17 +60,15 @@ class PhotoController
       $collectionID = $_POST['collectionID'];
       $uploadFile = $_FILES['uploadFile'];
 
-      // TODO: Check if user has upload access to photo collectiont
-
       $result = $this->upload_photo($collectionID, $uploadFile);
 
       if ($result) {
         $_SESSION['message'] = 'Photo uploaded successfully';
-        Redirect(URL . 'collection/' . $collectionID);
       } else {
         $_SESSION['message'] = 'Photo upload failed';
-        Redirect(URL . 'photo/upload?collectionID=' . $collectionID);
       }
+
+      Redirect(URL . 'collection/' . $collectionID);
 
     } else {
       $_SESSION['message'] = 'No Collection ID';
@@ -94,7 +92,6 @@ class PhotoController
     $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
 
     if ($uploadResult) {
-      // insert into database
       $model = new Photo();
       $result = $model->create($this->current_userID,
                               $collectionID,
