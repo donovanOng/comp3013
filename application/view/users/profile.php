@@ -17,7 +17,7 @@
     <div class="card">
       <div class="card-block bg-faded">
         <h5 class="card-title"><i class="fa fa-globe mr-1 text-muted" aria-hidden="true"></i> Intro</h5>
-        <p class="card-text"><?= $profile->about ?></p>
+        <p class="card-text"><?= nl2br($profile->about) ?></p>
       </div>
       <ul class="list-group list-group-flush small">
         <li class="list-group-item">
@@ -38,15 +38,15 @@
         </li>
         <li class="list-group-item">
           <span class="text-muted col-4 pl-0">Address</span>
-          <span class="col-8"><?= $profile->address ?></span>
+          <span class="col-8"><?= nl2br($profile->address) ?></span>
         </li>
         <li class="list-group-item">
           <span class="text-muted col-4 pl-0">Languages</span>
-          <span class="col-8"><?= $profile->languages ?></span>
+          <span class="col-8"><?= nl2br($profile->languages) ?></span>
         </li>
         <li class="list-group-item">
           <span class="text-muted col-4 pl-0">Workplace</span>
-          <span class="col-8"><?= $profile->workplace ?></span>
+          <span class="col-8"><?= nl2br($profile->workplace) ?></span>
         </li>
       </ul>
       <? if($this->current_userID == $user->userID) { ?>
@@ -86,7 +86,7 @@
                 <a href="<?= URL . 'post/' . $post->postID ?>"><?= $post->title ?></a>
                 <br><small class="text-muted"><?= $post->CREATED_AT ?></small>
               </h6>
-              <p class="card-text"><?= $post->body ?></p>
+              <p class="card-text"><?= nl2br($post->body) ?></p>
             </div>
           </div>
         <?php } ?>
