@@ -23,11 +23,21 @@ class BlogController
   {
     $model = new Blog();
     $blog = $model->find_by_id($blogID);
+
+    if (!$blog) {
+      $_SESSION['message'] = 'Blog ' . $blogID . ' does not exist.';
+      Redirect(URL);
+    }
+
     if (isset($_GET['q']) && strlen($_GET['q']) > 0) {
+
       $query = $_GET['q'];
       $blog_posts = $model->search_blog_posts($blogID, $query);
-    } else if (isset($_GET['q']) && strlen($_GET['q']) == 0) {
+
+    } elseif (isset($_GET['q']) && strlen($_GET['q']) == 0) {
+
       Redirect(URL . 'blog/' . $blogID);
+
     } else {
       $blog_posts = $model->find_blog_posts($blogID);
     }

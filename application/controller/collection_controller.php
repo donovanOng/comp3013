@@ -39,39 +39,42 @@ class CollectionController
     $model = new Collection();
     $collection = $model->find_by_id($collectionID);
 
+    if (!$collection) {
+      $_SESSION['message'] = 'Collection ' . $photoID . ' does not exist.';
+      Redirect(URL);
+    }
+
     $all_user_circles = $model->find_all_user_circles($collectionID);
     $current_access_circles = $model->find_access_circles($collectionID);
 
     $collection_photos = NULL;
-    if ($collection != NULL) {
-      if ($collection->accessRights < 2 && $this->current_userID != $collection->userID) {
 
-        $modelFriends = new Friend();
-        if ($collection->accessRights == 0){    //Friends
-          $access_by_relationship = $modelFriends->find_user_friend($collection->userID, 0);
-        }
-        else{   //Friends of friends
-          $access_by_relationship = $modelFriends->find_friends_of_friends($collection->userID);
-        }
-        $access_by_circle = $model->find_circle_members_access($collectionID);
+    if ($collection->accessRights < 2 && $this->current_userID != $collection->userID) {
 
-        if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) || 
-            !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
-          $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
-          Redirect(URL . $collection->userID);
-        }
+      $modelFriends = new Friend();
+      if ($collection->accessRights == 0) {
+        // Friends
+        $access_by_relationship = $modelFriends->find_user_friend($collection->userID, 0);
+      } else {
+        // Friends of friends
+        $access_by_relationship = $modelFriends->find_friends_of_friends($collection->userID);
       }
+      $access_by_circle = $model->find_circle_members_access($collectionID);
 
-      $collection_photos = $model->find_colllection_photos($collectionID);
-
-      require APP . 'view/_templates/header.php';
-      require APP . 'view/collections/view.php';
-      require APP . 'view/_templates/footer.php';
-
-    } else {
-      $_SESSION['message'] = 'Collection ' . $collectionID . ' does not exist.';
-      Redirect(URL);
+      if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) ||
+          !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
+        $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
+        Redirect(URL . $collection->userID);
+      }
+      
     }
+
+    $collection_photos = $model->find_colllection_photos($collectionID);
+
+    require APP . 'view/_templates/header.php';
+    require APP . 'view/collections/view.php';
+    require APP . 'view/_templates/footer.php';
+
   }
 
   public function create()
@@ -123,7 +126,7 @@ class CollectionController
                                                  $accessRights);
       $error[] = $result;
 
-      
+
       if (!in_array(0, $error)) {
         $_SESSION['message'] = 'Collection updated!';
       } else {

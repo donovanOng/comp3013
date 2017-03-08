@@ -39,6 +39,11 @@ class PhotoController
     $model = new Photo();
     $photo = $model->find_by_id($photoID);
 
+    if (!$photo) {
+      $_SESSION['message'] = 'Photo ' . $photoID . ' does not exist.';
+      Redirect(URL);
+    }
+
     $photo_comments = NULL;
     if ($photo != NULL) {
       $photo_comments = $model->find_photo_comments($photoID);
