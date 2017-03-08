@@ -26,14 +26,13 @@ class UserController
     $model = new User();
     $user = $model->find_by_id($userID);
     $profile = $model->fetch_profile($userID);
-    $privacy = $user->privacy;
 
-    if ($privacy == 0){
+    if ($user->privacy == 0) {
       $modelFriend = new Friend();
       $authorised_view = $modelFriend->find_friends_of_friends($userID);
       if (!in_array_field($this->current_userID, 'userID', $authorised_view) && $this->current_userID != $userID) {
         $_SESSION['message'] = 'You dont have rights to view profile of user ' . $user->userID;
-        Redirect(URL . $this->current_userID);
+        Redirect(URL);
       }
     }
 
@@ -41,12 +40,6 @@ class UserController
     $blogs = $blog_model->find_user_blog($userID);
     if ($blogs != NULL) {
       $blog_posts = $blog_model->find_blog_posts($blogs[0]->blogID);
-
-      // Sort dates in descending order
-      function date_sort($a, $b) {
-          return strtotime($a->CREATED_AT) < strtotime($b->CREATED_AT);
-      }
-      usort($blog_posts, "date_sort");
     }
 
     $friendModel = new Friend();
@@ -134,19 +127,29 @@ class UserController
     }
   }
 
-  public function update_settings()
+  public function update_user()
   {
     if (isset($_POST['update'])) {
+
+      $first_name = $_POST["first_name"];
+      $last_name = $_POST["last_name"];
+      $email = $_POST["email"];
+      $password = $_POST["password"];
       $privacy = $_POST["privacy"];
       $userID = $_POST["userID"];
 
       $model = new User();
-      $result = $model->update_settings($privacy, $userID);
+      $result = $model->update_user($first_name,
+                                    $last_name,
+                                    $email,
+                                    $password,
+                                    $privacy,
+                                    $userID);
 
       if ($result) {
-        $_SESSION['message'] = 'Settings is updated!';
+        $_SESSION['message'] = 'User account is updated!';
       } else {
-        $_SESSION['message'] = 'Fail to update settings';
+        $_SESSION['message'] = 'Fail to update account';
       }
 
       Redirect(URL . $userID);

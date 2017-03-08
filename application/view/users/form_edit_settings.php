@@ -2,13 +2,29 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Edit Settings</h5>
+        <h5 class="modal-title">Settings</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="text-left" action="<?= URL ?>user/update_settings" method="POST">
+        <form class="text-left" action="<?= URL ?>user/update_user" method="POST">
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" name="first_name" value="<?= $user->first_name ?>" required />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" name="last_name" value="<?= $user->last_name ?>" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" value="<?= $user->email ?>" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" value="<?= $user->password ?>" required />
+          </div>
           <p class="mb-2">Who can see my stuff?</p>
           <div class="form-check">
             <label class="form-check-label">

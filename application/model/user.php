@@ -31,7 +31,7 @@ class User extends Model
 
   public function find_by_id($userID)
   {
-    $sql = "SELECT first_name, last_name, userID, privacy
+    $sql = "SELECT first_name, last_name, userID, email, password, privacy
             FROM user
             WHERE userID = :userID
             LIMIT 1";
@@ -59,9 +59,10 @@ class User extends Model
   {
     $sql = "SELECT *
             FROM user
-            WHERE first_name LIKE :name
-            OR last_name LIKE :name
-            OR CONCAT(first_name, ' ', last_name) LIKE :name";
+            WHERE
+              first_name LIKE :name
+              OR last_name LIKE :name
+              OR CONCAT(first_name, ' ', last_name) LIKE :name";
 
     $query = $this->db->prepare($sql);
     $params = array(':name' => $name . '%');
@@ -73,9 +74,9 @@ class User extends Model
   {
     $sql = "SELECT status
             FROM relationship
-            WHERE (userID = :userID AND userID_2 = :userID_2)
-            OR (userID = :userID_2  AND userID_2 = :userID)
-          ";
+            WHERE
+              (userID = :userID AND userID_2 = :userID_2)
+              OR (userID = :userID_2  AND userID_2 = :userID)";
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
                     ':userID_2' => $userID_2);
@@ -147,7 +148,6 @@ class User extends Model
                 UPDATED_AT = '$timestamp'
             WHERE (userID = :userID)";
 
-
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
                     ':about' => $about,
@@ -161,13 +161,25 @@ class User extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function update_settings($privacy, $userID) {
-    $sql = "UPDATE user 
-            SET privacy = :privacy 
+  public function update_user($first_name, $last_name, $email,
+                                $password, $privacy, $userID)
+  {
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "UPDATE user
+            SET first_name = :first_name,
+                last_name = :last_name,
+                password = :password,
+                email = :email,
+                privacy = :privacy,
+                UPDATED_AT = '$timestamp'
             WHERE userID = :userID";
 
     $query = $this->db->prepare($sql);
-    $params = array(':privacy' => $privacy,
+    $params = array(':first_name' => $first_name,
+                    ':last_name' => $last_name,
+                    ':email' => $email,
+                    ':password' => $password,
+                    ':privacy' => $privacy,
                     ':userID' => $userID,);
     return $query->execute($params); // boolean result
   }
