@@ -18,9 +18,12 @@ class Collection extends Model
 
   public function find_by_id($collectionID)
   {
-    $sql = "SELECT *
-            FROM photoCollection
-            WHERE collectionID = :collectionID";
+    $sql = "SELECT a.collectionID, a.accessRights, a.userID, count(*) noOfPhotos
+            FROM photoCollection a
+            INNER JOIN photo p
+                  ON a.collectionID = p.collectionID
+            WHERE a.collectionID = :collectionID
+            GROUP BY a.collectionID";
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
@@ -55,62 +58,76 @@ class Collection extends Model
 
   public function access_collection($userID)
   {
-    $sql = "SELECT *
-            FROM photocollection
-            WHERE (
-            accessRights = 0 AND userID IN (
-              SELECT U.userID
-              FROM relationship R, user U
-              WHERE
-              CASE
-                WHEN R.userID = :userID THEN R.userID_2 = U.userID
-                WHEN R.userID_2 = :userID THEN R.userID = U.userID
-              END
-              AND status = 0
-              )
-            )
-            OR (
-            accessRights = 1 AND userID IN (
-              SELECT userID
-              FROM relationship
-              WHERE STATUS = 0 AND userID_2 = :userID
-              UNION
-              SELECT userID_2
-              FROM relationship
-              WHERE STATUS = 0 AND userID = :userID
-              UNION
-              SELECT userID
-              FROM relationship
-              WHERE status = 0 AND userID_2 IN (
-                SELECT userID
-                FROM relationship
-                WHERE STATUS = 0 AND userID_2 = :userID
-                UNION
-                SELECT userID_2
-                FROM relationship
-                WHERE STATUS = 0 AND userID = :userID
-              )
-              UNION
-              SELECT userID_2
-              FROM relationship
-              WHERE STATUS = 0 AND userID IN (
-                SELECT userID
-                FROM relationship
-                WHERE STATUS = 0 AND userID_2 = :userID
-                UNION
-                SELECT userID_2
-                FROM relationship
-                WHERE STATUS = 0 AND userID = :userID
+    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(*) noOfPhotos, p.path coverPhoto
+            FROM photocollection pc
+            INNER JOIN photo p
+                  ON pc.collectionID = p.collectionID
+            WHERE
+              ( pc.accessRights = 0
+                AND pc.userID IN (
+                  SELECT U.userID
+                  FROM relationship R, user U
+                  WHERE
+                  CASE
+                    WHEN R.userID = :userID THEN R.userID_2 = U.userID
+                    WHEN R.userID_2 = :userID THEN R.userID = U.userID
+                  END
+                  AND status = 0
                 )
               )
-            )
-            OR (accessRights = 2)
-            OR userID = :userID
+              OR (
+                pc.accessRights = 1
+                AND pc.userID IN (
+                  SELECT userID
+                  FROM relationship
+                  WHERE STATUS = 0 AND userID_2 = :userID
+                  UNION
+                  SELECT userID_2
+                  FROM relationship
+                  WHERE STATUS = 0 AND userID = :userID
+                  UNION
+                  SELECT userID
+                  FROM relationship
+                  WHERE status = 0 AND userID_2 IN (
+                    SELECT userID
+                    FROM relationship
+                    WHERE STATUS = 0 AND userID_2 = :userID
+                    UNION
+                    SELECT userID_2
+                    FROM relationship
+                    WHERE STATUS = 0 AND userID = :userID
+                  )
+                  UNION
+                  SELECT userID_2
+                  FROM relationship
+                  WHERE STATUS = 0 AND userID IN (
+                    SELECT userID
+                    FROM relationship
+                    WHERE STATUS = 0 AND userID_2 = :userID
+                    UNION
+                    SELECT userID_2
+                    FROM relationship
+                    WHERE STATUS = 0 AND userID = :userID
+                  )
+                )
+              )
+              OR (pc.accessRights = 2)
+              OR pc.userID = :userID
+              GROUP BY pc.collectionID
             UNION
-            SELECT DISTINCT pc.*
-            FROM photocollectionaccessrights AS pcar, circlefriends AS cf, photocollection as pc
-            WHERE cf.circleID = pcar.circleID AND pc.collectionID = pcar.collectionID AND cf.userID = :userID 
-            ORDER BY collectionID";
+              SELECT a.collectionID, a.accessRights, a.userID, count(*) noOfPhotos, p.path
+              FROM photoCollection a
+              INNER JOIN photo p
+                    ON a.collectionID = p.collectionID
+              WHERE a.collectionID IN (
+                SELECT DISTINCT pc.collectionID
+                FROM photocollectionaccessrights AS pcar, circlefriends AS cf, photocollection as pc
+                WHERE
+                  cf.circleID = pcar.circleID
+                  AND pc.collectionID = pcar.collectionID
+                  AND cf.userID = :userID
+              )
+              GROUP BY a.collectionID";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
