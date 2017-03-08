@@ -25,6 +25,11 @@ class PostController
     $model = new Post();
     $post = $model->find_by_id($postID);
 
+    if (!$post) {
+      $_SESSION['message'] = 'Post ' . $postID . ' does not exist.';
+      Redirect(URL);
+    }
+
     require APP . 'view/_templates/header.php';
     require APP . 'view/posts/view.php';
     require APP . 'view/_templates/footer.php';
@@ -50,7 +55,7 @@ class PostController
       } else {
         $_SESSION['message'] = 'Fail to create post';
       }
-      
+
       Redirect(URL . $this->current_userID);
 
     } else {
@@ -76,11 +81,8 @@ class PostController
         $_SESSION['message'] = 'Fail to delete post!';
       }
 
-      if (isset($_GET['blogID']) && strlen($_GET['blogID']) > 0 ) {
-        Redirect(URL . 'blog/' . $_GET['blogID']);
-      } else {
-        Redirect(URL . 'blog');
-      }
+      Redirect(URL);
+
 
     } else {
       $_SESSION['message'] = 'No post ID';
