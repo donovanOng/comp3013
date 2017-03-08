@@ -23,7 +23,9 @@
               <i class="fa fa-heart mr-1" aria-hidden="true"></i>Like
             </a>
         <? } ?>
-        <a class="mr-2" href="#"><i class="fa fa-comment mr-1" aria-hidden="true"></i>Comment</a>
+        <a class="mr-2" title="Leave a comment" href="#" onclick="setFocusToCommentInput();return false;">
+          <i class="fa fa-comment mr-1" aria-hidden="true"></i>Comment
+        </a>
       </div>
       <div class="bg-faded pr-2 pl-2 pb-3" style="border-top: 1px solid #DDD;">
         <div class="p-2 mb-2 small" style="border-bottom: 1px solid #DDD;">
