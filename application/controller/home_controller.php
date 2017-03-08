@@ -1,6 +1,7 @@
 <?php
 
 require_once APP . 'model/user.php';
+require_once APP . 'model/post.php';
 
 class HomeController
 {
@@ -15,6 +16,9 @@ class HomeController
 
   public function index()
   {
+    $model = new Post();
+    $posts = $model->posts_feed($this->current_userID);
+
     require APP . 'view/_templates/header.php';
     require APP . 'view/home/index.php';
     require APP . 'view/_templates/footer.php';
