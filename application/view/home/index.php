@@ -19,8 +19,51 @@
       <?php } ?>
     </div>
     <div class="col-4">
-      <div class="bg-faded p-2">
-        <p class="text-muted mb-2"><small>SUGGESTED FRIENDS</small></p>
+      <div class="bg-faded p-2 pl-3 pr-3">
+        <p class="text-muted mb-2"><small>SUGGESTION BASED ON MUTUAL FRIENDS</small></p>
+
+        <? if (count($recommendation_based_on_mutual_friends) > 0) { ?>
+          <? foreach($recommendation_based_on_mutual_friends as $friend_recommend) { ?>
+            <div class="row mb-1 mt-1">
+              <div class="col-6">
+                <a href="<?= URL . $friend_recommend->userID ?>"><?= user_name($friend_recommend->userID) ?></a>
+                <span class="text-muted">(<?= $friend_recommend->rank ?>)</span>
+              </div>
+              <div class="col-6 text-right">
+                <a href="<?= URL ?>user/add_friend?userID=<?= $friend_recommend->userID ?>">Add Friend</a>
+              </div>
+            </div>
+          <? } ?>
+        <? } else { ?>
+          <div class="row mb-1 mt-1">
+            <div class="col-12">
+              No friend suggestion.
+            </div>
+          </div>
+        <? } ?>
+
+        <p class="text-muted mb-2"><small>SUGGESTION BASED ON PHOTOS LIKED</small></p>
+
+        <? if (count($recommendation_based_on_photos_liked) > 0) { ?>
+          <? foreach($recommendation_based_on_photos_liked as $friend_recommend) { ?>
+            <div class="row mb-1 mt-1">
+              <div class="col-6">
+                <a href="<?= URL . $friend_recommend->userID ?>"><?= user_name($friend_recommend->userID) ?></a>
+                <span class="text-muted">(<?= $friend_recommend->rank ?>)</span>
+              </div>
+              <div class="col-6 text-right">
+                <a href="<?= URL ?>user/add_friend?userID=<?= $friend_recommend->userID ?>">Add Friend</a>
+              </div>
+            </div>
+          <? } ?>
+        <? } else { ?>
+          <div class="row mb-1 mt-1">
+            <div class="col-12">
+              No friend suggestion.
+            </div>
+          </div>
+        <? } ?>
+
       </div>
     </div>
   </div>
