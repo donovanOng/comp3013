@@ -9,7 +9,8 @@ class Blog extends Model
   {
     $sql = "SELECT *
             FROM blog
-            WHERE userID = :userID";
+            WHERE userID = :userID
+            ORDER BY CREATED_AT DESC";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
@@ -61,7 +62,7 @@ class Blog extends Model
     $sql = "SELECT *
             FROM post
             WHERE blogID = :blogID
-            ORDER BY UPDATED_AT DESC";
+            ORDER BY CREATED_AT DESC";
 
     $query = $this->db->prepare($sql);
     $params = array(':blogID' => $blogID);
