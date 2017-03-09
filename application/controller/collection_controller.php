@@ -20,14 +20,19 @@ class CollectionController
     $model = new User();
     $user = $model->find_by_id($collection_userID);
 
+    if (can_access_user($this->current_userID, $collection_userID) == false) {
+      $_SESSION['message'] = 'You dont have rights to view collections of user ' . $user->userID;
+      Redirect(URL);
+    }
+
     $friendModel = new Friend();
     $is_friend = $model->is_friend($this->current_userID, $collection_userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID, $collection_userID);
 
     $model = new Collection();
-    $collections_owned = $model->find_user_collection($this->current_userID);
-    $collections_access = $model->access_collection($collection_userID);
-
+    $collections_owned = $model->find_user_collection($collection_userID);
+    $collections_access = $model->access_collection($this->current_userID);
+    
     require APP . 'view/_templates/header.php';
     require APP . 'view/collections/index.php';
     require APP . 'view/_templates/footer.php';

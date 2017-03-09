@@ -19,6 +19,11 @@ class FriendController
     $model = new User();
     $user = $model->find_by_id($friend_userID);
 
+    if (can_access_user($this->current_userID, $friend_userID) == false) {
+      $_SESSION['message'] = 'You dont have rights to view friends of user ' . $user->userID;
+      Redirect(URL);
+    }
+
     $friendModel = new Friend();
     $is_friend = $model->is_friend($this->current_userID, $friend_userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID, $friend_userID);

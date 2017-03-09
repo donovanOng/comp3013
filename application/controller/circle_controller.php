@@ -21,6 +21,11 @@ class CircleController
     $model = new User();
     $user = $model->find_by_id($circle_userID);
 
+    if (can_access_user($this->current_userID, $circle_userID) == false) {
+      $_SESSION['message'] = 'You dont have rights to view circles of user ' . $user->userID;
+      Redirect(URL);
+    }
+
     $friendModel = new Friend();
     $is_friend = $model->is_friend($this->current_userID, $circle_userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID, $circle_userID);
