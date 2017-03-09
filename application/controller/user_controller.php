@@ -27,13 +27,9 @@ class UserController
     $user = $model->find_by_id($userID);
     $profile = $model->fetch_profile($userID);
 
-    if ($user->privacy == 0) {
-      $modelFriend = new Friend();
-      $authorised_view = $modelFriend->find_friends_of_friends($userID);
-      if (!in_array_field($this->current_userID, 'userID', $authorised_view) && $this->current_userID != $userID) {
-        $_SESSION['message'] = 'You dont have rights to view profile of user ' . $user->userID;
-        Redirect(URL);
-      }
+    if (can_access_user($this->current_userID, $userID) == false) {
+      $_SESSION['message'] = 'You dont have rights to view profile of user ' . $user->userID;
+      Redirect(URL);
     }
 
     $blog_model = new Blog();

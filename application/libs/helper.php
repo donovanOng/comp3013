@@ -31,4 +31,23 @@ function user_name($userID) {
   return NULL;
 }
 
+function can_access_user($current_userID, $target_userID){
+  require_once APP . 'model/user.php';
+  require_once APP . 'model/friend.php';
+
+  $model = new User();
+  $target_user = $model->find_by_id($target_userID);
+
+  $friendModel = new Friend();
+    if ($target_user->privacy == 0) {
+      $authorised_view_users = $friendModel->find_friends_of_friends($target_userID);
+      $is_authorised = in_array_field($current_userID, 'userID', $authorised_view); 
+      
+      if ($is_authorised == false && $current_userID != $target_userID) {
+        return false;
+      }
+    }
+  return true;
+}
+
 ?>
