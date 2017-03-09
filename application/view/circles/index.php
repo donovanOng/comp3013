@@ -25,8 +25,10 @@
             <div class="card mb-3 bg-faded">
               <div class="card-block">
                 <h5 class="card-title"><?= $circle->name ?></h5>
-                <p class="card-text text-muted">
-                  # members
+                <p class="card-text">
+                  <small class="text-muted">
+                    <?= user_name($circle->userID) ?>
+                  </small>
                 </p>
                 <a href="<?= URL; ?>circle/<?= $circle->circleID ?>" class="card-link">View Circle</a>
                 <? if ($this->current_userID == $circle->userID) { ?>
@@ -43,8 +45,10 @@
             <div class="card mb-3">
               <div class="card-block">
                 <h5 class="card-title"><?= $circle->name ?></h5>
-                <p class="card-text text-muted">
-                  # members
+                <p class="card-text">
+                  <small class="text-muted">
+                    <?= user_name($circle->userID) ?>
+                  </small>
                 </p>
                 <a href="<?= URL; ?>circle/<?= $circle->circleID ?>" class="card-link">View Circle</a>
               </div>
