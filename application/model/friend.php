@@ -29,37 +29,106 @@ class Friend extends Model
   }
 
   public function find_friends_of_friends($userID){
-    $sql = "SELECT userID 
-            FROM relationship 
+    $sql = "SELECT userID
+            FROM relationship
             WHERE STATUS = 0 AND userID_2 = :userID
-            UNION 
-            SELECT userID_2 
-            FROM relationship 
-            WHERE STATUS = 0 AND userID = :userID 
             UNION
-            SELECT userID 
-            FROM relationship 
+            SELECT userID_2
+            FROM relationship
+            WHERE STATUS = 0 AND userID = :userID
+            UNION
+            SELECT userID
+            FROM relationship
             WHERE userID != :userID AND status = 0 AND userID_2 IN (
-                SELECT userID 
-                FROM relationship 
-                WHERE STATUS = 0 AND userID_2 = :userID 
+                SELECT userID
+                FROM relationship
+                WHERE STATUS = 0 AND userID_2 = :userID
                 UNION
-                SELECT userID_2 
-                FROM relationship 
+                SELECT userID_2
+                FROM relationship
                 WHERE STATUS = 0 AND userID = :userID
                 )
-            UNION 
-            SELECT userID_2 
-            FROM relationship 
-            WHERE userID_2 != :userID AND STATUS = 0 AND userID IN ( 
-                SELECT userID 
-                FROM relationship 
-                WHERE STATUS=0 AND userID_2 = :userID 
+            UNION
+            SELECT userID_2
+            FROM relationship
+            WHERE userID_2 != :userID AND STATUS = 0 AND userID IN (
+                SELECT userID
+                FROM relationship
+                WHERE STATUS=0 AND userID_2 = :userID
                 UNION
-                SELECT userID_2 
-                FROM relationship 
+                SELECT userID_2
+                FROM relationship
                 WHERE STATUS = 0 AND userID = :userID
                 )";
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
+  public function recommend_friends_based_on_mutual_friends($userID)
+  {
+    $sql = "SELECT *
+            FROM (SELECT similar.user1 userID, count(*) rank
+              FROM (
+                  SELECT userID user1, userID_2 friend
+                    FROM relationship target
+                    WHERE status = 0
+                  UNION
+                  SELECT userID_2 user1, userID friend
+                    FROM relationship target
+                    WHERE status = 0
+                  ORDER BY `user1` ASC) AS target
+              JOIN (SELECT userID user1, userID_2 friend
+                      FROM relationship target
+                      WHERE status = 0
+                    UNION
+                    SELECT userID_2 user1, userID friend
+                      FROM relationship target
+                      WHERE status = 0
+                    ORDER BY `user1` ASC) AS similar
+                ON target.friend = similar.friend
+                  AND target.user1 != similar.user1
+              WHERE target.user1 = :userID
+              GROUP BY similar.user1
+              ORDER BY rank DESC) as temp_friends
+            WHERE userID NOT IN (
+              SELECT userID
+              FROM relationship
+              WHERE userID_2 = :userID
+              UNION
+              SELECT userID_2
+              FROM relationship
+              WHERE userID = :userID
+            ) AND userID != :userID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
+  public function recommend_friends_based_on_photos_liked($userID)
+  {
+    $sql = "SELECT *
+            FROM (SELECT similar.userID userID, count(*) rank
+              FROM annotation target
+              JOIN annotation similar
+              	ON target.photoID = similar.photoID
+                  AND target.userID != similar.userID
+              WHERE target.userID = :userID
+              GROUP BY similar.userID
+              ORDER BY rank DESC) as temp_friends
+            WHERE userID NOT IN (
+              SELECT userID
+              FROM relationship
+              WHERE userID_2 = :userID
+              UNION
+              SELECT userID_2
+              FROM relationship
+              WHERE userID = :userID
+            ) AND userID != :userID";
+
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);
