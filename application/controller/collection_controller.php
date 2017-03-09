@@ -21,6 +21,14 @@ class CollectionController
     $user = $model->find_by_id($collection_userID);
 
     $friendModel = new Friend();
+    if ($user->privacy == 0) {
+      $authorised_view = $friendModel->find_friends_of_friends($userID);
+      if (!in_array_field($this->current_userID, 'userID', $authorised_view) && $this->current_userID != $userID) {
+        $_SESSION['message'] = 'You dont have rights to view photo collections of user ' . $user->userID;
+        Redirect(URL);
+      }
+    }
+
     $is_friend = $model->is_friend($this->current_userID, $collection_userID);
     $initiator = $friendModel->friendship_initiator($this->current_userID, $collection_userID);
 
