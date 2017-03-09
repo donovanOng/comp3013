@@ -6,9 +6,12 @@ class Collection extends Model
 {
   public function find_user_collection($userID)
   {
-    $sql = "SELECT *
-            FROM photoCollection
-            WHERE userID = :userID";
+    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(*) noOfPhotos, p.path coverPhoto
+            FROM photoCollection pc 
+            INNER JOIN photo p 
+                  ON pc.collectionID = p.collectionID
+            WHERE pc.userID = :userID
+            GROUP BY pc.collectionID";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
