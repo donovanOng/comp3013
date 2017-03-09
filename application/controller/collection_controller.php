@@ -61,7 +61,7 @@ class CollectionController
       }
       $access_by_circle = $model->find_circle_members_access($collectionID);
 
-      if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) ||
+      if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) &&
           !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
         $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
         Redirect(URL . $collection->userID);
