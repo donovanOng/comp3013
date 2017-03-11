@@ -139,6 +139,17 @@ class Circle extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function find_circleID_by_name($name){
+    $sql = "SELECT *
+            FROM circle
+            WHERE name = :name";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':name' => $name);
+    $query->execute($params);
+    return $query->fetch();
+  }
+
 }
 
 ?>

@@ -73,7 +73,7 @@ class CircleController
     require APP . 'view/_templates/footer.php';
   }
 
-  public function new()
+  public function new_circle()
   {
     if (isset($_GET['name'])) {
 
@@ -84,6 +84,8 @@ class CircleController
 
       if ($result) {
         $_SESSION['message'] = 'Circle created!';
+        $name = $model->find_circleID_by_name($circle_name);
+        $addUser = $model->add_circle_member($name->circleID,$this->current_userID);
       } else {
         $_SESSION['message'] = 'Fail to create circle!';
       }

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-    <?php require APP . 'view/circles/new.php'; ?>
+    <?php require APP . 'view/circles/new_circle.php'; ?>
     <?php if ( (count($circlesAdmin) + count($circlesMember))  == 0) { ?>
       <p class="pl-1 pr-1 m-0">Not in any Circle.</p>
     <?php } else { ?>

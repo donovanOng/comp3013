@@ -35,7 +35,7 @@ class PostController
     require APP . 'view/_templates/footer.php';
   }
 
-  public function new()
+  public function new_post()
   {
     if (isset($_POST['submit'])) {
 
