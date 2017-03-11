@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-inline" action="<?= URL ?>circle/new">
+        <form class="form-inline" action="<?php echo URL ?>circle/new">
           <input class="form-control w-75" type="text" name="name" value="" placeholder="Circle Name" required />
           <input class="btn btn-primary w-25" type="submit" name="submit" value="Create" />
         </form>

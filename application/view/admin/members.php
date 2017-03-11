@@ -10,11 +10,11 @@
     <?php foreach ($members as $member) {
     ?>
       <tr>
-        <th scope="row"><?= $member->cFriendsID ?></th>
-        <td><?= $member->circleID ?></td>
-        <td><?= $member->userID ?></td>
+        <th scope="row"><?php echo $member->cFriendsID ?></th>
+        <td><?php echo $member->circleID ?></td>
+        <td><?php echo $member->userID ?></td>
         <td class="text-right">
-          <a href="<?= URL ?>admin/delete_member?cFriendsID=<?= $member->cFriendsID ?>" class="btn-link">Delete</a>
+          <a href="<?php echo URL ?>admin/delete_member?cFriendsID=<?php echo $member->cFriendsID ?>" class="btn-link">Delete</a>
         </td>
       </tr>
     <?php } ?>

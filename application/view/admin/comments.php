@@ -10,15 +10,15 @@
   <tbody>
     <?php foreach ($comments as $comment) { ?>
       <tr>
-        <th scope="row"><?= $comment->commentID ?></th>
-        <td>User <?= $comment->userID ?></td>
-        <td>Photo <?= $comment->photoID ?></td>
-        <td><?= $comment->content ?></td>
+        <th scope="row"><?php echo $comment->commentID ?></th>
+        <td>User <?php echo $comment->userID ?></td>
+        <td>Photo <?php echo $comment->photoID ?></td>
+        <td><?php echo $comment->content ?></td>
         <td class="text-right">
-          <button type="button" class="btn-link" data-toggle="modal" data-target="#editComment<?= $comment->commentID ?>">
+          <button type="button" class="btn-link" data-toggle="modal" data-target="#editComment<?php echo $comment->commentID ?>">
             Edit
           </button>
-          <a href="<?= URL ?>admin/delete_comment?commentID=<?= $comment->commentID ?>" class="btn-link">Delete</a>
+          <a href="<?php echo URL ?>admin/delete_comment?commentID=<?php echo $comment->commentID ?>" class="btn-link">Delete</a>
         </td>
       </tr>
       <?php require APP . 'view/admin/edit_comment.php'; ?>

@@ -1,4 +1,4 @@
-<? if ($this->current_userID == $collection->userID) { ?>
+<?php if ($this->current_userID == $collection->userID) { ?>
 <!-- Only collection's owner can edit rights -->
   <div class="modal fade" id="editSettings">
     <div class="modal-dialog" role="document">
@@ -10,37 +10,37 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="text-left" action="<?= URL ?>collection/update" method="POST">
+          <form class="text-left" action="<?php echo URL ?>collection/update" method="POST">
             <div class="form-group">
               <label for="accessRights">Access Rights:</label>
               <select class="form-control" name="accessRights" id="accessRights">
-                <? foreach($privacy as $key=>$privacy_type) { ?>
-                    <? if ($key == $collection->accessRights) { ?>
-                      <option selected value="<?= $key ?>"><?= $privacy_type ?></option>
-                    <? } else { ?>
-                      <option value="<?= $key ?>"><?= $privacy_type ?></option>
-                    <? } ?>
-                <? } ?>
+                <?php foreach($privacy as $key=>$privacy_type) { ?>
+                    <?php if ($key == $collection->accessRights) { ?>
+                      <option selected value="<?php echo $key ?>"><?php echo $privacy_type ?></option>
+                    <?php } else { ?>
+                      <option value="<?php echo $key ?>"><?php echo $privacy_type ?></option>
+                    <?php } ?>
+                <?php } ?>
               </select>
             </div>
 
-            <? if ($collection->accessRights != 2) { ?>
+            <?php if ($collection->accessRights != 2) { ?>
               <p class="mb-1">Circles:</p>
-              <? foreach($all_user_circles as $circle) { ?>
+              <?php foreach($all_user_circles as $circle) { ?>
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="accessCircles[]" value="<?= $circle->circleID ?>" <? if(in_array_field($circle->circleID, 'circleID', $current_access_circles)){ ?> checked <? } ?>>
-                    <?= $circle->name ?>
+                    <input class="form-check-input" type="checkbox" name="accessCircles[]" value="<?php echo $circle->circleID ?>" <?php if(in_array_field($circle->circleID, 'circleID', $current_access_circles)){ ?> checked <?php } ?>>
+                    <?php echo $circle->name ?>
                   </label>
                 </div>
-              <? } ?>
-            <? } ?>
+              <?php } ?>
+            <?php } ?>
 
-            <input type="hidden" name="collectionID" value="<?= $collection->collectionID ?>" >
+            <input type="hidden" name="collectionID" value="<?php echo $collection->collectionID ?>" >
             <input class="mt-2 btn btn-primary" type="submit" name="update" value="Update" />
           </form>
         </div>
       </div>
     </div>
   </div>
-<? } ?>
+<?php } ?>

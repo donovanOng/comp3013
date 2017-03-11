@@ -4,47 +4,47 @@
   <ul class="nav nav-tabs" id="adminTabs" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#users" role="tab">
-        Users <span class="text-muted"><?= count($users) ?></span>
+        Users <span class="text-muted"><?php echo count($users) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#profiles" role="tab">
-        Profiles <span class="text-muted"><?= count($profiles) ?></span>
+        Profiles <span class="text-muted"><?php echo count($profiles) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#posts" role="tab">
-        Posts <span class="text-muted"><?= count($posts) ?></span>
+        Posts <span class="text-muted"><?php echo count($posts) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#circles" role="tab">
-        Circles <span class="text-muted"><?= count($circles) ?></span>
+        Circles <span class="text-muted"><?php echo count($circles) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#members" role="tab">
-        Members <span class="text-muted"><?= count($members) ?></span>
+        Members <span class="text-muted"><?php echo count($members) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#messages" role="tab">
-        Messages <span class="text-muted"><?= count($messages) ?></span>
+        Messages <span class="text-muted"><?php echo count($messages) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#collections" role="tab">
-        Photo Collections <span class="text-muted"><?= count($collections) ?></span>
+        Photo Collections <span class="text-muted"><?php echo count($collections) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#photos" role="tab">
-        Photos <span class="text-muted"><?= count($photos) ?></span>
+        Photos <span class="text-muted"><?php echo count($photos) ?></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#comments" role="tab">
-        Comments <span class="text-muted"><?= count($comments) ?></span>
+        Comments <span class="text-muted"><?php echo count($comments) ?></span>
       </a>
     </li>
   </ul>

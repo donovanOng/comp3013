@@ -3,28 +3,28 @@
   <div class="card">
     <div class="card-block">
 
-      <h4 class="card-title mb-0"><?= $post->title ?></h4>
+      <h4 class="card-title mb-0"><?php echo $post->title ?></h4>
 
       <div class="mb-3">
         <span class="text-muted small">
-          <a href="<?= URL . $post->userID ?>"><?= user_name($post->userID) ?></a> /
-          <a href="<?= URL . 'blog/' . $post->blogID ?>"><?= $post->name ?></a>
+          <a href="<?php echo URL . $post->userID ?>"><?php echo user_name($post->userID) ?></a> /
+          <a href="<?php echo URL . 'blog/' . $post->blogID ?>"><?php echo $post->name ?></a>
           <strong><span class="align-top">.</span></strong>
-          <?= $post->CREATED_AT ?>
+          <?php echo $post->CREATED_AT ?>
         </span>
       </div>
 
-      <p class="card-text"><?= $post->body ?></p>
+      <p class="card-text"><?php echo $post->body ?></p>
 
-      <? if ($post->userID == $this->current_userID) { ?>
+      <?php if ($post->userID == $this->current_userID) { ?>
         <div class="bg-faded p-2">
             <a href="#" class="card-link">Edit</a>
-            <a class="card-link text-danger" href="<?= URL . "post/delete?blogID="  . $post->blogID  . '&postID=' . $post->postID ?>">
+            <a class="card-link text-danger" href="<?php echo URL . "post/delete?blogID="  . $post->blogID  . '&postID=' . $post->postID ?>">
               Delete
             </a>
         </div>
-      <? } ?>
-      
+      <?php } ?>
+
     </div>
   </div>
   </div>

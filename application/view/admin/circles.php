@@ -9,14 +9,14 @@
   <tbody>
     <?php foreach ($circles as $circle) { ?>
       <tr>
-        <th scope="row"><?= $circle->circleID ?></th>
-        <td>User <?= $circle->userID ?></td>
-        <td><?= $circle->name ?></td>
+        <th scope="row"><?php echo $circle->circleID ?></th>
+        <td>User <?php echo $circle->userID ?></td>
+        <td><?php echo $circle->name ?></td>
         <td class="text-right">
-          <button type="button" class="btn-link" data-toggle="modal" data-target="#editCircle<?= $circle->circleID ?>">
+          <button type="button" class="btn-link" data-toggle="modal" data-target="#editCircle<?php echo $circle->circleID ?>">
             Edit
           </button>
-          <a href="<?= URL ?>admin/delete_circle?circleID=<?= $circle->circleID ?>" class="btn-link">Delete</a>
+          <a href="<?php echo URL ?>admin/delete_circle?circleID=<?php echo $circle->circleID ?>" class="btn-link">Delete</a>
         </td>
       </tr>
       <?php require APP . 'view/admin/edit_circle.php'; ?>

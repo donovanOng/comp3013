@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="<?= URL ?>user/new_profile" method="POST">
+      <form action="<?php echo URL ?>user/new_profile" method="POST">
         <div class="form-group">
           <textarea class="form-control" type="text" name="about" rows="4" cols="40" placeholder="Tell us more about yourself!" required></textarea>
         </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
           <input class="form-control" type="text" name="workplace" value="" placeholder="Workplace" required />
         </div>
-        <input type="hidden" name="userID" value="<?= $user->userID ?>" />
+        <input type="hidden" name="userID" value="<?php echo $user->userID ?>" />
         <input class="btn btn-primary" type="submit" name="submit" value="Update" />
       </form>
       </div>

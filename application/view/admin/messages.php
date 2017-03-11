@@ -10,15 +10,15 @@
   <tbody>
     <?php foreach ($messages as $message) { ?>
       <tr>
-        <th scope="row"><?= $message->messageID ?></th>
-        <td>Circle <?= $message->circleID ?></td>
-        <td>User <?= $message->userID ?></td>
-        <td><?= $message->content ?></td>
+        <th scope="row"><?php echo $message->messageID ?></th>
+        <td>Circle <?php echo $message->circleID ?></td>
+        <td>User <?php echo $message->userID ?></td>
+        <td><?php echo $message->content ?></td>
         <td class="text-right">
-          <button type="button" class="btn-link" data-toggle="modal" data-target="#editMessage<?= $message->messageID ?>">
+          <button type="button" class="btn-link" data-toggle="modal" data-target="#editMessage<?php echo $message->messageID ?>">
             Edit
           </button>
-          <a href="<?= URL ?>admin/delete_message?messageID=<?= $message->messageID ?>" class="btn-link">Delete</a>
+          <a href="<?php echo URL ?>admin/delete_message?messageID=<?php echo $message->messageID ?>" class="btn-link">Delete</a>
         </td>
       </tr>
       <?php require APP . 'view/admin/edit_message.php'; ?>

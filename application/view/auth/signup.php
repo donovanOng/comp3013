@@ -4,7 +4,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-5 bg-faded rounded" style="padding: 32px 64px;">
-    <form action="<?= URL; ?>signup" method="POST">
+    <form action="<?php echo URL; ?>signup" method="POST">
       <div class="form-group">
         <label for="first_name">First Name</label>
         <input type="text" class="form-control" name="first_name" value="" required />
