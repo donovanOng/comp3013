@@ -7,7 +7,7 @@ class Post extends Model
 
   public function posts_feed($userID)
   {
-    $sql = "SELECT p.*, u.userID
+    $sql = "SELECT p.*, b.*, u.userID
             FROM post p
             JOIN blog b
                 ON b.blogID = p.blogID
@@ -68,8 +68,10 @@ class Post extends Model
   public function find_by_id($postID)
   {
     $sql = "SELECT *
-            FROM post
-            WHERE postID = :postID";
+            FROM post p
+            JOIN blog b
+              ON b.blogID = p.blogID
+            WHERE p.postID = :postID";
 
     $query = $this->db->prepare($sql);
     $params = array(':postID' => $postID);
