@@ -39,8 +39,6 @@ class PostController
   {
     if (isset($_POST['submit'])) {
 
-      // TODO: check if current_userID is the owner of blogID
-
       $blogID = $_POST['blogID'];
       $title = $_POST['title'];
       $body = $_POST['body'];
@@ -55,13 +53,35 @@ class PostController
       } else {
         $_SESSION['message'] = 'Fail to create post';
       }
-
       Redirect(URL . 'blog/' . $blogID);
 
     } else {
       Redirect(URL);
     }
+  }
 
+  public function update()
+  {
+    if (isset($_POST['update'])) {
+      $postID = $_POST['postID'];
+      $title = $_POST['title'];
+      $body = $_POST['body'];
+
+      $model = new Post();
+      $result = $model->update($postID,
+                               $title,
+                               $body);
+
+      if ($result) {
+        $_SESSION['message'] = 'Post updated successfully';
+      } else {
+        $_SESSION['message'] = 'Fail to updated post';
+      }
+      Redirect(URL . 'post/' . $postID);
+
+    } else {
+      Redirect(URL);
+    }
   }
 
   public function delete()
@@ -69,8 +89,7 @@ class PostController
     if (isset($_GET['postID']) && strlen($_GET['postID']) > 0 ) {
 
       $postID = $_GET['postID'];
-
-      // TODO: check if current_userID is the owner of postID
+      $blogID = $_GET['blogID'];
 
       $model = new Post();
       $result = $model->delete($postID);
@@ -80,9 +99,7 @@ class PostController
       } else {
         $_SESSION['message'] = 'Fail to delete post!';
       }
-
-      Redirect(URL);
-
+      Redirect(URL . 'blog/' . $blogID);
 
     } else {
       $_SESSION['message'] = 'No post ID';

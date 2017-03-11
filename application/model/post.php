@@ -92,6 +92,23 @@ class Post extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function update($postID, $title, $body)
+  {
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "UPDATE post
+            SET title = :title,
+                body = :body,
+                UPDATED_AT = '$timestamp'
+            WHERE postID = :postID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':title' => $title,
+                    ':body' => $body,
+                    ':postID' => $postID);
+    return $query->execute($params); // boolean result
+  }
+
+
   public function delete($postID)
   {
     $sql = "DELETE FROM post

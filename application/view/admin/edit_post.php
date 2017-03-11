@@ -10,7 +10,7 @@
       <div class="modal-body text-right">
         <form action="<?php echo URL; ?>admin/update_post" method="POST">
           <div class="form-group">
-            <input class="form-control" type="text" name="title" value="<?php echo $post->title ?>" placeholder="Circle Name" required />
+            <input class="form-control" type="text" name="title" value="<?php echo $post->title ?>" placeholder="Title" required />
           </div>
           <textarea class="form-control mb-2" type="text" name="body" value="" rows="4" cols="50" required ><?php echo $post->body ?></textarea>
           <input type="hidden" name="postID" value="<?php echo $post->postID ?>" />

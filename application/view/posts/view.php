@@ -18,10 +18,13 @@
 
       <?php if ($post->userID == $this->current_userID) { ?>
         <div class="bg-faded p-2">
-            <a href="#" class="card-link">Edit</a>
-            <a class="card-link text-danger" href="<?php echo URL . "post/delete?blogID="  . $post->blogID  . '&postID=' . $post->postID ?>">
-              Delete
-            </a>
+          <button type="button" class="btn-link mr-2" data-toggle="modal" data-target="#editPost">
+            Edit
+          </button>
+          <?php require APP . 'view/posts/edit_post.php'; ?>
+          <a class="card-link text-danger" href="<?php echo URL . "post/delete?blogID="  . $post->blogID  . '&postID=' . $post->postID ?>">
+            Delete
+          </a>
         </div>
       <?php } ?>
 
