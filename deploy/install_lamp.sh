@@ -25,8 +25,8 @@ cp /var/www/comp3013/deploy/000-default.conf /etc/apache2/sites-enabled/
 # Enable URL rewrite
 cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 
-mysql -h localhost -u root < /var/www/comp3013/script/create.sql
-mysql -h localhost -u root < /var/www/comp3013/script/insert.sql
+mysql -h localhost -u root -p $dbpass < /var/www/comp3013/script/create.sql
+mysql -h localhost -u root -p $dbpass < /var/www/comp3013/script/insert.sql
 
 export MYSQL_PASS=$dbpass
 
