@@ -25,10 +25,6 @@ sudo cp /var/www/comp3013/deploy/000-default.conf /etc/apache2/sites-enabled/
 # Enable URL rewrite
 sudo cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 
-sudo ysql -h localhost -u root -p $dbpass < /var/www/comp3013/script/create.sql
-sudo mysql -h localhost -u root -p $dbpass < /var/www/comp3013/script/insert.sql
-
-export MYSQL_PASS=$dbpass
 
 # restart Apache
 sudo apachectl restart
