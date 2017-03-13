@@ -32,7 +32,7 @@
                 </p>
                 <a href="<?php echo URL; ?>circle/<?php echo $circle->circleID ?>" class="card-link">View Circle</a>
                 <?php if ($this->current_userID == $circle->userID) { ?>
-                  <a href="<?php echo URL; ?>circle/delete?circleID=<?php echo $circle->circleID?>" class="card-link">Delete</a>
+                  <a href="<?php echo URL; ?>circle/delete?circleID=<?php echo $circle->circleID ?>" class="card-link">Delete</a>
                 <?php } ?>
               </div>
             </div>
