@@ -1,2 +1,4 @@
 /public/uploads/*
 .DS_STORE
+
+/deploy/azuredeploy.parameters.json
