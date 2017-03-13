@@ -2,24 +2,11 @@
 sudo apt-add-repository -y ppa:ondrej/php
 sudo apt-get -y update
 
-# set up a silent install of MySQL
-dbpass=$1
-
 # install the LAMP stack
 sudo apt-get -y install apache2 mysql-server php7.0 php7.0-mysql
 
 # write some PHP
 echo \<\?php phpinfo\(\)\; \?\> >> /var/www/html/phpinfo.php
-
-sudo apt-get -y install git
-
-sudo git clone https://github.com/donovanOng/comp3013.git /var/www/comp3013/
-
-# Point to project folder
-sudo cp /var/www/comp3013/deploy/000-default.conf /etc/apache2/sites-enabled/
-
-# Enable URL rewrite
-sudo cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 
 # restart Apache
 sudo apachectl restart
