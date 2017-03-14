@@ -5,6 +5,10 @@ require_once APP . 'model/friend.php';
 require_once APP . 'model/photo.php';
 require_once APP . 'model/collection.php';
 
+if (ENVIRONMENT == 'prod') {
+  require_once APP . 'libs/azure_upload.php';
+}
+
 class PhotoController
 {
 
@@ -89,29 +93,38 @@ class PhotoController
 
   private function upload_photo($collectionID, $uploadFile)
   {
-    $targetDirectory = "uploads/users/" . $this->current_userID . '/';
-    // create user's directory if it does not exist
-    if (!file_exists($targetDirectory)) {
-        mkdir($targetDirectory, 0777, true);
-    }
+    $model = new Photo();
+    $last_photoID = $model->get_last_photoID()->photoID;
+    $save_filename = $this->current_userID . '_' . ($last_photoID + 1) . '.jpg';
 
-    // TODO validate file format, size
-    // TODO rename file if already exits
+    if (ENVIRONMENT != 'prod') {
+      $targetDirectory = "uploads/users/" . $this->current_userID . '/';
+      // create user's directory if it does not exist
+      if (!file_exists($targetDirectory)) {
+          mkdir($targetDirectory, 0777, true);
+      }
 
-    $targetFile = $targetDirectory . basename($uploadFile["name"]);
-    $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
+      // TODO validate file format, size
 
-    if ($uploadResult) {
-      $model = new Photo();
-      $result = $model->create($this->current_userID,
-                              $collectionID,
-                              $targetFile);
-
-      if (!$result) { unlink($targetFile); }
-      return $result;
+      $targetFile = $targetDirectory . $save_filename;
+      $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
+      if ($uploadResult) {
+        $result = $model->create($this->current_userID, $collectionID, URL . $targetFile);
+        if (!$result) { unlink($targetFile); }
+        return $result;
+      } else {
+        return FALSE;
+      }
 
     } else {
-      return FALSE;
+      // Upload to Azure Blob Storage
+      $uploadResult = upload_to_azure($uploadFile, $save_filename);
+      if (!$uploadResult) {
+        return FALSE;
+      } else {
+        $result = $model->create($this->current_userID, $collectionID, $uploadResult);
+        return $result;
+      }
     }
   }
 

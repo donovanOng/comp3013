@@ -29,17 +29,16 @@ class Photo extends Model
     return $query->fetch();
   }
 
-
-  public function find_photo_comments($photoID)
+  public function get_last_photoID()
   {
-    $sql = "SELECT *
-            FROM comment
-            WHERE photoID = :photoID";
+    $sql = "SELECT photoID
+            FROM photo
+            ORDER BY photoID DESC
+            LIMIT 1";
 
     $query = $this->db->prepare($sql);
-    $params = array(':photoID' => $photoID);
-    $query->execute($params);
-    return $query->fetchAll();
+    $query->execute();
+    return $query->fetch();
   }
 
 
@@ -55,6 +54,20 @@ class Photo extends Model
                     ':path' => $path);
     return $query->execute($params); // boolean result
   }
+
+
+  public function find_photo_comments($photoID)
+  {
+    $sql = "SELECT *
+            FROM comment
+            WHERE photoID = :photoID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':photoID' => $photoID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
 
   public function get_annotations($photoID)
   {

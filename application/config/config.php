@@ -3,7 +3,7 @@
 if (strpos($_SERVER['HTTP_HOST'],'localhost') !== false) {
   define('ENVIRONMENT', 'dev');
 } else {
-  define('ENVIRONMENT', $_SERVER['HTTP_HOST'] );
+  define('ENVIRONMENT', 'prod' );
 }
 
 error_reporting(E_ALL);
@@ -24,8 +24,11 @@ if (getenv('MYSQL_PASS')) {
 } else {
   define('DB_PASS', 'root');
 }
-
 //define('DB_PASS', 'COMP3013');
 define('DB_CHARSET', 'utf8');
+
+define('AZURE_ACCOUNT_NAME', '3013grp8');
+define('AZURE_ACCOUNT_KEY', 'hwysA6BT0j07FzdY9bBIo4yz9V4tuKpwCao8KTsxpzW74pMU+c5bAbTsOH1EivJJGBfYQOMVqzdShLTG32ZDgA==');
+define('AZURE_CONTAINER', 'grp8uploads');
 
 ?>
