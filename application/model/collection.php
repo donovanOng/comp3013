@@ -6,10 +6,15 @@ class Collection extends Model
 {
   public function find_user_collection($userID)
   {
-    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(*) noOfPhotos, p.path coverPhoto
-            FROM photoCollection pc 
-            INNER JOIN photo p 
-                  ON pc.collectionID = p.collectionID
+    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(p.path) noOfPhotos, p.path coverPhoto
+            FROM photoCollection pc
+            LEFT JOIN
+              (
+                SELECT *
+                FROM photo
+                ORDER BY CREATED_AT DESC
+              ) AS p
+              ON pc.collectionID = p.collectionID
             WHERE pc.userID = :userID
             GROUP BY pc.collectionID";
 
@@ -23,7 +28,7 @@ class Collection extends Model
   {
     $sql = "SELECT a.collectionID, a.accessRights, a.userID, count(*) noOfPhotos
             FROM photoCollection a
-            INNER JOIN photo p
+            LEFT JOIN photo p
                   ON a.collectionID = p.collectionID
             WHERE a.collectionID = :collectionID
             GROUP BY a.collectionID";
