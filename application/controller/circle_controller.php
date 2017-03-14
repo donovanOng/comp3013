@@ -22,7 +22,7 @@ class CircleController
     $user = $model->find_by_id($circle_userID);
 
     if (can_access_user($this->current_userID, $circle_userID) == false) {
-      $_SESSION['message'] = 'You dont have rights to view circles of user ' . $user->userID;
+      $_SESSION['message'] = 'You dont have rights to view circles of ' . user_name($user->userID);
       Redirect(URL);
     }
 
@@ -83,11 +83,11 @@ class CircleController
                                $this->current_userID);
 
       if ($result) {
-        $_SESSION['message'] = 'Circle created!';
+        $_SESSION['message'] = 'Circle created successfully';
         $name = $model->find_circleID_by_name($circle_name);
         $addUser = $model->add_circle_member($name->circleID,$this->current_userID);
       } else {
-        $_SESSION['message'] = 'Fail to create circle!';
+        $_SESSION['message'] = 'Fail to create circle';
       }
     }
 
@@ -107,9 +107,9 @@ class CircleController
                                     $this->current_userID);
 
       if ($result) {
-        $_SESSION['message'] = 'Circle name updated!';
+        $_SESSION['message'] = 'Circle name updated successfully';
       } else {
-        $_SESSION['message'] = 'Fail to update circle name!';
+        $_SESSION['message'] = 'Fail to update circle name';
       }
 
       Redirect(URL . 'circle/' . $circleID);
@@ -132,7 +132,7 @@ class CircleController
                                           $userID);
 
       if ($result) {
-        $_SESSION['message'] = user_name($userID) . ' added!';
+        $_SESSION['message'] = user_name($userID) . ' added to circle';
       } else {
         $_SESSION['message'] = 'Fail to add ' . user_name($userID);
       }
@@ -154,7 +154,7 @@ class CircleController
       $result = $model->remove_circle_member($circleID, $userID);
 
       if ($result) {
-        $_SESSION['message'] = user_name($userID) . ' removed!';
+        $_SESSION['message'] = user_name($userID) . ' removed from circle';
       } else {
         $_SESSION['message'] = 'Fail to remove ' . user_name($userID);
       }
@@ -197,9 +197,9 @@ class CircleController
         $result = $model->delete($circleID, $this->current_userID);
 
         if ($result) {
-          $_SESSION['message'] = 'Circle deleted!';
+          $_SESSION['message'] = 'Circle deleted successfully';
         } else {
-          $_SESSION['message'] = 'Fail to delete circle!';
+          $_SESSION['message'] = 'Fail to delete circle';
         }
 
         Redirect(URL . 'circle');

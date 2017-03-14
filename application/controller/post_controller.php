@@ -15,18 +15,17 @@ class PostController
 
   public function user_index($post_userID)
   {
-    $_SESSION['message'] = URL . 'post does not exist.';
+    $_SESSION['message'] = URL . 'post does not exist';
     Redirect(URL);
   }
 
   public function view($postID)
   {
-    // display photos from single collection
     $model = new Post();
     $post = $model->find_by_id($postID);
 
     if (!$post) {
-      $_SESSION['message'] = 'Post ' . $postID . ' does not exist.';
+      $_SESSION['message'] = 'Post ' . $postID . ' does not exist';
       Redirect(URL);
     }
 
@@ -95,9 +94,9 @@ class PostController
       $result = $model->delete($postID);
 
       if ($result) {
-        $_SESSION['message'] = 'Post deleted!';
+        $_SESSION['message'] = 'Post deleted successfully';
       } else {
-        $_SESSION['message'] = 'Fail to delete post!';
+        $_SESSION['message'] = 'Fail to delete post successfully';
       }
       Redirect(URL . 'blog/' . $blogID);
 

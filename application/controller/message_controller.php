@@ -15,7 +15,7 @@ class MessageController
 
   public function user_index($message_userID)
   {
-    $_SESSION['message'] = URL . 'message does not exist.';
+    $_SESSION['message'] = URL . 'message does not exist';
     Redirect(URL);
   }
 
@@ -40,7 +40,6 @@ class MessageController
       }
 
     } else {
-      $_SESSION['message'] = 'Missing required POST header';
       Redirect(URL);
     }
   }

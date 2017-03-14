@@ -17,7 +17,7 @@ class AuthController
   {
     if (isset($this->current_user)) {
 
-      $_SESSION['message'] = 'Already logged in!';
+      $_SESSION['message'] = 'Already logged in';
       Redirect(URL);
 
     } elseif (isset($_POST["login"])) {
@@ -59,7 +59,7 @@ class AuthController
   {
     if (isset($this->current_user)) {
 
-      $_SESSION['message'] = 'Already logged in!';
+      $_SESSION['message'] = 'Already logged in';
       Redirect(URL);
 
     } elseif (isset($_POST["signup"])) {

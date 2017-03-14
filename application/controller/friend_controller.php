@@ -20,7 +20,7 @@ class FriendController
     $user = $model->find_by_id($friend_userID);
 
     if (can_access_user($this->current_userID, $friend_userID) == false) {
-      $_SESSION['message'] = 'You dont have rights to view friends of user ' . $user->userID;
+      $_SESSION['message'] = 'You dont have rights to view friends of ' . user_name($user->userID);
       Redirect(URL);
     }
 

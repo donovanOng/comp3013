@@ -44,7 +44,7 @@ class CollectionController
     $collection = $model->find_by_id($collectionID);
 
     if (!$collection) {
-      $_SESSION['message'] = 'Collection ' . $collectionID . ' does not exist.';
+      $_SESSION['message'] = 'Collection ' . $collectionID . ' does not exist';
       Redirect(URL);
     }
 
@@ -64,8 +64,6 @@ class CollectionController
         $access_by_relationship = $modelFriends->find_friends_of_friends($collection->userID);
       }
       $access_by_circle = $model->find_circle_members_access($collectionID);
-
-
 
       if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) &&
           !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
@@ -90,9 +88,9 @@ class CollectionController
     $result = $model->create($this->current_userID);
 
     if ($result) {
-      $_SESSION['message'] = 'Collection created!';
+      $_SESSION['message'] = 'Collection created successfully';
     } else {
-      $_SESSION['message'] = 'Fail to create collection!';
+      $_SESSION['message'] = 'Fail to create collection';
     }
 
     Redirect(URL . 'collection');
@@ -134,15 +132,14 @@ class CollectionController
 
 
       if (!in_array(0, $error)) {
-        $_SESSION['message'] = 'Collection updated!';
+        $_SESSION['message'] = 'Collection updated successfully';
       } else {
-        $_SESSION['message'] = 'Fail to update collection!';
+        $_SESSION['message'] = 'Fail to update collection';
       }
 
       Redirect(URL . "collection/" . $collectionID);
 
     } else {
-      $_SESSION['message'] = 'Missing required POST header';
       Redirect(URL . 'collection');
     }
   }
@@ -157,9 +154,9 @@ class CollectionController
                                  $this->current_userID);
 
         if ($result) {
-          $_SESSION['message'] = 'Collection deleted!';
+          $_SESSION['message'] = 'Collection deleted successfully';
         } else {
-          $_SESSION['message'] = 'Fail to delete collection!';
+          $_SESSION['message'] = 'Fail to delete collection';
         }
 
         // TODO: Remove image files in public directory

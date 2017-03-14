@@ -26,7 +26,7 @@ class PhotoController
     $user = $model->find_by_id($photo_userID);
 
     if (can_access_user($this->current_userID, $photo_userID) == false) {
-      $_SESSION['message'] = 'You dont have rights to view photos of user ' . $user->userID;
+      $_SESSION['message'] = 'You dont have rights to view photos of ' . user_name($user->userID);
       Redirect(URL);
     }
 
@@ -49,7 +49,7 @@ class PhotoController
     $photo = $model->find_by_id($photoID);
 
     if (!$photo) {
-      $_SESSION['message'] = 'Photo ' . $photoID . ' does not exist.';
+      $_SESSION['message'] = 'Photo ' . $photoID . ' does not exist';
       Redirect(URL);
     }
 
@@ -141,14 +141,12 @@ class PhotoController
                                        $userID);
       if ($result) {
         $_SESSION['message'] = 'Annotation added successfully';
-        Redirect(URL . 'photo/' . $photoID);
       } else {
         $_SESSION['message'] = 'Fail to add Annotation';
-        Redirect(URL . 'photo/' . $photoID);
       }
+      Redirect(URL . 'photo/' . $photoID);
 
     } else {
-      $_SESSION['message'] = 'Missing required POST header';
       Redirect(URL);
     }
   }
@@ -163,17 +161,15 @@ class PhotoController
       // insert into database
       $model = new Photo();
       $result = $model->delete_annotation($photoID,
-                                       $userID);
+                                          $userID);
       if ($result) {
         $_SESSION['message'] = 'Annotation deleted successfully';
-        Redirect(URL . 'photo/' . $photoID);
       } else {
         $_SESSION['message'] = 'Fail to delete Annotation';
-        Redirect(URL . 'photo/' . $photoID);
       }
+      Redirect(URL . 'photo/' . $photoID);
 
     } else {
-      $_SESSION['message'] = 'Missing required POST header';
       Redirect(URL);
     }
   }

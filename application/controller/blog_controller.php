@@ -15,7 +15,7 @@ class BlogController
 
   public function user_index($blog_userID)
   {
-    $_SESSION['message'] = URL . 'blog does not exist.';
+    $_SESSION['message'] = URL . 'blog does not exist';
     Redirect(URL);
   }
 
@@ -25,7 +25,7 @@ class BlogController
     $blog = $model->find_by_id($blogID);
 
     if (!$blog) {
-      $_SESSION['message'] = 'Blog ' . $blogID . ' does not exist.';
+      $_SESSION['message'] = 'Blog ' . $blogID . ' does not exist';
       Redirect(URL);
     }
 

@@ -15,7 +15,7 @@ class CommentController
 
   public function user_index($comment_userID)
   {
-    $_SESSION['message'] = URL . 'comment does not exist.';
+    $_SESSION['message'] = URL . 'comment does not exist';
     Redirect(URL);
   }
 
@@ -40,7 +40,6 @@ class CommentController
       }
 
     } else {
-      $_SESSION['message'] = 'Missing required POST header';
       Redirect(URL);
     }
   }
