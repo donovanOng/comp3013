@@ -84,7 +84,6 @@ class User extends Model
     return $query->fetch();
   }
 
-
   public function create($first_name, $last_name, $email, $password)
   {
     $timestamp = date("Y-m-d H:i:s");
@@ -104,6 +103,7 @@ class User extends Model
     $sql = "SELECT *
             FROM profile
             WHERE (userID = :userID)";
+            
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);

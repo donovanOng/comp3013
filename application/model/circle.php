@@ -23,12 +23,12 @@ class Circle extends Model
     $sql = "SELECT c.*
             FROM circle as c, circleFriends as cf
             WHERE cf.userID = :userID
-            AND cf.circleID = c.circleID
-            AND c.circleID NOT IN (
-              SELECT circleID
-              FROM circle
-              WHERE userID = :userID
-            )";
+              AND cf.circleID = c.circleID
+              AND c.circleID NOT IN (
+                SELECT circleID
+                FROM circle
+                WHERE userID = :userID
+              )";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
@@ -66,14 +66,11 @@ class Circle extends Model
             FROM circleFriends
             WHERE circleID = :circleID";
 
-    // TODO: Join user and blog to get detailed information
-
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID);
     $query->execute($params);
     return $query->fetchAll();
   }
-
 
   public function create($name, $userID)
   {
@@ -91,7 +88,7 @@ class Circle extends Model
   {
     $sql = "DELETE FROM circle
             WHERE circleID = :circleID
-            AND userID = :userID";
+              AND userID = :userID";
 
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID,
@@ -106,7 +103,7 @@ class Circle extends Model
             SET name = :name,
                 UPDATED_AT = '$timestamp'
             WHERE circleID = :circleID
-            AND userID = :userID ";
+              AND userID = :userID ";
 
     $query = $this->db->prepare($sql);
     $params = array(':name' => $name,
@@ -131,7 +128,7 @@ class Circle extends Model
   {
     $sql = "DELETE FROM circleFriends
             WHERE circleID = :circleID
-            AND userID = :userID";
+              AND userID = :userID";
 
     $query = $this->db->prepare($sql);
     $params = array(':circleID' => $circleID,
@@ -151,5 +148,4 @@ class Circle extends Model
   }
 
 }
-
 ?>

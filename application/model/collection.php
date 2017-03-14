@@ -9,8 +9,7 @@ class Collection extends Model
     $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(p.path) noOfPhotos, p.path coverPhoto
             FROM photoCollection pc
             LEFT JOIN
-              (
-                SELECT *
+              (SELECT *
                 FROM photo
                 ORDER BY CREATED_AT DESC
               ) AS p
@@ -48,6 +47,7 @@ class Collection extends Model
                 WHEN R.userID_2 = :collection_userID THEN R.userID = U.userID
               END
               AND status = 0";
+
     $query = $this->db->prepare($sql);
     $params = array(':collection_userID' => $collection_userID);
     $query->execute($params);
@@ -58,6 +58,7 @@ class Collection extends Model
     $sql = "SELECT DISTINCT c.userID
             FROM circleFriends AS c, photoCollectionAccessRights AS p
             WHERE c.circleID = p.circleID AND p.collectionID = :collectionID";
+
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
     $query->execute($params);
@@ -143,7 +144,6 @@ class Collection extends Model
     return $query->fetchAll();
   }
 
-
   public function find_colllection_photos($collectionID)
   {
     $sql = "SELECT *
@@ -160,7 +160,9 @@ class Collection extends Model
   {
     $sql = "SELECT DISTINCT c.*
             FROM circle AS c, circleFriends AS cf, photoCollection as pc
-            WHERE cf.circleID = c.circleID AND pc.userID = cf.userID AND cf.userID = :userID";
+            WHERE cf.circleID = c.circleID
+              AND pc.userID = cf.userID
+              AND cf.userID = :userID";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
@@ -194,7 +196,8 @@ class Collection extends Model
   public function delete($collectionID, $userID)
   {
     $sql = "DELETE FROM photoCollection
-            WHERE collectionID = :collectionID AND userID = :userID";
+            WHERE collectionID = :collectionID
+              AND userID = :userID";
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID,
@@ -207,8 +210,9 @@ class Collection extends Model
     $timestamp = date("Y-m-d H:i:s");
     $sql = "UPDATE photoCollection
             SET accessRights = :accessRights,
-            UPDATED_AT = '$timestamp'
-            WHERE userID = :userID AND collectionID = :collectionID";
+                UPDATED_AT = '$timestamp'
+            WHERE userID = :userID
+              AND collectionID = :collectionID";
 
     $query = $this->db->prepare($sql);
     $params = array(':accessRights' => $accessRights,
@@ -232,13 +236,14 @@ class Collection extends Model
   public function delete_access_circles($collectionID, $circleID)
   {
     $sql = "DELETE FROM photoCollectionAccessRights
-            WHERE collectionID=:collectionID AND circleID = :circleID";
+            WHERE collectionID=:collectionID
+              AND circleID = :circleID";
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID,
                     ':circleID' => $circleID);
     return $query->execute($params); // boolean result
   }
-}
 
+}
 ?>

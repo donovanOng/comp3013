@@ -108,7 +108,6 @@ class Post extends Model
     return $query->execute($params); // boolean result
   }
 
-
   public function delete($postID)
   {
     $sql = "DELETE FROM post

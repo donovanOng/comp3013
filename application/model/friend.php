@@ -13,12 +13,12 @@ class Friend extends Model
               SELECT userID
               FROM relationship
               WHERE STATUS = :status
-              AND userID_2 = :userID
+                AND userID_2 = :userID
               UNION
-              SELECT userID_2
-              FROM relationship
-              WHERE STATUS = :status
-              AND userID = :userID
+                SELECT userID_2
+                FROM relationship
+                WHERE STATUS = :status
+                  AND userID = :userID
             )";
 
     $query = $this->db->prepare($sql);
@@ -31,35 +31,46 @@ class Friend extends Model
   public function find_friends_of_friends($userID){
     $sql = "SELECT userID
             FROM relationship
-            WHERE STATUS = 0 AND userID_2 = :userID
+            WHERE STATUS = 0
+              AND userID_2 = :userID
             UNION
-            SELECT userID_2
-            FROM relationship
-            WHERE STATUS = 0 AND userID = :userID
+              SELECT userID_2
+              FROM relationship
+              WHERE STATUS = 0
+                AND userID = :userID
             UNION
-            SELECT userID
-            FROM relationship
-            WHERE userID != :userID AND status = 0 AND userID_2 IN (
-                SELECT userID
-                FROM relationship
-                WHERE STATUS = 0 AND userID_2 = :userID
-                UNION
-                SELECT userID_2
-                FROM relationship
-                WHERE STATUS = 0 AND userID = :userID
-                )
+              SELECT userID
+              FROM relationship
+              WHERE userID != :userID
+                AND status = 0
+                AND userID_2 IN (
+                  SELECT userID
+                  FROM relationship
+                  WHERE STATUS = 0
+                    AND userID_2 = :userID
+                  UNION
+                  SELECT userID_2
+                  FROM relationship
+                  WHERE STATUS = 0
+                    AND userID = :userID
+                  )
             UNION
-            SELECT userID_2
-            FROM relationship
-            WHERE userID_2 != :userID AND STATUS = 0 AND userID IN (
-                SELECT userID
-                FROM relationship
-                WHERE STATUS=0 AND userID_2 = :userID
-                UNION
-                SELECT userID_2
-                FROM relationship
-                WHERE STATUS = 0 AND userID = :userID
-                )";
+              SELECT userID_2
+              FROM relationship
+              WHERE userID_2 != :userID
+                AND STATUS = 0
+                AND userID IN (
+                  SELECT userID
+                  FROM relationship
+                  WHERE STATUS=0
+                    AND userID_2 = :userID
+                  UNION
+                    SELECT userID_2
+                    FROM relationship
+                    WHERE STATUS = 0
+                      AND userID = :userID
+                  )";
+
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);
@@ -192,12 +203,12 @@ class Friend extends Model
   {
     $sql = "SELECT userID
             FROM relationship
-            WHERE relationshipID =  (SELECT relationshipID
-                                     FROM relationship
-                                     WHERE (userID = :userID AND userID_2 = :userID_2)
-                                     OR (userID = :userID_2  AND userID_2 = :userID)
-                                    )
-            ";
+            WHERE relationshipID =
+              (SELECT relationshipID
+               FROM relationship
+               WHERE (userID = :userID AND userID_2 = :userID_2)
+                OR (userID = :userID_2  AND userID_2 = :userID)
+              )";
 
       $query = $this->db->prepare($sql);
       $params = array(':userID' => $userID,
@@ -206,9 +217,7 @@ class Friend extends Model
       return $query->fetch();
   }
 
-
-
-  public function add_friends($userID, $userID_2, $status)
+  public function add_friend($userID, $userID_2, $status)
   {
     $timestamp = date("Y-m-d H:i:s");
     $sql = "INSERT INTO relationship (userID, userID_2, status, CREATED_AT)
@@ -244,21 +253,21 @@ class Friend extends Model
   public function reject_friendship($userID, $userID_2)
   {
     $sql = "DELETE FROM relationship
-            WHERE relationshipID = (SELECT relationshipID
-                                    FROM
-                                      (SELECT relationshipID
-                                      FROM relationship
-                                      WHERE (userID = :userID AND userID_2 = :userID_2)
-                                      OR (userID = :userID_2  AND userID_2 = :userID)
-                                      )a
-                                  )
-          ";
+            WHERE relationshipID =
+              (SELECT relationshipID
+               FROM
+                (SELECT relationshipID
+                FROM relationship
+                WHERE (userID = :userID AND userID_2 = :userID_2)
+                  OR (userID = :userID_2  AND userID_2 = :userID)
+                ) a
+              )";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
                     ':userID_2' => $userID_2);
     return $query->execute($params); // boolean result
   }
-}
 
+}
 ?>

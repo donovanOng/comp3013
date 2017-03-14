@@ -16,7 +16,6 @@ class Photo extends Model
     return $query->fetchAll();
   }
 
-
   public function find_by_id($photoID)
   {
     $sql = "SELECT *
@@ -41,7 +40,6 @@ class Photo extends Model
     return $query->fetch();
   }
 
-
   public function create($userID, $collectionID,  $path)
   {
     $timestamp = date("Y-m-d H:i:s");
@@ -55,7 +53,6 @@ class Photo extends Model
     return $query->execute($params); // boolean result
   }
 
-
   public function find_photo_comments($photoID)
   {
     $sql = "SELECT *
@@ -67,7 +64,6 @@ class Photo extends Model
     $query->execute($params);
     return $query->fetchAll();
   }
-
 
   public function get_annotations($photoID)
   {
@@ -90,7 +86,6 @@ class Photo extends Model
     $query = $this->db->prepare($sql);
     $params = array(':photoID' => $photoID,
                     ':userID' => $userID);
-
     return $query->execute($params); // boolean result
   }
 
@@ -102,9 +97,8 @@ class Photo extends Model
     $query = $this->db->prepare($sql);
     $params = array(':photoID' => $photoID,
                     ':userID' => $userID);
-
     return $query->execute($params); // boolean result
   }
-}
 
+}
 ?>

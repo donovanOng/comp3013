@@ -171,7 +171,7 @@ class UserController
       $userID = $_GET['userID'];
 
       $model = new Friend();
-      $result = $model->add_friends($this->current_userID,
+      $result = $model->add_friend($this->current_userID,
                                     $userID,
                                     1);
       if ($result) {
