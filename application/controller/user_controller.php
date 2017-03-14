@@ -17,7 +17,7 @@ class UserController
 
   public function user_index($post_userID)
   {
-    $_SESSION['message'] = URL . 'user does not exist.';
+    $_SESSION['message'] = URL . 'user does not exist';
     Redirect(URL);
   }
 
@@ -28,7 +28,7 @@ class UserController
     $profile = $model->fetch_profile($userID);
 
     if (can_access_user($this->current_userID, $userID) == false) {
-      $_SESSION['message'] = 'You dont have rights to view profile of user ' . $user->userID;
+      $_SESSION['message'] = 'You dont have rights to view profile of ' . user_name($user->userID);
       Redirect(URL);
     }
 
@@ -73,7 +73,7 @@ class UserController
                                     $workplace);
 
       if ($result) {
-        $_SESSION['message'] = 'Profile is created!';
+        $_SESSION['message'] = 'Profile created successfully';
       } else {
         $_SESSION['message'] = 'Fail to create profile!';
       }
@@ -111,7 +111,7 @@ class UserController
                                        $workplace);
 
       if ($result) {
-        $_SESSION['message'] = 'Profile is updated!';
+        $_SESSION['message'] = 'Profile is updated successfully';
       } else {
         $_SESSION['message'] = 'Fail to update profile';
       }
@@ -143,7 +143,7 @@ class UserController
                                     $userID);
 
       if ($result) {
-        $_SESSION['message'] = 'User account is updated!';
+        $_SESSION['message'] = 'User account updated successfully';
       } else {
         $_SESSION['message'] = 'Fail to update account';
       }
@@ -165,7 +165,7 @@ class UserController
                                     $userID,
                                     1);
       if ($result) {
-        $_SESSION['message'] = 'Friendship request for ' . user_name($userID) . ' sent.';
+        $_SESSION['message'] = 'Friendship request for ' . user_name($userID) . ' sent';
       } else {
         $_SESSION['message'] = 'Fail to send friendship request for ' . user_name($userID);
       }
@@ -174,7 +174,7 @@ class UserController
     }
   }
 
-  public function accept_friendships()
+  public function accept_friendship()
   {
     if (isset($_GET['userID'])) {
       $userID = $_GET['userID'];
@@ -183,16 +183,16 @@ class UserController
       $result = $model->accept_friendship($this->current_userID,
                                           $userID);
       if ($result) {
-        $_SESSION['message'] = 'Friendship request from ' . user_name($userID) . ' accepted.';
+        $_SESSION['message'] = 'Friendship request from ' . user_name($userID) . ' accepted';
       } else {
-        $_SESSION['message'] = 'Accept friendship request from ' . user_name($userID) . ' failed.';
+        $_SESSION['message'] = 'Accept friendship request from ' . user_name($userID) . ' failed';
       }
 
       Redirect(URL . $userID);
     }
   }
 
-  public function reject_friendships()
+  public function reject_friendship()
   {
     if (isset($_GET['userID'])) {
       $userID = $_GET['userID'];
@@ -201,9 +201,9 @@ class UserController
       $result = $model->reject_friendship($this->current_userID,
                                           $userID);
       if ($result) {
-        $_SESSION['message'] = 'Friendship request from ' . user_name($userID) . ' rejected.';
+        $_SESSION['message'] = 'Friendship request from ' . user_name($userID) . ' rejected';
       } else {
-        $_SESSION['message'] = 'Reject friendship request from ' . user_name($userID) . ' failed.';
+        $_SESSION['message'] = 'Reject friendship request from ' . user_name($userID) . ' failed';
       }
 
       Redirect(URL . $userID);

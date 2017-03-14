@@ -34,8 +34,8 @@
           <?php if($initiator->userID == $this->current_userID) { ?>
               <button class="btn btn-secondary">Friend Request sent</button>
           <?php } else { ?>
-              <a class="btn btn-primary" href="<?php echo URL ?>user/accept_friendships?userID=<?php echo $user->userID ?>">Accept Friend Request</a>
-              <a class="btn btn-secondary" href="<?php echo URL ?>user/reject_friendships?userID=<?php echo $user->userID ?>">Reject</a>
+              <a class="btn btn-primary" href="<?php echo URL ?>user/accept_friendship?userID=<?php echo $user->userID ?>">Accept Friend Request</a>
+              <a class="btn btn-secondary" href="<?php echo URL ?>user/reject_friendship?userID=<?php echo $user->userID ?>">Reject</a>
           <?php } ?>
         <?php } ?>
       <?php } else {?>

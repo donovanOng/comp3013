@@ -43,7 +43,7 @@
                 <h6 class="text-muted"><?php echo $friend->email ?></h6>
               </div>
               <div class="col-4 text-right">
-                <a class="btn btn-secondary" href="<?php echo URL ?>user/reject_friendships?userID=<?php echo $friend->userID ?>">Delete Request</a>
+                <a class="btn btn-secondary" href="<?php echo URL ?>user/reject_friendship?userID=<?php echo $friend->userID ?>">Delete Request</a>
               </div>
             </div>
           <?php } ?>
@@ -67,8 +67,8 @@
                 <h6 class="text-muted"><?php echo $friend->email ?></h6>
               </div>
               <div class="col-4 text-right">
-                <a class="btn btn-primary" href="<?php echo URL ?>user/accept_friendships?userID=<?php echo $friend->userID ?>">Accept</a>
-                <a class="btn btn-secondary" href="<?php echo URL ?>user/reject_friendships?userID=<?php echo $friend->userID ?>">Delete Request</a>
+                <a class="btn btn-primary" href="<?php echo URL ?>user/accept_friendship?userID=<?php echo $friend->userID ?>">Accept</a>
+                <a class="btn btn-secondary" href="<?php echo URL ?>user/reject_friendship?userID=<?php echo $friend->userID ?>">Delete Request</a>
               </div>
             </div>
           <?php } ?>
