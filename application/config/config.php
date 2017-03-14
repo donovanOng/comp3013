@@ -1,11 +1,13 @@
 <?php
 
-define('ENVIRONMENT', 'development');
-
-if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
+if (strpos($_SERVER['HTTP_HOST'],'localhost') !== false) {
+  define('ENVIRONMENT', 'dev');
+} else {
+  define('ENVIRONMENT', $_SERVER['HTTP_HOST'] );
 }
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 define('URL_PUBLIC_FOLDER', 'public');
 define('URL_PROTOCOL', '//');
