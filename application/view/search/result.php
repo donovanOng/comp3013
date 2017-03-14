@@ -48,7 +48,7 @@
             <small class="text-muted"><a href="<?php echo URL . $post->userID ?>"><?php echo user_name($post->userID) ?></a>
             <strong><span class="align-top">.</span></strong> <?php echo $post->CREATED_AT ?></small>
           </h6>
-          <p class="card-text"><?php echo $post->body ?></p>
+          <p class="card-text"><?php echo nl2br($post->body) ?></p>
         </div>
       </div>
     <?php } ?>

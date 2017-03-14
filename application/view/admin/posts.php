@@ -14,7 +14,7 @@
         <th scope="row"><?php echo $post->postID ?></th>
         <td><?php echo $post->blogID ?></td>
         <td><?php echo $post->title ?></td>
-        <td><?php echo $post->body ?></td>
+        <td><?php echo nl2br($post->body) ?></td>
         <td class="text-right">
           <button type="button" class="btn-link" data-toggle="modal" data-target="#editPost<?php echo $post->postID ?>">
             Edit
