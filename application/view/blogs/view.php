@@ -2,11 +2,22 @@
   <div class="row">
     <div class="col-8">
   <h6>
-    <span class="text-muted">
-      <i class="fa fa-pencil-square-o mr-1 text-muted" aria-hidden="true"></i>
-      <a href="<?php echo URL . $blog->userID ?>"><?php echo user_name($blog->userID) ?></a>'s Blog:
-    </span>
-      <?php echo $blog->name ?>
+    <div class="row">
+      <div class="col-9 mt-2">
+          <span class="text-muted">
+            <i class="fa fa-pencil-square-o mr-1 text-muted" aria-hidden="true"></i>
+            <a href="<?php echo URL . $blog->userID ?>"><?php echo user_name($blog->userID) ?></a>'s Blog:
+          </span>
+          <?php echo $blog->name ?>
+      </div>
+      <?php if($this->current_userID == $blog->userID) { ?>
+        <div class="col-3">
+          <?php require APP . 'view/blogs/form_edit_blog_name.php'; ?>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editBlogName">
+            Edit Blog Name
+          </button>
+        </div>
+      <?php } ?>
   </h6>
   <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
   <?php if ($this->current_userID == $blog->userID) {?>
