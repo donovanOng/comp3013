@@ -18,7 +18,7 @@
                     <?php echo $post->CREATED_AT ?>
                   </span>
                 </div>
-                <p class="card-text"><?php echo nl2bre($post->body) ?></p>
+                <p class="card-text"><?php echo nl2br($post->body) ?></p>
               </div>
             </div>
           <?php } ?>
