@@ -135,7 +135,7 @@ class UserController
 
       $model = new User();
 
-      if (isset($_POST["password"])) {
+      if (strlen($_POST["password"]) > 0) {
         $password = $_POST["password"];
         $result = $model->update_user_with_pw($first_name,
                                               $last_name,

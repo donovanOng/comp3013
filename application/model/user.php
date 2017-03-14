@@ -103,7 +103,7 @@ class User extends Model
     $sql = "SELECT *
             FROM profile
             WHERE (userID = :userID)";
-            
+
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
     $query->execute($params);
@@ -200,7 +200,6 @@ class User extends Model
     $params = array(':first_name' => $first_name,
                     ':last_name' => $last_name,
                     ':email' => $email,
-                    ':password' => $password,
                     ':privacy' => $privacy,
                     ':userID' => $userID,);
     return $query->execute($params); // boolean result
