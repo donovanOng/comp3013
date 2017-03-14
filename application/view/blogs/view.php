@@ -14,7 +14,9 @@
   <?php } ?>
   <?php require APP . 'view/blogs/search.php' ?>
   <?php if (isset($_GET['q']) && count($blog_posts) == 0) { ?>
-    <p class="mb-3 p-3 bg-warning rounded">Opps! No result for '<?php echo $_GET['q'] ?>'.</p>
+    <p class="mb-3 p-3 bg-faded rounded">
+      <i class="fa fa-question-circle-o mr-1" aria-hidden="true"></i>
+      Opps! No result for '<?php echo $_GET['q'] ?>'.</p>
   <?php } ?>
   <?php if (count($blog_posts) > 0) { ?>
     <?php foreach ($blog_posts as $post) { ?>

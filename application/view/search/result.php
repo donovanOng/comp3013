@@ -3,7 +3,7 @@
     <div class="row" >
       <div class="col-12">
         <h4 class="mb-0">Users</h4>
-        <p class="mb-0">Number of users found: <?php echo count($users) ?></p>
+        <p class="mb-0">Number of user found: <?php echo count($users) ?></p>
       </div>
     </div>
     <?php if (count($users) > 0) { ?>
@@ -31,7 +31,7 @@
   <div class="row" >
     <div class="col-12">
       <h4 class="mb-0">Posts</h4>
-      <p class="mb-0">Number of posts found: <?php echo count($posts) ?></p>
+      <p class="mb-0">Number of post found: <?php echo count($posts) ?></p>
     </div>
   </div>
 

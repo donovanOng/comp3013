@@ -24,7 +24,7 @@
           <?php } ?>
       <?php } else { ?>
         <div class="bg-faded p-3">
-          <i class="fa fa-question-circle-o mr-1" aria-hidden="true"></i> No recent posts to show.
+          <i class="fa fa-question-circle-o mr-2" aria-hidden="true"></i>No recent posts to show.
         </div>
       <?php } ?>
     </div>
