@@ -20,8 +20,9 @@ class Blog extends Model
 
   public function create($userID, $name)
   {
-    $sql = "INSERT INTO blog (userID, name)
-            VALUES (:userID, :name)";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO blog (userID, name, CREATED_AT)
+            VALUES (:userID, :name, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
