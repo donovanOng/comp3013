@@ -1,4 +1,4 @@
-<div class="small p-4">
+<div class="pt-4 small">
   <div class="row">
     <div class="col-2">
       <nav class="nav flex-column">

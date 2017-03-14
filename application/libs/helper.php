@@ -55,4 +55,11 @@ function can_access_user($current_userID, $target_userID)
     return true;
 }
 
+function is_admin($current_userID)
+{
+  require_once APP . 'model/admin.php';
+  $model = new Admin();
+  return $model->is_admin($current_userID);
+}
+
 ?>
