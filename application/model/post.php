@@ -16,15 +16,13 @@ class Post extends Model
             WHERE u.userID IN (
                 SELECT userID
                 FROM relationship
-                WHERE
-                  STATUS = 0
+                WHERE STATUS = 0
                   AND userID_2 = :userID
                 UNION
-                SELECT userID_2
-                FROM relationship
-                WHERE
-                  STATUS = 0
-                  AND userID = :userID)
+                  SELECT userID_2
+                  FROM relationship
+                  WHERE STATUS = 0
+                    AND userID = :userID)
             ORDER BY p.UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
@@ -47,15 +45,13 @@ class Post extends Model
               AND u.userID IN (
                 SELECT userID
                 FROM relationship
-                WHERE
-                  STATUS = 0
+                WHERE STATUS = 0
                   AND userID_2 = :userID
                 UNION
-                SELECT userID_2
-                FROM relationship
-                WHERE
-                  STATUS = 0
-                  AND userID = :userID)
+                  SELECT userID_2
+                  FROM relationship
+                  WHERE STATUS = 0
+                    AND userID = :userID)
             ORDER BY p.UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
@@ -119,5 +115,4 @@ class Post extends Model
   }
 
 }
-
 ?>

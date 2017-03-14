@@ -1,89 +1,39 @@
-<div class="pt-4 pb-5">
+<div class="pt-4 small">
   <h3 class="mb-3">Admin Console</h3>
 
-  <ul class="nav nav-tabs" id="adminTabs" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#users" role="tab">
-        Users <span class="text-muted"><?php echo count($users) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#profiles" role="tab">
-        Profiles <span class="text-muted"><?php echo count($profiles) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#posts" role="tab">
-        Posts <span class="text-muted"><?php echo count($posts) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#circles" role="tab">
-        Circles <span class="text-muted"><?php echo count($circles) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#members" role="tab">
-        Members <span class="text-muted"><?php echo count($members) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#messages" role="tab">
-        Messages <span class="text-muted"><?php echo count($messages) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#collections" role="tab">
-        Photo Collections <span class="text-muted"><?php echo count($collections) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#photos" role="tab">
-        Photos <span class="text-muted"><?php echo count($photos) ?></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#comments" role="tab">
-        Comments <span class="text-muted"><?php echo count($comments) ?></span>
-      </a>
-    </li>
-  </ul>
+  <form class="row m-0 mb-3" action="<?php echo URL . 'admin' ?>" method="GET">
+    <input class="form-control col-11" type="text" name="q" placeholder="Search User" value="<?php if (isset($_GET['q'])) { echo $_GET['q']; } ?>" />
+    <button class="btn btn-primary col-1" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+  </form>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div class="tab-pane active" id="users" role="tabpanel">
-      <?php require APP . 'view/admin/users.php'; ?>
-    </div>
-    <div class="tab-pane" id="profiles" role="tabpanel">
-      <?php require APP . 'view/admin/profiles.php'; ?>
-    </div>
-    <div class="tab-pane" id="posts" role="tabpanel">
-      <?php require APP . 'view/admin/posts.php'; ?>
-    </div>
-    <div class="tab-pane" id="circles" role="tabpanel">
-      <?php require APP . 'view/admin/circles.php'; ?>
-    </div>
-    <div class="tab-pane" id="members" role="tabpanel">
-      <?php require APP . 'view/admin/members.php'; ?>
-    </div>
-    <div class="tab-pane" id="messages" role="tabpanel">
-      <?php require APP . 'view/admin/messages.php'; ?>
-    </div>
-    <div class="tab-pane" id="collections" role="tabpanel">
-      <?php require APP . 'view/admin/collections.php'; ?>
-    </div>
-    <div class="tab-pane" id="photos" role="tabpanel">
-      <?php require APP . 'view/admin/photos.php'; ?>
-    </div>
-    <div class="tab-pane" id="comments" role="tabpanel">
-      <?php require APP . 'view/admin/comments.php'; ?>
-    </div>
-  </div>
+  <?php
+  if ($result != NULL){
+    foreach($tables_data as $table => $table_data) {
+      echo '<table class="mb-5 table table-hover table-bordered table-striped"><thead><tr>';
+      foreach ($table_data[0] as $key => $value) {
+        echo '<th>' . $key . '</th>';
+      }
+      echo '<th width="20px">Action</h>';
+      echo '</tr></thead><tbody>';
 
-  <script>
-    $(function () {
-      $('#adminTabs a:last').tab('show')
-    })
-  </script>
-
+      foreach ($table_data as $row => $column) {
+        echo '<tr>';
+        foreach ($column as $key => $value) {
+          echo '<td>' . $value . '</td>';
+        }
+        echo '<td>
+          <a class="btn-link" href="' . URL . 'admin/user?' .
+          'userID=' . $tables_data['user'][0]->userID .
+          '">View</a>';
+        echo '</tr>';
+      }
+      echo '</tbody></table>';
+    }
+  } else {
+    echo '<div class="bg-faded p-3">' .
+    '<i class="fa fa-question-circle-o mr-2" aria-hidden="true"></i>' .
+    'No user with name that contain \'' . $_GET['q'] . '\' found.'.
+    ' </div>';
+  }
+  ?>
 </div>
