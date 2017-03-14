@@ -1,12 +1,12 @@
 <?php
 
 header('Content-type: text/xml');
-header('Content-Disposition: attachment; filename="user_data.xml"');
+header('Content-Disposition: attachment; filename="new_data.xml"');
 
 ini_set('display_errors', 1);
 
 //connect
-$link = mysqli_connect("localhost","user","password");
+$link = mysqli_connect("localhost","root","root");
 mysqli_select_db($link, "group8");
 
 //get all the tables
@@ -161,9 +161,35 @@ mysqli_select_db($link, "group8");
 			$xml.= $tab.$tab.'</photoCollection>'.$br;
 		}
 
-//photoCollectionAccessRights table ??????????
 
-//post table ????????
+		// $query1 = 'SELECT pa.rightsID, pa.collectionID, pa.circleID, pa.CREATED_AT, pa.UPDATED_AT FROM `photoCollectionAccessRights` pa, `circle`c, `photoCollection` p WHERE pa.circleID = c.circleID AND pa.collectionID=p.collectionID AND p.userID=c.userID="1"';
+		// $records = mysqli_query($link, $query1) or die('cannot select from table: '.photoCollectionAccessRights);
+		
+		// //stick the records
+		// while($record = mysqli_fetch_assoc($records))
+		// {
+		// 	$xml.= $tab.$tab.'<photoCollectionAccessRights>'.$br;
+		// 	foreach($record as $key=>$value)
+		// 	{
+		// 		$xml.= $tab.$tab.$tab.'<'.$key.'>'.htmlspecialchars(stripslashes($value)).'</'.$key.'>'.$br;
+		// 	}
+		// 	$xml.= $tab.$tab.'</photoCollectionAccessRights>'.$br;
+		// }
+
+
+		$query1 = 'SELECT p.postID, p.blogID, p.title, p.body, p.CREATED_AT, p.UPDATED_AT FROM `post` p, `blog`b WHERE p.blogID = b.blogID AND b.userID="1"';
+		$records = mysqli_query($link, $query1) or die('cannot select from table: '.post);
+		
+		//stick the records
+		while($record = mysqli_fetch_assoc($records))
+		{
+			$xml.= $tab.$tab.'<post>'.$br;
+			foreach($record as $key=>$value)
+			{
+				$xml.= $tab.$tab.$tab.'<'.$key.'>'.htmlspecialchars(stripslashes($value)).'</'.$key.'>'.$br;
+			}
+			$xml.= $tab.$tab.'</post>'.$br;
+		}
 
 
 
@@ -185,7 +211,7 @@ mysqli_select_db($link, "group8");
 
 
 		//for relationship table
-		$query1 = 'SELECT * FROM `relationship` WHERE `userID`="1"';
+		$query1 = 'SELECT * FROM `relationship` WHERE `userID`="1" OR `userID_2`="1"';
 		$records = mysqli_query($link, $query1) or die('cannot select from table: '.relationship);
 		
 		//stick the records
@@ -219,7 +245,7 @@ mysqli_select_db($link, "group8");
     $xml.= $tab.'</records>'.$br;
 
 	// $handle = fopen("group8".'-backup-'.time().'.xml','w+');
-	$handle = fopen('user_data.xml','w+');
+	$handle = fopen('new_data.xml','w+');
 	fwrite($handle,$xml);
 	fclose($handle);
 
