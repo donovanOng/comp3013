@@ -33,7 +33,7 @@
       <div class="col-3">
         <a href="<?php echo URL; ?>photo/<?php echo $photo->photoID ?>">
         <div class="card mt-1 mb-1">
-          <img class="card-img-top" src="<?php echo URL; ?><?php echo $photo->path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
+          <img class="card-img-top" src="<?php echo $photo->path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
           <div class="card-block">
             <p class="card-text text-muted small text-right">
               uploaded by <?php echo user_name($photo->userID) ?>

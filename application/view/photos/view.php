@@ -1,7 +1,7 @@
 <div class="p-4">
   <div class="row">
     <div class="col-8">
-      <img class="w-100" src="<?php echo URL . $photo->path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'"  />
+      <img class="w-100" src="<?php echo $photo->path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'"  />
     </div>
     <div class="col-4">
       <p class="p-2" style="min-height:150px;">
