@@ -14,9 +14,11 @@
       <?php require APP . 'view/collections/edit.php'; ?>
 
       <form class="align-self-center" action="<?php echo URL ?>photo/upload" method="post" enctype="multipart/form-data">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
-          Settings
-        </button>
+        <?php if ($this->current_userID == $collection->userID) { ?>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
+            Settings
+          </button>
+        <? } ?>
         <label class="btn btn-primary mb-0">
             Upload Photo <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
         </label>
