@@ -18,7 +18,7 @@
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
             Settings
           </button>
-        <? } ?>
+        <?php } ?>
         <label class="btn btn-primary mb-0">
             Upload Photo <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
         </label>
