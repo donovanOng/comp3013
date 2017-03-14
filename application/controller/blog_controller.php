@@ -67,5 +67,29 @@ class BlogController
     }
   }
 
+  public function update_blog_name()
+  {
+    if (isset($_POST['submit'])) {
+
+      $blogID = $_POST['blogID'];
+      $name = $_POST['name'];
+
+      $model = new Blog();
+      $result = $model->update_blog_name($blogID,
+                                        $name);
+
+      if ($result) {
+        $_SESSION['message'] = 'Blog name is updated successfully';
+      } else {
+        $_SESSION['message'] = 'Fail to update blog name';
+      }
+
+      Redirect(URL . 'blog/' . $blogID);
+
+    } else {
+      Redirect(URL . 'blog/' . $blogID);
+    }
+  }
+
 }
 ?>

@@ -71,5 +71,21 @@ class Blog extends Model
     return $query->fetchAll();
   }
 
+  public function update_blog_name($blogID, $name)
+  {
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "UPDATE blog
+            SET name = :name,
+                UPDATED_AT = '$timestamp'
+            WHERE (blogID = :blogID)";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':blogID' => $blogID,
+                    ':name' => $name);
+    return $query->execute($params); // boolean result
+  }
+
+
+
 }
 ?>
