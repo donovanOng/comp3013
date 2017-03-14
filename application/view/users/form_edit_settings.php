@@ -23,7 +23,7 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" value="<?php echo $user->password ?>" required />
+            <input type="password" class="form-control" name="password" value="" placeholder="Leave blank if not changing password" />
           </div>
           <p class="mb-2">Who can see my stuff?</p>
           <div class="form-check">

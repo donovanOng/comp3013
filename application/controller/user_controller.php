@@ -130,17 +130,27 @@ class UserController
       $first_name = $_POST["first_name"];
       $last_name = $_POST["last_name"];
       $email = $_POST["email"];
-      $password = $_POST["password"];
       $privacy = $_POST["privacy"];
       $userID = $_POST["userID"];
 
       $model = new User();
-      $result = $model->update_user($first_name,
-                                    $last_name,
-                                    $email,
-                                    $password,
-                                    $privacy,
-                                    $userID);
+
+      if (isset($_POST["password"])) {
+        $password = $_POST["password"];
+        $result = $model->update_user_with_pw($first_name,
+                                              $last_name,
+                                              $email,
+                                              $password,
+                                              $privacy,
+                                              $userID);
+
+      } else {
+        $result = $model->update_user($first_name,
+                                      $last_name,
+                                      $email,
+                                      $privacy,
+                                      $userID);
+      }
 
       if ($result) {
         $_SESSION['message'] = 'User account updated successfully';

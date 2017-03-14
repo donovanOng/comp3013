@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-3">Work place</label>
+          <label class="col-sm-3">Workplace</label>
           <div class="form-group col-sm-9">
             <input class="form-control" type="text" name="workplace" value="<?php echo $profile->workplace ?>" placeholder="Workplace" required />
           </div>

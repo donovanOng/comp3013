@@ -16,7 +16,7 @@
           <input class="form-control" type="text" name="gender" value="" placeholder="Gender" required />
         </div>
         <div class="form-group">
-          <input class="form-control" type="text" name="birthdate" value="" placeholder="Birth date YYYY-MM-DD" required />
+          <input class="form-control" type="date" name="birthdate" value="" placeholder="Birth date YYYY-MM-DD" required />
         </div>
         <div class="form-group">
           <input class="form-control" type="text" name="current_city" value="" placeholder="Current City" required />

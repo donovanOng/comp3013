@@ -161,14 +161,36 @@ class User extends Model
     return $query->execute($params); // boolean result
   }
 
-  public function update_user($first_name, $last_name, $email,
-                                $password, $privacy, $userID)
+  public function update_user_with_pw($first_name, $last_name, $email,
+                                      $password, $privacy, $userID)
   {
     $timestamp = date("Y-m-d H:i:s");
     $sql = "UPDATE user
             SET first_name = :first_name,
                 last_name = :last_name,
                 password = :password,
+                email = :email,
+                privacy = :privacy,
+                UPDATED_AT = '$timestamp'
+            WHERE userID = :userID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':first_name' => $first_name,
+                    ':last_name' => $last_name,
+                    ':email' => $email,
+                    ':password' => $password,
+                    ':privacy' => $privacy,
+                    ':userID' => $userID,);
+    return $query->execute($params); // boolean result
+  }
+
+  public function update_user($first_name, $last_name, $email,
+                              $privacy, $userID)
+  {
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "UPDATE user
+            SET first_name = :first_name,
+                last_name = :last_name,
                 email = :email,
                 privacy = :privacy,
                 UPDATED_AT = '$timestamp'
