@@ -21,7 +21,7 @@ class CollectionController
     $user = $model->find_by_id($collection_userID);
 
     if (can_access_user($this->current_userID, $collection_userID) == false) {
-      $_SESSION['message'] = 'You dont have rights to view collections of user ' . $user->userID;
+      $_SESSION['message'] = 'You dont have rights to view collections of ' . user_name($user->userID);
       Redirect(URL);
     }
 
@@ -31,8 +31,7 @@ class CollectionController
 
     $model = new Collection();
     $collections_owned = $model->find_user_collection($collection_userID);
-    $collections_access = $model->access_collection($this->current_userID);
-    
+
     require APP . 'view/_templates/header.php';
     require APP . 'view/collections/index.php';
     require APP . 'view/_templates/footer.php';
@@ -45,7 +44,7 @@ class CollectionController
     $collection = $model->find_by_id($collectionID);
 
     if (!$collection) {
-      $_SESSION['message'] = 'Collection ' . $photoID . ' does not exist.';
+      $_SESSION['message'] = 'Collection ' . $collectionID . ' does not exist.';
       Redirect(URL);
     }
 
@@ -66,12 +65,14 @@ class CollectionController
       }
       $access_by_circle = $model->find_circle_members_access($collectionID);
 
+
+
       if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) &&
           !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
         $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
         Redirect(URL . $collection->userID);
       }
-      
+
     }
 
     $collection_photos = $model->find_colllection_photos($collectionID);
@@ -138,7 +139,7 @@ class CollectionController
         $_SESSION['message'] = 'Fail to update collection!';
       }
 
-      Redirect(URL . "collection\\" . $collectionID);
+      Redirect(URL . "collection/" . $collectionID);
 
     } else {
       $_SESSION['message'] = 'Missing required POST header';
