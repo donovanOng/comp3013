@@ -34,7 +34,7 @@
           <input class="form-control" type="text" name="workplace" value="" placeholder="Workplace" required />
         </div>
         <input type="hidden" name="userID" value="<?php echo $user->userID ?>" />
-        <input class="btn btn-primary" type="submit" name="submit" value="Update" />
+        <input class="btn btn-primary" type="submit" name="submit" value="Submit" />
       </form>
       </div>
     </div>

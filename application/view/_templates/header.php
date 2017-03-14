@@ -38,6 +38,11 @@
               <?php echo $this->current_user->first_name . ' ' . $this->current_user->last_name ?>
             </a>
           </li>
+          <?php if (is_admin($this->current_userID)) { ?>
+            <li class="nav-item">
+              <a class="nav-link active" href="<?php echo URL ?>admin">Admin</a>
+            </li>
+          <?php } ?>
           <li class="nav-item">
             <a class="nav-link active" href="<?php echo URL ?>logout">Log Out</a>
           </li>
@@ -64,7 +69,7 @@
   <button type="button" class="close pl-1 pr-1" style="top:0;right:0;padding:0;" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-  <?php echo  $_SESSION['message'] ?>
+  <?php echo $_SESSION['message'] ?>
   <?php unset($_SESSION['message']) ?>
 </div>
 <?php } ?>

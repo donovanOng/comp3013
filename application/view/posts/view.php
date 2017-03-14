@@ -14,7 +14,7 @@
         </span>
       </div>
 
-      <p class="card-text"><?php echo $post->body ?></p>
+      <p class="card-text"><?php echo nl2br($post->body) ?></p>
 
       <?php if ($post->userID == $this->current_userID) { ?>
         <div class="bg-faded p-2">
