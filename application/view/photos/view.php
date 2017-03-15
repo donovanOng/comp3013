@@ -15,9 +15,9 @@
         <br>
         <?php if ($photo->userID == $this->current_userID) { ?>
         <a class="small mr-2 text-danger" data-toggle="modal" data-target="#deletePhoto" href="">
-          <i class="fa fa-times text-danger mr-1" aria-hidden="true"></i>Delete photo
+          <i class="fa fa-trash-o text-danger mr-1" aria-hidden="true"></i>Delete photo
         </a>
-        <? } ?>
+        <?php } ?>
       </p>
       <div class="small m-2 p-2" style="border-top: 1px solid #DDD;">
         <?php if ($photo_user_Liked_photo) { ?>
@@ -37,26 +37,15 @@
         <div class="p-2 mb-2 small" style="border-bottom: 1px solid #DDD;">
           <?php if (count($photo_annotations) > 1) { ?>
             <i class="fa fa-heart mr-1" aria-hidden="true"></i>
-            <a href="#"><?php echo user_name($photo_annotations[0]->userID) ?> and <?=(count($photo_annotations)-1)?> others</a>
+            <a href="#"><?php echo user_name($photo_annotations[0]->userID) ?> and <?php echo (count($photo_annotations)-1) ?> others</a>
           <?php } else if (count($photo_annotations) == 1) { ?>
             <i class="fa fa-heart mr-1" aria-hidden="true"></i>
             <a href="#"><?php echo user_name($photo_annotations[0]->userID) ?>
           <?php } ?>
         </div>
-        <?php if (count($photo_comments) > 0) { ?>
-          <div class="list-group mb-2">
-          <?php foreach ($photo_comments as $comment) { ?>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-              <p class="mb-1">
-                <a href="<?php echo URL . $comment->userID ?>"><?php echo user_name($comment->userID) ?></a> <?php echo $comment->content ?>
-              </p>
-              <small class="text-muted"><?php echo $comment->CREATED_AT ?></small>
-            </div>
-          <?php } ?>
-          </div>
-        <?php } ?>
+        <?php require APP . 'view/comments/list.php'; ?>
         <?php require APP . 'view/comments/form.php'; ?>
-        <?php require APP . 'view/photos/delete_confirmation.php'; ?>
+        <?php require APP . 'view/photos/modal_delete.php'; ?>
       </div>
     </div>
   </div>
