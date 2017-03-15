@@ -53,6 +53,16 @@ class Photo extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function delete_photo($photoID)
+  {
+    $sql = "DELETE FROM photo
+            WHERE (photoID = :photoID)" ;
+
+    $query = $this->db->prepare($sql);
+    $params = array(':photoID' => $photoID);
+    return $query->execute($params); // boolean result
+  }
+
   public function find_photo_comments($photoID)
   {
     $sql = "SELECT *

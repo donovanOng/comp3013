@@ -128,6 +128,26 @@ class PhotoController
     }
   }
 
+  public function delete_photo()
+  {
+    if (isset($_POST['delete'])) {
+      $photoID = $_POST['photoID'];
+
+      // insert into database
+      $model = new Photo();
+      $result = $model->delete_photo($photoID);
+      if ($result) {
+        $_SESSION['message'] = 'Photo deleted successfully';
+      } else {
+        $_SESSION['message'] = 'Fail to delete photo';
+      }
+      Redirect(URL . $this->current_userID . '/photo');
+
+    } else {
+      Redirect(URL);
+    }
+  }
+
   public function set_photo_annotation()
   {
     if (isset($_GET['photoID'])) {
