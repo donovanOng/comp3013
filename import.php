@@ -16,7 +16,7 @@ echo "connected to DB<br /><br />";
 $db = new PDO('mysql:host=localhost;dbname=group8', 'root', 'root');
 
 $xmldoc=new DOMDocument();
-$xmldoc->load('new_data.xml');
+$xmldoc->load('user_data.xml');
 
 
 $xmldata1 = $xmldoc -> getElementsByTagName('annotation');
@@ -34,14 +34,12 @@ $UPDATED_AT = $xmldata1->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
     $data = mysqli_fetch_array($rs, MYSQLI_NUM);
 
     if ($data[0] > 0) {
-        $query = "UPDATE annotation SET photoID = '$photoID', userID='$userID', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE photoID = '$photoID' AND userID = '$userID'"; 
+        $query = "UPDATE annotation SET CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE photoID = '$photoID' AND userID = '$userID'"; 
     } else {
         $query = "INSERT INTO annotation (photoID, userID, CREATED_AT, UPDATED_AT)
                         VALUES ('$photoID', '$userID', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
     mysqli_query($con2, $query);
-
 }
 
 
@@ -56,7 +54,6 @@ for ($i=0; $i<$xmlcount2; $i++) {
     $CREATED_AT = $xmldata2->item($i)->getElementsByTagName('CREATED_AT')->item(0)->childNodes->item(0)->nodeValue;
     $UPDATED_AT = $xmldata2->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->childNodes->item(0)->nodeValue;
 
-
     $check="SELECT count(*) FROM blog WHERE blogID = '$blogID'";
     $rs = mysqli_query($con2,$check);
     $data = mysqli_fetch_array($rs, MYSQLI_NUM);
@@ -67,14 +64,7 @@ for ($i=0; $i<$xmlcount2; $i++) {
         $query = "INSERT INTO blog (blogID, userID, name, CREATED_AT, UPDATED_AT)
                         VALUES ('$blogID', '$userID', '$name', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-
-    // $query =    "INSERT INTO blog (blogID, userID, name, CREATED_AT, UPDATED_AT)
-    // VALUES ('$blogID', '$userID', '$name', '$CREATED_AT', '$UPDATED_AT')"; 
-
-    // $query = "UPDATE blog SET blogID='$blogID', userID='$userID', name='$name', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE blogID='$blogID'"; 
-	
+    mysqli_query($con2, $query);	
 }
 
 $xmldata3 = $xmldoc -> getElementsByTagName('circle');
@@ -99,9 +89,7 @@ $UPDATED_AT = $xmldata3->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "INSERT INTO circle (circleID, userID, name, CREATED_AT, UPDATED_AT)
                         VALUES ('$circleID', '$userID', '$name', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-    
+    mysqli_query($con2, $query);  
 }
 
 
@@ -124,11 +112,9 @@ $UPDATED_AT = $xmldata4->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "UPDATE circleFriends SET circleID='$circleID', userID='$userID', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE cFriendsID='$cFriendsID'"; 
     } else {
         $query = "INSERT INTO circleFriends (cFriendsID, circleID, userID, CREATED_AT, UPDATED_AT)
-                        VALUES ('$cFriendsID', $circleID', '$userID', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$cFriendsID', '$circleID', '$userID', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-    
+    mysqli_query($con2, $query);  
 }
 
 
@@ -152,11 +138,9 @@ $UPDATED_AT = $xmldata5->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "UPDATE comment SET userID='$userID', photoID='$photoID', content='$content', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE commentID='$commentID'"; 
     } else {
         $query = "INSERT INTO comment (commentID, userID, photoID, content, CREATED_AT, UPDATED_AT)
-                        VALUES ('$commentID', $userID', '$photoID', '$content', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$commentID', '$userID', '$photoID', '$content', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
     mysqli_query($con2, $query);
-
 }
 
 $xmldata6 = $xmldoc -> getElementsByTagName('message');
@@ -179,11 +163,9 @@ $UPDATED_AT = $xmldata6->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "UPDATE message SET circleID='$circleID', userID='$userID', content='$content', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE messageID='$messageID'"; 
     } else {
         $query = "INSERT INTO message (messageID, circleID, userID, content, CREATED_AT, UPDATED_AT)
-                        VALUES ('$messageID', $circleID', '$userID', '$content', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$messageID', '$circleID', '$userID', '$content', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-    
+    mysqli_query($con2, $query);   
 }
 
 $xmldata7 = $xmldoc -> getElementsByTagName('photo');
@@ -206,11 +188,9 @@ $UPDATED_AT = $xmldata7->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "UPDATE photo SET collectionID='$collectionID', userID='$userID', path='$path', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE photoID='$photoID'"; 
     } else {
         $query = "INSERT INTO photo (photoID, collectionID, userID, path, CREATED_AT, UPDATED_AT)
-                        VALUES ('$photoID', $collectionID', '$userID', '$path', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$photoID', '$collectionID', '$userID', '$path', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-    
+    mysqli_query($con2, $query);  
 }
 
 $xmldata8 = $xmldoc -> getElementsByTagName('photoCollection');
@@ -232,11 +212,9 @@ $UPDATED_AT = $xmldata8->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "UPDATE photoCollection SET userID='$userID', accessRights='$accessRights', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE collectionID='$collectionID'"; 
     } else {
         $query = "INSERT INTO photoCollection (collectionID, userID, accessRights, CREATED_AT, UPDATED_AT)
-                        VALUES ($collectionID', '$userID', '$accessRights', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$collectionID', '$userID', '$accessRights', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
     mysqli_query($con2, $query);
-    
 }
 
 
@@ -260,11 +238,9 @@ $UPDATED_AT = $xmldata12->item($i)->getElementsByTagName('UPDATED_AT')->item(0)-
         $query = "UPDATE post SET blogID='$blogID', title='$title', body='$body', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE postID='$postID'"; 
     } else {
         $query = "INSERT INTO post (postID, blogID, title, body, CREATED_AT, UPDATED_AT)
-                        VALUES ($postID', '$blogID', '$title', '$body', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$postID', '$blogID', '$title', '$body', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
     mysqli_query($con2, $query);
-    
 }
 
 
@@ -293,12 +269,9 @@ $UPDATED_AT = $xmldata9->item($i)->getElementsByTagName('UPDATED_AT')->item(0)->
         $query = "UPDATE profile SET about='$about', gender='$gender', birthdate='$birthdate', current_city='$current_city', home_city='$home_city', address='$address', languages='$languages', workplace='$workplace', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE userID='$userID'"; 
     } else {
         $query = "INSERT INTO profile (userID, about, gender, birthdate, current_city, home_city, address, languages, workplace, CREATED_AT, UPDATED_AT)
-                        VALUES ($userID, $about', '$gender', '$birthdate', '$current_city', '$home_city', '$address', '$languages', 'workplace', '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$userID', '$about', '$gender', '$birthdate', '$current_city', '$home_city', '$address', '$languages', 'workplace', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
     mysqli_query($con2, $query);
-
-    
 }
 
 
@@ -321,12 +294,10 @@ $UPDATED_AT = $xmldata10->item($i)->getElementsByTagName('UPDATED_AT')->item(0)-
     if ($data[0] > 0) {
         $query = "UPDATE relationship SET userID='$userID', userID_2='$userID_2', status='$status', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE relationshipID='$relationshipID'"; 
     } else {
-        $query = "INSERT INTO relationship (relationshipID, userID, userID_2, CREATED_AT, UPDATED_AT)
-                        VALUES ($relationshipID', '$userID', '$userID_2', '$CREATED_AT', '$UPDATED_AT')"; 
+        $query = "INSERT INTO relationship (relationshipID, userID, userID_2, status, CREATED_AT, UPDATED_AT)
+                        VALUES ('$relationshipID', '$userID', '$userID_2', '$status', '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-    
+    mysqli_query($con2, $query);  
 }
 
 
@@ -353,14 +324,10 @@ $UPDATED_AT = $xmldata11->item($i)->getElementsByTagName('UPDATED_AT')->item(0)-
         $query = "UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', password='$password', privacy='$privacy', admin='$admin', CREATED_AT='$CREATED_AT', UPDATED_AT='$UPDATED_AT' WHERE userID='$userID'"; 
     } else {
         $query = "INSERT INTO user (userID, first_name, last_name, email, password, privacy, admin, CREATED_AT, UPDATED_AT)
-                        VALUES ($userID', '$first_name', '$last_name', '$email', '$password', '$privacy', '$admin' '$CREATED_AT', '$UPDATED_AT')"; 
+                        VALUES ('$userID', '$first_name', '$last_name', '$email', '$password', '$privacy', '$admin' '$CREATED_AT', '$UPDATED_AT')"; 
     }
-    echo $query;
-    mysqli_query($con2, $query);
-    
+    mysqli_query($con2, $query);   
 }
-
-
     //show updated records            
     printf ("Records inserted: %d\n", mysqli_affected_rows($con2)); 
 
