@@ -8,7 +8,11 @@
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
 
     <div class="row">
-      <?php if (count($photos) > 0)  { ?>
+      <?php if (!$photos) { ?>
+        <div class="col-12">
+          <?php echo user_name($user->userID) ?> does not have any photo.
+        </div>
+      <?php } else { ?>
         <?php foreach ($photos as $photo) { ?>
           <div class="col-3">
             <a href="<?php echo URL; ?>photo/<?php echo $photo->photoID ?>">
@@ -18,10 +22,6 @@
             </a>
           </div>
         <?php } ?>
-      <?php } else { ?>
-        <div class="col-12">
-          <?php echo user_name($user->userID) ?> does not have any photo.
-        </div>
       <?php } ?>
     </div>
   </div>
