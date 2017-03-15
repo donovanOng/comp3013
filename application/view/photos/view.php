@@ -13,7 +13,7 @@
           <?php echo $photo->CREATED_AT ?>
         </small>
         <br>
-        <?php if ($photo->userID == $this->current_userID) { ?>
+        <?php if ( ($photo->userID == $this->current_userID) || $isUserCollection ) { ?>
         <a class="small mr-2 text-danger" data-toggle="modal" data-target="#deletePhoto" href="">
           <i class="fa fa-trash-o text-danger mr-1" aria-hidden="true"></i>Delete photo
         </a>

@@ -48,6 +48,10 @@ class PhotoController
     $model = new Photo();
     $photo = $model->find_by_id($photoID);
 
+    $collectionModel = new Collection();
+    $userCollections = $collectionModel->find_user_collection($this->current_userID);
+    $isUserCollection = in_array_field($photo->collectionID, 'collectionID', $userCollections);
+
     if (!$photo) {
       $_SESSION['message'] = 'Photo ' . $photoID . ' does not exist';
       Redirect(URL);
@@ -57,8 +61,7 @@ class PhotoController
     if ($photo != NULL) {
       $photo_comments = $model->find_photo_comments($photoID);
       $photo_annotations = $model->get_annotations($photoID);
-      $photo_annotations_userID = array_column($photo_annotations, 'userID');
-      $photo_user_Liked_photo = in_array($this->current_userID, $photo_annotations_userID);
+      $photo_user_Liked_photo = in_array_field($this->current_userID, 'userID', $photo_annotations);
     }
 
     require APP . 'view/_templates/header.php';
