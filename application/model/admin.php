@@ -22,8 +22,7 @@ class Admin extends Model
   {
     $sql = "SELECT *
             FROM user
-            WHERE
-              first_name LIKE :name
+            WHERE first_name LIKE :name
               OR last_name LIKE :name
               OR CONCAT(first_name, ' ', last_name) LIKE :name";
 

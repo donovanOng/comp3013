@@ -18,18 +18,6 @@ class Blog extends Model
     return $query->fetch();
   }
 
-  public function create($userID, $name)
-  {
-    $timestamp = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO blog (userID, name, CREATED_AT)
-            VALUES (:userID, :name, '$timestamp')";
-
-    $query = $this->db->prepare($sql);
-    $params = array(':userID' => $userID,
-                    ':name' => $name);
-    return $query->execute($params); // boolean result
-  }
-
   public function find_by_id($blogID)
   {
     $sql = "SELECT *
@@ -42,33 +30,16 @@ class Blog extends Model
     return $query->fetch();
   }
 
-  public function search_blog_posts($blogID, $search_query)
+  public function create($userID, $name)
   {
-    $sql = "SELECT *
-            FROM post
-            WHERE blogID = :blogID
-            AND (title LIKE :search_query
-                OR body LIKE :search_query)
-            ORDER BY UPDATED_AT DESC";
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO blog (userID, name, CREATED_AT)
+            VALUES (:userID, :name, '$timestamp')";
 
     $query = $this->db->prepare($sql);
-    $params = array(':blogID' => $blogID,
-                    ':search_query' => "%" . $search_query . "%");
-    $query->execute($params);
-    return $query->fetchAll();
-  }
-
-  public function find_blog_posts($blogID)
-  {
-    $sql = "SELECT *
-            FROM post
-            WHERE blogID = :blogID
-            ORDER BY CREATED_AT DESC";
-
-    $query = $this->db->prepare($sql);
-    $params = array(':blogID' => $blogID);
-    $query->execute($params);
-    return $query->fetchAll();
+    $params = array(':userID' => $userID,
+                    ':name' => $name);
+    return $query->execute($params); // boolean result
   }
 
   public function update_blog_name($blogID, $name)
@@ -85,7 +56,34 @@ class Blog extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function find_blog_posts($blogID)
+  {
+    $sql = "SELECT *
+            FROM post
+            WHERE blogID = :blogID
+            ORDER BY CREATED_AT DESC";
 
+    $query = $this->db->prepare($sql);
+    $params = array(':blogID' => $blogID);
+    $query->execute($params);
+    return $query->fetchAll();
+  }
+
+  public function search_blog_posts($blogID, $search_query)
+  {
+    $sql = "SELECT *
+            FROM post
+            WHERE blogID = :blogID
+              AND (title LIKE :search_query
+              OR body LIKE :search_query)
+            ORDER BY UPDATED_AT DESC";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':blogID' => $blogID,
+                    ':search_query' => "%" . $search_query . "%");
+    $query->execute($params);
+    return $query->fetchAll();
+  }
 
 }
 ?>
