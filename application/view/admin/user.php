@@ -27,7 +27,7 @@
         echo '<tr>';
         foreach ($column as $key => $value) {
           if ($key != "CREATED_AT" && $key != "UPDATED_AT") {
-            echo '<td>' . $value . '</td>';
+            echo '<td style="word-break:break-all;">' . $value . '</td>';
           }
         }
         echo '<td>

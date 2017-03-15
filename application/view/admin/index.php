@@ -6,34 +6,38 @@
     <button class="btn btn-primary col-1" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
   </form>
 
-  <?php
-  if ($result != NULL){
-    foreach($tables_data as $table => $table_data) {
-      echo '<table class="mb-5 table table-hover table-bordered table-striped"><thead><tr>';
-      foreach ($table_data[0] as $key => $value) {
-        echo '<th>' . $key . '</th>';
-      }
-      echo '<th width="20px">Action</h>';
-      echo '</tr></thead><tbody>';
+  <div class="row">
+    <div class="col-12">
+      <?php
+      if ($result != NULL){
+        foreach($tables_data as $table => $table_data) {
+          echo '<table class="w-100 mb-5 table table-hover table-bordered table-striped"><thead><tr>';
+          foreach ($table_data[0] as $key => $value) {
+            echo '<th>' . $key . '</th>';
+          }
+          echo '<th width="20px">Action</h>';
+          echo '</tr></thead><tbody>';
 
-      foreach ($table_data as $row => $column) {
-        echo '<tr>';
-        foreach ($column as $key => $value) {
-          echo '<td>' . $value . '</td>';
+          foreach ($table_data as $row => $column) {
+            echo '<tr>';
+            foreach ($column as $key => $value) {
+              echo '<td style="word-break:break-all;">' . $value . '</td>';
+            }
+            echo '<td>
+              <a class="btn-link" href="' . URL . 'admin/user?' .
+              'userID=' . $tables_data['user'][0]->userID .
+              '">View</a>';
+            echo '</tr>';
+          }
+          echo '</tbody></table>';
         }
-        echo '<td>
-          <a class="btn-link" href="' . URL . 'admin/user?' .
-          'userID=' . $tables_data['user'][0]->userID .
-          '">View</a>';
-        echo '</tr>';
+      } else {
+        echo '<div class="bg-faded p-3">' .
+        '<i class="fa fa-question-circle-o mr-2" aria-hidden="true"></i>' .
+        'No user with name that contain \'' . $_GET['q'] . '\' found.'.
+        ' </div>';
       }
-      echo '</tbody></table>';
-    }
-  } else {
-    echo '<div class="bg-faded p-3">' .
-    '<i class="fa fa-question-circle-o mr-2" aria-hidden="true"></i>' .
-    'No user with name that contain \'' . $_GET['q'] . '\' found.'.
-    ' </div>';
-  }
-  ?>
+      ?>
+    </div>
+  </div>
 </div>
