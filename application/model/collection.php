@@ -6,7 +6,8 @@ class Collection extends Model
 {
   public function find_user_collection($userID)
   {
-    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, pc.name, count(p.path) noOfPhotos, p.path coverPhoto
+    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, pc.name,
+                   count(p.path) noOfPhotos, p.path coverPhoto
             FROM photoCollection pc
             LEFT JOIN
               (SELECT *
@@ -25,7 +26,8 @@ class Collection extends Model
 
   public function find_by_id($collectionID)
   {
-    $sql = "SELECT a.collectionID, a.accessRights, a.userID, a.name, count(*) noOfPhotos
+    $sql = "SELECT a.collectionID, a.accessRights, a.userID, a.name,
+                   count(*) noOfPhotos
             FROM photoCollection a
             LEFT JOIN photo p
                   ON a.collectionID = p.collectionID
@@ -43,8 +45,10 @@ class Collection extends Model
               FROM relationship R, user U
               WHERE
               CASE
-                WHEN R.userID = :collection_userID THEN R.userID_2 = U.userID
-                WHEN R.userID_2 = :collection_userID THEN R.userID = U.userID
+                WHEN R.userID = :collection_userID
+                  THEN R.userID_2 = U.userID
+                WHEN R.userID_2 = :collection_userID
+                  THEN R.userID = U.userID
               END
               AND status = 0";
 
@@ -57,7 +61,8 @@ class Collection extends Model
   public function find_circle_members_access($collectionID){
     $sql = "SELECT DISTINCT c.userID
             FROM circleFriends AS c, photoCollectionAccessRights AS p
-            WHERE c.circleID = p.circleID AND p.collectionID = :collectionID";
+            WHERE c.circleID = p.circleID
+              AND p.collectionID = :collectionID";
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
@@ -67,17 +72,18 @@ class Collection extends Model
 
   public function access_collection($userID)
   {
-    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(*) noOfPhotos, p.path coverPhoto
+    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID,
+              count(*) noOfPhotos, p.path coverPhoto
             FROM photoCollection pc
             INNER JOIN photo p
                   ON pc.collectionID = p.collectionID
             WHERE
-              ( pc.accessRights = 0
-                AND pc.userID IN (
+              (pc.accessRights = 0
+               AND pc.userID IN (
                   SELECT userID_friend
                   FROM friends
                   WHERE userID_user = :userID
-                )
+               )
               )
               OR (
                 pc.accessRights = 1
@@ -87,13 +93,13 @@ class Collection extends Model
                   WHERE userID_user = :userID
                 )
               )
-              OR (pc.accessRights = 2) 
-              OR pc.userID = :userID 
-              OR pc.collectionID IN ( 
+              OR (pc.accessRights = 2)
+              OR pc.userID = :userID
+              OR pc.collectionID IN (
                 SELECT DISTINCT pc.collectionID
-                FROM photoCollectionAccessRights AS pcar, circleFriends AS cf, photoCollection as pc
-                WHERE
-                  cf.circleID = pcar.circleID
+                FROM photoCollectionAccessRights AS pcar, circleFriends AS cf,
+                     photoCollection as pc
+                WHERE cf.circleID = pcar.circleID
                   AND pc.collectionID = pcar.collectionID
                   AND cf.userID = :userID
               )

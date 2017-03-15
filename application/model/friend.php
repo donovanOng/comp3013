@@ -179,8 +179,7 @@ class Friend extends Model
      					) AS  q
              SET status = 0,
              UPDATED_AT = '$timestamp'
-             WHERE r.relationshipID = q.relationshipID
-          ";
+             WHERE r.relationshipID = q.relationshipID";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID,
