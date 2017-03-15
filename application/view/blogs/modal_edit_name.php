@@ -10,8 +10,8 @@
       <div class="modal-body">
       <form action="<?php echo URL; ?>blog/update_blog_name" method="POST">
         <div class="form-group row">
-          <label class="col-sm-3 mt-2">Blog Name</label>
-          <div class="form-group col-sm-9">
+          <label class="col-sm-2 mt-2">Name</label>
+          <div class="form-group col-sm-10">
             <input class="form-control" type="text" name="name" value="<?php echo $blog->name ?>" placeholder="Blog name" required />
           </div>
         </div>

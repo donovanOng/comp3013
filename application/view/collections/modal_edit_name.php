@@ -10,8 +10,8 @@
       <div class="modal-body">
       <form action="<?php echo URL; ?>collection/update_collection_name" method="POST">
         <div class="form-group row">
-          <label class="col-sm-3 mt-2">Name</label>
-          <div class="form-group col-sm-9">
+          <label class="col-sm-2 mt-2">Name</label>
+          <div class="form-group col-sm-10">
             <input class="form-control" type="text" name="name" value="<?php echo $collection->name ?>" placeholder="Collection name" required />
           </div>
         </div>

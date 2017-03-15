@@ -6,8 +6,7 @@
       <div class="col-10"><h4><i class="fa fa-folder mr-1 text-muted" aria-hidden="true"></i> Photo Collections</h4></div>
       <div class="col-2 text-right">
         <?php if ($user->userID == $this->current_userID) { ?>
-          <!-- <a class="btn btn-sm btn-secondary" href="<?php echo URL; ?>collection/create">New Collection</a> -->
-          <?php require APP . 'view/collections/new_collection.php'; ?>
+          <?php require APP . 'view/collections/modal_new_collection.php'; ?>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#newCollection">
             New Collection
           </button>

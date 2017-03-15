@@ -11,8 +11,8 @@
     </div>
     <div class="col-6 text-right">
 
-      <?php require APP . 'view/collections/edit.php'; ?>
-      <?php require APP . 'view/collections/rename_collection.php'; ?>
+      <?php require APP . 'view/collections/modal_edit_privacy.php'; ?>
+      <?php require APP . 'view/collections/modal_edit_name.php'; ?>
 
       <form class="align-self-center" action="<?php echo URL ?>photo/upload" method="post" enctype="multipart/form-data">
         <?php if ($this->current_userID == $collection->userID) { ?>
