@@ -48,7 +48,7 @@ class CollectionController
       Redirect(URL);
     }
 
-    $all_user_circles = $model->find_all_user_circles($collectionID);
+    $all_user_circles = $model->find_all_user_circles($collection->userID);
     $current_access_circles = $model->find_access_circles($collectionID);
 
     $collection_photos = NULL;

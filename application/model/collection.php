@@ -193,7 +193,7 @@ class Collection extends Model
   {
     $timestamp = date("Y-m-d H:i:s");
     $sql = "INSERT INTO photoCollectionAccessRights (collectionID, circleID, CREATED_AT)
-            VALUES (:collectionID, :circleID, $timestamp)";
+            VALUES (:collectionID, :circleID, '$timestamp')";
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID,
