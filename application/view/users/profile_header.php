@@ -4,15 +4,15 @@
     <div class="col-8">
       <img class="w-100" src="<?php echo $user->photo_path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'"  />
     </div>
+    <?php if($user->userID == $this->current_userID) { ?>
     <form class="align-self-center" action="<?php echo URL ?>user/upload" method="post" enctype="multipart/form-data">
       <label class="label text-primary">
           <i class="fa fa-camera mr-1" aria-hidden="true"></i>Update profile picture
           <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
       </label>
         <input type="hidden" name="userID" value="<?php echo $this->current_userID ?>">
-
     </form>
-
+    <?php } ?>
   </div>
   <div class="col-8">
     <ul class="nav nav-fill">
