@@ -42,38 +42,18 @@ class Friend extends Model
   public function recommend_friends_based_on_mutual_friends($userID)
   {
     $sql = "SELECT *
-            FROM (SELECT similar.user1 userID, count(*) rank
-              FROM (
-                  SELECT userID user1, userID_2 friend
-                    FROM relationship target
-                    WHERE status = 0
-                  UNION
-                  SELECT userID_2 user1, userID friend
-                    FROM relationship target
-                    WHERE status = 0
-                  ORDER BY `user1` ASC) AS target
-              JOIN (SELECT userID user1, userID_2 friend
-                      FROM relationship target
-                      WHERE status = 0
-                    UNION
-                    SELECT userID_2 user1, userID friend
-                      FROM relationship target
-                      WHERE status = 0
-                    ORDER BY `user1` ASC) AS similar
-                ON target.friend = similar.friend
-                  AND target.user1 != similar.user1
-              WHERE target.user1 = :userID
-              GROUP BY similar.user1
+            FROM (SELECT similar.userID_user userID, count(*) rank
+              FROM friends target
+              JOIN friends similar
+                ON target.userID_friend = similar.userID_friend
+                  AND target.userID_user != similar.userID_user
+              WHERE target.userID_user = :userID
+              GROUP BY similar.userID_user
               ORDER BY rank DESC) as temp_friends
             WHERE userID NOT IN (
-              SELECT userID
-              FROM relationship
-              WHERE userID_2 = :userID
-              UNION
-              SELECT userID_2
-              FROM relationship
-              WHERE userID = :userID
-            ) AND userID != :userID";
+              SELECT userID_friend
+              FROM friends
+              WHERE userID_user = :userID )";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
@@ -93,13 +73,9 @@ class Friend extends Model
               GROUP BY similar.userID
               ORDER BY rank DESC) as temp_friends
             WHERE userID NOT IN (
-              SELECT userID
-              FROM relationship
-              WHERE userID_2 = :userID
-              UNION
-              SELECT userID_2
-              FROM relationship
-              WHERE userID = :userID
+              SELECT userID_friend
+              FROM friends
+              WHERE userID_user = :userID
             ) AND userID != :userID";
 
     $query = $this->db->prepare($sql);
