@@ -4,6 +4,10 @@ require_once APP . 'model/user.php';
 require_once APP . 'model/blog.php';
 require_once APP . 'model/friend.php';
 
+if (ENVIRONMENT == 'prod') {
+  require_once APP . 'libs/azure_upload.php';
+}
+
 class UserController
 {
 
