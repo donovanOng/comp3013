@@ -8,11 +8,17 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-inline" action="<?php echo URL ?>circle/new_circle">
-          <input class="form-control w-75" type="text" name="name" value="" placeholder="Circle Name" required />
-          <input class="btn btn-primary w-25" type="submit" name="submit" value="Create" />
-        </form>
+      <form action="<?php echo URL ?>circle/new_circle">
+        <div class="form-group row">
+          <label class="col-sm-3 mt-2">Name</label>
+          <div class="form-group col-sm-9">
+            <input class="form-control" type="text" name="name" value="" placeholder="Circle name" required />
+          </div>
+        </div>
+        <input class="btn btn-primary col-md-2 offset-md-10" type="submit" name="submit" value="Create" />
+      </form>
       </div>
+
     </div>
   </div>
 </div>
