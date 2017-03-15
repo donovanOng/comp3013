@@ -40,24 +40,6 @@ class Collection extends Model
     return $query->fetch();
   }
 
-  public function find_friends($collection_userID){
-    $sql = "SELECT U.userID
-              FROM relationship R, user U
-              WHERE
-              CASE
-                WHEN R.userID = :collection_userID
-                  THEN R.userID_2 = U.userID
-                WHEN R.userID_2 = :collection_userID
-                  THEN R.userID = U.userID
-              END
-              AND status = 0";
-
-    $query = $this->db->prepare($sql);
-    $params = array(':collection_userID' => $collection_userID);
-    $query->execute($params);
-    return $query->fetchAll();
-  }
-
   public function find_circle_members_access($collectionID){
     $sql = "SELECT DISTINCT c.userID
             FROM circleFriends AS c, photoCollectionAccessRights AS p
@@ -66,47 +48,6 @@ class Collection extends Model
 
     $query = $this->db->prepare($sql);
     $params = array(':collectionID' => $collectionID);
-    $query->execute($params);
-    return $query->fetchAll();
-  }
-
-  public function access_collection($userID)
-  {
-    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID,
-              count(*) noOfPhotos, p.path coverPhoto
-            FROM photoCollection pc
-            INNER JOIN photo p
-                  ON pc.collectionID = p.collectionID
-            WHERE
-              (pc.accessRights = 0
-               AND pc.userID IN (
-                  SELECT userID_friend
-                  FROM friends
-                  WHERE userID_user = :userID
-               )
-              )
-              OR (
-                pc.accessRights = 1
-                AND pc.userID IN (
-                  SELECT userID_friendOfFriend
-                  FROM friendAndFriendsOfFriends
-                  WHERE userID_user = :userID
-                )
-              )
-              OR (pc.accessRights = 2)
-              OR pc.userID = :userID
-              OR pc.collectionID IN (
-                SELECT DISTINCT pc.collectionID
-                FROM photoCollectionAccessRights AS pcar, circleFriends AS cf,
-                     photoCollection as pc
-                WHERE cf.circleID = pcar.circleID
-                  AND pc.collectionID = pcar.collectionID
-                  AND cf.userID = :userID
-              )
-              GROUP BY pc.collectionID";
-
-    $query = $this->db->prepare($sql);
-    $params = array(':userID' => $userID);
     $query->execute($params);
     return $query->fetchAll();
   }
