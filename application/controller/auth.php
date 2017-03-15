@@ -41,7 +41,7 @@ class AuthController
     } else {
 
       require APP . 'view/_templates/header.php';
-      require APP . 'view/auth/form.php';
+      require APP . 'view/auth/login.php';
       require APP . 'view/_templates/footer.php';
 
     }
