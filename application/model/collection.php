@@ -74,61 +74,22 @@ class Collection extends Model
             WHERE
               ( pc.accessRights = 0
                 AND pc.userID IN (
-                  SELECT U.userID
-                  FROM relationship R, user U
-                  WHERE
-                  CASE
-                    WHEN R.userID = :userID THEN R.userID_2 = U.userID
-                    WHEN R.userID_2 = :userID THEN R.userID = U.userID
-                  END
-                  AND status = 0
+                  SELECT userID_friend
+                  FROM friends
+                  WHERE userID_user = :userID
                 )
               )
               OR (
                 pc.accessRights = 1
                 AND pc.userID IN (
-                  SELECT userID
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID_2 = :userID
-                  UNION
-                  SELECT userID_2
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID = :userID
-                  UNION
-                  SELECT userID
-                  FROM relationship
-                  WHERE status = 0 AND userID_2 IN (
-                    SELECT userID
-                    FROM relationship
-                    WHERE STATUS = 0 AND userID_2 = :userID
-                    UNION
-                    SELECT userID_2
-                    FROM relationship
-                    WHERE STATUS = 0 AND userID = :userID
-                  )
-                  UNION
-                  SELECT userID_2
-                  FROM relationship
-                  WHERE STATUS = 0 AND userID IN (
-                    SELECT userID
-                    FROM relationship
-                    WHERE STATUS = 0 AND userID_2 = :userID
-                    UNION
-                    SELECT userID_2
-                    FROM relationship
-                    WHERE STATUS = 0 AND userID = :userID
-                  )
+                  SELECT userID_friendOfFriend
+                  FROM friendAndFriendsOfFriends
+                  WHERE userID_user = :userID
                 )
               )
-              OR (pc.accessRights = 2)
-              OR pc.userID = :userID
-              GROUP BY pc.collectionID
-            UNION
-              SELECT a.collectionID, a.accessRights, a.userID, count(*) noOfPhotos, p.path
-              FROM photoCollection a
-              INNER JOIN photo p
-                    ON a.collectionID = p.collectionID
-              WHERE a.collectionID IN (
+              OR (pc.accessRights = 2) 
+              OR pc.userID = :userID 
+              OR pc.collectionID IN ( 
                 SELECT DISTINCT pc.collectionID
                 FROM photoCollectionAccessRights AS pcar, circleFriends AS cf, photoCollection as pc
                 WHERE
@@ -136,7 +97,7 @@ class Collection extends Model
                   AND pc.collectionID = pcar.collectionID
                   AND cf.userID = :userID
               )
-              GROUP BY a.collectionID";
+              GROUP BY pc.collectionID";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
