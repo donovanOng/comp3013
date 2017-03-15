@@ -1,22 +1,22 @@
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', 'Chevy', 'Ng', 'chevyng@gmail.com', 'pw1', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('1', 'Chevy', 'Ng', 'chevyng@gmail.com', '$2y$10$tfByDMZgTlJM.NwPxwtLT.eDNUrN8Hm9aH8jp39knEo6uQmVdMfUG', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', 'pw2', '1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('2', 'Yi Shan', 'Chua', 'yishan@hotmail.com', '$2y$10$tfByDMZgTlJM.NwPxwtLT.eDNUrN8Hm9aH8jp39knEo6uQmVdMfUG', '1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', 'pw3', '1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('3', 'Donovan', 'Ong', 'donong@gmail.com', '$2y$10$tfByDMZgTlJM.NwPxwtLT.eDNUrN8Hm9aH8jp39knEo6uQmVdMfUG', '1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', 'pw4', '0', '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('4', 'Laman', 'Mammadova', 'laman@gmail.com', '$2y$10$tfByDMZgTlJM.NwPxwtLT.eDNUrN8Hm9aH8jp39knEo6uQmVdMfUG', '0', '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`user` (
 `userID`, `first_name`, `last_name`, `email`, `password`, `privacy`, `admin`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', 'Nigel', 'Ng', 'nigelng@gmail.com', 'pw5', '1', '0',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('5', 'Nigel', 'Ng', 'nigelng@gmail.com', '$2y$10$tfByDMZgTlJM.NwPxwtLT.eDNUrN8Hm9aH8jp39knEo6uQmVdMfUG', '1', '0',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
 INSERT INTO `group8`.`blog`
