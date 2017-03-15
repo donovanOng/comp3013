@@ -1,5 +1,5 @@
 <?php if ($this->current_userID != $user->userID) { ?>
-  <li class="nav-item">
+  <li class="nav-item py-1">
     <?php if($is_friend != NULL) { ?>
       <?php if($is_friend->status == 0) { ?>
         <button class="btn btn-secondary">Friends</button>
@@ -16,8 +16,7 @@
     <?php } ?>
   </li>
 <?php } else { ?>
-  <li class="nav-item">
-    <?php require APP . 'view/users/modal_edit_settings.php'; ?>
+  <li class="nav-item py-1">
     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
       Settings
     </button>
