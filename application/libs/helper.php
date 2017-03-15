@@ -46,7 +46,7 @@ function can_access_user($current_userID, $target_userID)
     $friendModel = new Friend();
     if ($target_user->privacy == 0) {
         $authorised_view_users = $friendModel->find_friends_of_friends($target_userID);
-        $is_authorised = in_array_field($current_userID, 'userID', $authorised_view_users);
+        $is_authorised = in_array_field($current_userID, 'userID_friendOfFriend', $authorised_view_users);
 
         if ($is_authorised == false && $current_userID != $target_userID) {
             return false;
