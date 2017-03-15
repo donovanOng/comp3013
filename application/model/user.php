@@ -31,7 +31,7 @@ class User extends Model
 
   public function find_by_id($userID)
   {
-    $sql = "SELECT first_name, last_name, userID, email, password, privacy
+    $sql = "SELECT first_name, last_name, userID, email, password, privacy, photo_path
             FROM user
             WHERE userID = :userID
             LIMIT 1";
@@ -202,6 +202,20 @@ class User extends Model
                     ':email' => $email,
                     ':privacy' => $privacy,
                     ':userID' => $userID,);
+    return $query->execute($params); // boolean result
+  }
+
+  public function upload_profile_photo($userID, $path)
+  {
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "UPDATE user
+            SET photo_path = :path,
+                UPDATED_AT = '$timestamp'
+            WHERE userID = :userID";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':userID' => $userID,
+                    ':path' => $path);
     return $query->execute($params); // boolean result
   }
 

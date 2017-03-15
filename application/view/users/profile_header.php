@@ -1,6 +1,18 @@
 <div class="row bg-faded align-items-center p-3 mb-4 ml-0 mr-0 rounded-bottom">
   <div class="col-4">
     <h4 class="mb-0"><a href="<?php echo URL . $user->userID ?>"><?php echo $user->first_name ?> <?php echo $user->last_name ?></a></h4>
+    <div class="col-8">
+      <img class="w-100" src="<?php echo $user->photo_path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'"  />
+    </div>
+    <form class="align-self-center" action="<?php echo URL ?>user/upload" method="post" enctype="multipart/form-data">
+      <label class="label text-primary">
+          <i class="fa fa-camera mr-1" aria-hidden="true"></i>Update profile picture
+          <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
+      </label>
+        <input type="hidden" name="userID" value="<?php echo $this->current_userID ?>">
+
+    </form>
+
   </div>
   <div class="col-8">
     <ul class="nav nav-fill">

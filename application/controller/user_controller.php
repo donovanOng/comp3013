@@ -165,6 +165,67 @@ class UserController
     }
   }
 
+  public function upload()
+  {
+
+    if (isset($_POST['userID'])) {
+
+      $userID = $_POST['userID'];
+      $uploadFile = $_FILES['uploadFile'];
+
+      $result = $this->upload_photo($uploadFile);
+
+      if ($result) {
+        $_SESSION['message'] = 'Photo uploaded successfully';
+      } else {
+        $_SESSION['message'] = 'Photo upload failed';
+      }
+
+      Redirect(URL . $userID);
+
+    } else {
+      $_SESSION['message'] = 'Unable to find photo path';
+      Redirect(URL);
+    }
+
+  }
+
+  private function upload_photo($uploadFile)
+  {
+    $model = new User();
+    $save_filename = $this->current_userID . '_abc' . '.jpg';
+
+    if (ENVIRONMENT != 'prod') {
+      $targetDirectory = "uploads/users/" . $this->current_userID . '/';
+      // create user's directory if it does not exist
+      if (!file_exists($targetDirectory)) {
+          mkdir($targetDirectory, 0777, true);
+      }
+
+      // TODO validate file format, size
+
+      $targetFile = $targetDirectory . $save_filename;
+      $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
+      if ($uploadResult) {
+        $result = $model->upload_profile_photo($this->current_userID, URL . $targetFile);
+        if (!$result) { unlink($targetFile); }
+        return $result;
+      } else {
+        return FALSE;
+      }
+
+    } else {
+      // Upload to Azure Blob Storage
+      $uploadResult = upload_to_azure($uploadFile, $save_filename);
+      if (!$uploadResult) {
+        return FALSE;
+      } else {
+        $result = $model->upload_profile_photo($this->current_userID, $uploadResult);
+        return $result;
+      }
+    }
+  }
+
   public function add_friend()
   {
     if (isset($_GET['userID'])) {
