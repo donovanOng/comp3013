@@ -372,36 +372,36 @@ VALUES ('29', '6', '3', 'blablabla 29', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('1', '1',  '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('1', '1', 'Default', '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('2', '1', '2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('2', '1', 'Instagram','2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('3', '2',  '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('3', '2', 'Default', '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('4', '4', '2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('4', '4', 'Default', '2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('5', '3', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('5', '3', 'Default', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('6', '4', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('6', '4', 'Travel', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('7', '5', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('7', '5', 'Default', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO `group8`.`photoCollection`
-(`collectionID`, `userID`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
-VALUES ('8', '2', '2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(`collectionID`, `userID`, `name`, `accessRights`, `CREATED_AT`, `UPDATED_AT`)
+VALUES ('8', '2', 'Food', '2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
 INSERT INTO `group8`.`photoCollectionAccessRights`

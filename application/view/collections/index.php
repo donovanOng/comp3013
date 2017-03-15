@@ -6,7 +6,11 @@
       <div class="col-10"><h4><i class="fa fa-folder mr-1 text-muted" aria-hidden="true"></i> Photo Collections</h4></div>
       <div class="col-2 text-right">
         <?php if ($user->userID == $this->current_userID) { ?>
-          <a class="btn btn-sm btn-secondary" href="<?php echo URL; ?>collection/create">New Collection</a>
+          <!-- <a class="btn btn-sm btn-secondary" href="<?php echo URL; ?>collection/create">New Collection</a> -->
+          <?php require APP . 'view/collections/new_collection.php'; ?>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#newCollection">
+            New Collection
+          </button>
         <?php } ?>
       </div>
     </div>
@@ -18,7 +22,7 @@
               <div class="card mb-3">
                 <img class="card-img-top" src="<?php echo $collection->coverPhoto ?>" onError="this.src='<?php echo URL ?>images/missing.jpg'" style="object-fit: cover; height: 200px;">
                 <div class="card-block">
-                  <h5 class="card-title">Collection <?php echo $collection->collectionID ?></h5>
+                  <h5 class="card-title"><?php echo $collection->name ?></h5>
                   <p class="card-text text-muted">
                     <?php echo $collection->noOfPhotos ?> photos
                   </p>

@@ -6,7 +6,7 @@ class Collection extends Model
 {
   public function find_user_collection($userID)
   {
-    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, count(p.path) noOfPhotos, p.path coverPhoto
+    $sql = "SELECT pc.collectionID, pc.accessRights, pc.userID, pc.name, count(p.path) noOfPhotos, p.path coverPhoto
             FROM photoCollection pc
             LEFT JOIN
               (SELECT *
@@ -25,7 +25,7 @@ class Collection extends Model
 
   public function find_by_id($collectionID)
   {
-    $sql = "SELECT a.collectionID, a.accessRights, a.userID, count(*) noOfPhotos
+    $sql = "SELECT a.collectionID, a.accessRights, a.userID, a.name, count(*) noOfPhotos
             FROM photoCollection a
             LEFT JOIN photo p
                   ON a.collectionID = p.collectionID
@@ -182,14 +182,15 @@ class Collection extends Model
     return $query->fetchAll();
   }
 
-  public function create($userID)
+  public function create($userID, $name)
   {
     $timestamp = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO photoCollection (userID,CREATED_AT)
-            VALUES (:userID, '$timestamp')";
+    $sql = "INSERT INTO photoCollection (userID, name,CREATED_AT)
+            VALUES (:userID, :name, '$timestamp')";
 
     $query = $this->db->prepare($sql);
-    $params = array(':userID' => $userID);
+    $params = array(':userID' => $userID,
+                    ':name'   => $name);
     return $query->execute($params); // boolean result
   }
 
@@ -245,5 +246,18 @@ class Collection extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function update_collection_name($collectionID, $name)
+  {
+    $timestamp = date("Y-m-d H:i:s");
+    $sql = "UPDATE photoCollection
+            SET name = :name,
+                UPDATED_AT = '$timestamp'
+            WHERE (collectionID = :collectionID)";
+
+    $query = $this->db->prepare($sql);
+    $params = array(':collectionID' => $collectionID,
+                    ':name' => $name);
+    return $query->execute($params); // boolean result
+  }
 }
 ?>
