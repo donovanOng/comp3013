@@ -12,6 +12,12 @@
           <strong><span class="align-top">.</span></strong>
           <?php echo $photo->CREATED_AT ?>
         </small>
+        <br>
+        <?php if ($photo->userID == $this->current_userID) { ?>
+        <a class="small mr-2 text-danger" data-toggle="modal" data-target="#deletePhoto" href="">
+          <i class="fa fa-times text-danger mr-1" aria-hidden="true"></i>Delete photo
+        </a>
+        <? } ?>
       </p>
       <div class="small m-2 p-2" style="border-top: 1px solid #DDD;">
         <?php if ($photo_user_Liked_photo) { ?>
@@ -50,6 +56,7 @@
           </div>
         <?php } ?>
         <?php require APP . 'view/comments/form.php'; ?>
+        <?php require APP . 'view/photos/delete_confirmation.php'; ?>
       </div>
     </div>
   </div>

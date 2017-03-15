@@ -81,19 +81,39 @@ class CollectionController
 
   }
 
+  // public function create()
+  // {
+  //   // TODO: Add name to collection
+  //   $model = new Collection();
+  //   $result = $model->create($this->current_userID);
+  //
+  //   if ($result) {
+  //     $_SESSION['message'] = 'Collection created successfully';
+  //   } else {
+  //     $_SESSION['message'] = 'Fail to create collection';
+  //   }
+  //
+  //   Redirect(URL . 'collection');
+  // }
+
   public function create()
   {
-    // TODO: Add name to collection
-    $model = new Collection();
-    $result = $model->create($this->current_userID);
+    if (isset($_POST['submit'])) {
+      $name = $_POST['name'];
 
-    if ($result) {
-      $_SESSION['message'] = 'Collection created successfully';
+      $model = new Collection();
+      $result = $model->create($this->current_userID,
+                               $name);
+      if ($result) {
+        $_SESSION['message'] = 'Collection created successfully';
+      } else {
+        $_SESSION['message'] = 'Fail to create Collection';
+      }
+      Redirect(URL . 'collection');
+
     } else {
-      $_SESSION['message'] = 'Fail to create collection';
+      Redirect(URL . 'collection');
     }
-
-    Redirect(URL . 'collection');
   }
 
   public function update()
@@ -165,6 +185,30 @@ class CollectionController
 
     } else {
       $_SESSION['message'] = 'No Collection ID';
+      Redirect(URL . 'collection');
+    }
+  }
+
+  public function update_collection_name()
+  {
+    if (isset($_POST['update'])) {
+
+      $collectionID = $_POST['collectionID'];
+      $name = $_POST['name'];
+
+      $model = new Collection();
+      $result = $model->update_collection_name($collectionID,
+                                               $name);
+
+      if ($result) {
+        $_SESSION['message'] = 'Collection name is updated successfully';
+      } else {
+        $_SESSION['message'] = 'Fail to update collection name';
+      }
+
+      Redirect(URL . "collection/" . $collectionID);
+
+    } else {
       Redirect(URL . 'collection');
     }
   }

@@ -2,7 +2,7 @@
 <div class="p-4">
   <div class="row align-items-center mb-3">
     <div class="col-6">
-      <h4 class="mb-0">Collection <?php echo $collectionID ?></h4>
+      <h4 class="mb-0"><?php echo $collection->name ?></h4>
       <small class="text-muted">
         Privacy: <?php echo $privacy[$collection->accessRights] ?>
         <strong><span class="align-top">.</span></strong>
@@ -12,9 +12,13 @@
     <div class="col-6 text-right">
 
       <?php require APP . 'view/collections/edit.php'; ?>
+      <?php require APP . 'view/collections/rename_collection.php'; ?>
 
       <form class="align-self-center" action="<?php echo URL ?>photo/upload" method="post" enctype="multipart/form-data">
         <?php if ($this->current_userID == $collection->userID) { ?>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editCollectionName">
+            Edit
+          </button>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editSettings">
             Settings
           </button>
