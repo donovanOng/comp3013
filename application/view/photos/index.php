@@ -6,10 +6,9 @@
       <div class="col-12"><h4><i class="fa fa-picture-o mr-1 text-muted" aria-hidden="true"></i> Photos</h4></div>
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-    <?php if (count($photos) > 0) { ?>
-      <?php echo user_name($user->userID) ?> does not have any photo.
-    <?php } else { ?>
-      <div class="row">
+
+    <div class="row">
+      <?php if (count($photos) > 0)  { ?>
         <?php foreach ($photos as $photo) { ?>
           <div class="col-3">
             <a href="<?php echo URL; ?>photo/<?php echo $photo->photoID ?>">
@@ -19,7 +18,11 @@
             </a>
           </div>
         <?php } ?>
-      </div>
-    <?php } ?>
+      <?php } else { ?>
+        <div class="col-12">
+          <?php echo user_name($user->userID) ?> does not have any photo.
+        </div>
+      <?php } ?>
+    </div>
   </div>
 </div>
