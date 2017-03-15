@@ -4,8 +4,6 @@
       <img class="w-100" src="<?php echo $photo->path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'"  />
     </div>
     <div class="col-4">
-      <?php require APP . 'view/photos/delete_confirmation.php'; ?>
-
       <p class="p-2" style="min-height:150px;">
          <a href="<?php echo URL . $photo->userID ?>"><?php echo user_name($photo->userID) ?></a>
         <br>
@@ -58,6 +56,7 @@
           </div>
         <?php } ?>
         <?php require APP . 'view/comments/form.php'; ?>
+        <?php require APP . 'view/photos/delete_confirmation.php'; ?>
       </div>
     </div>
   </div>
