@@ -14,7 +14,9 @@
       </div>
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-      <?php if ($collections_owned != NULL) { ?>
+      <?php if (!$collections_owned) { ?>
+        <?php echo user_name($user->userID) ?> does not have any photo collection.
+      <?php } else { ?>
         <div class="row">
         <?php foreach ($collections_owned as $collection) { ?>
             <div class="col-3">

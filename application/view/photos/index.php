@@ -7,6 +7,8 @@
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
     <?php if (count($photos) > 0) { ?>
+      <?php echo user_name($user->userID) ?> does not have any photo.
+    <?php } else { ?>
       <div class="row">
         <?php foreach ($photos as $photo) { ?>
           <div class="col-3">
