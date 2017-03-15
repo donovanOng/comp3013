@@ -16,7 +16,7 @@
       <?php } ?>
     </div>
   </div>
-  <?php require APP . 'view/circles/edit_circle.php'; ?>
+  <?php require APP . 'view/circles/modal_edit_circle.php'; ?>
   <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
   <div class="row">
     <div class="col-8">
@@ -32,7 +32,7 @@
           <div class="col-7 text-right"><?php echo count($members) ?> Members</div>
         </div>
         <div class="mt-2 mb-2" style="border-bottom: 1px solid #DDD;"></div>
-        <?php require APP . 'view/circles/members.php'; ?>
+        <?php require APP . 'view/circles/members_list.php'; ?>
       </div>
     </div>
   </div>
