@@ -140,11 +140,11 @@ class UserController
       $model = new User();
 
       if (strlen($_POST["password"]) > 0) {
-        $password = $_POST["password"];
+        $hash_pw = password_hash($_POST["password"], PASSWORD_DEFAULT);
         $result = $model->update_user_with_pw($first_name,
                                               $last_name,
                                               $email,
-                                              $password,
+                                              $hash_pw,
                                               $privacy,
                                               $userID);
 

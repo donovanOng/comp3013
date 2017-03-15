@@ -59,14 +59,20 @@ class CollectionController
       if ($collection->accessRights == 0) {
         // Friends
         $access_by_relationship = $modelFriends->find_user_friend($collection->userID);
+        $have_access = in_array_field($this->current_userID, 'userID', $access_by_relationship);
       } else {
         // Friends of friends
         $access_by_relationship = $modelFriends->find_friends_of_friends($collection->userID);
+        $have_access = in_array_field($this->current_userID, 'userID_friendOfFriend', $access_by_relationship);
       }
-      $access_by_circle = $model->find_circle_members_access($collectionID);
 
-      if (!in_array_field($this->current_userID, 'userID', $access_by_relationship) &&
-          !in_array_field($this->current_userID, 'userID', $access_by_circle)) {
+      //circles
+      $access_by_circle = $model->find_circle_members_access($collectionID);
+      if (in_array_field($this->current_userID, 'userID', $access_by_circle)){
+        $have_access = true;
+      }
+      
+      if ($have_access == false) {
         $_SESSION['message'] = 'You dont have rights to access Collection ' . $collection->collectionID;
         Redirect(URL . $collection->userID);
       }

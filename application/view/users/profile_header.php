@@ -4,13 +4,15 @@
     <div style="background:white;padding:6px;border:1px solid #ddd;">
       <img style="width:160px;height:160px;object-fit:cover;" src="<?php echo $user->photo_path ?>" onError="this.src ='<?php echo URL; ?>images/missing.jpg'" />
     </div>
-    <form class="text-center" action="<?php echo URL ?>user/upload" method="post" enctype="multipart/form-data">
-      <label class="label text-primary" style="cursor: pointer;">
-          <i class="fa fa-camera mt-2 mr-2" aria-hidden="true"></i>Update Profile Picture
-          <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
-      </label>
-      <input type="hidden" name="userID" value="<?php echo $this->current_userID ?>">
-    </form>
+    <?php if($user->userID == $this->current_userID) { ?>
+      <form class="text-center" action="<?php echo URL ?>user/upload" method="post" enctype="multipart/form-data">
+        <label class="label text-primary" style="cursor: pointer;">
+            <i class="fa fa-camera mt-2 mr-2" aria-hidden="true"></i>Update Profile Picture
+            <input type="file" name="uploadFile" onchange="this.form.submit()" id="upload_file" hidden>
+        </label>
+        <input type="hidden" name="userID" value="<?php echo $this->current_userID ?>">
+      </form>
+    <?php } ?>
   </div>
 
   <div style="margin-top:-76px;z-index:0;width: 100%">
