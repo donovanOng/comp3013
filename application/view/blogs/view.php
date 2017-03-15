@@ -21,27 +21,21 @@
         </div>
       </h6>
       <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
-
       <?php if ($this->current_userID == $blog->userID) {?>
-        <?php require APP . 'view/blogs/new_post.php'; ?>
+        <div class="bg-faded p-3 text-right mb-3">
+          <h6 class="text-left">Write Post</h6>
+          <div class="mt-2 mb-2" style="border-bottom: 1px solid #DDD;"></div>
+          <form action="<?php echo URL; ?>post/new_post" method="POST">
+            <input class="form-control mb-2" type="text" name="title" value="" placeholder="Title" required />
+            <textarea class="form-control mb-2" type="text" name="body" value="" rows="4" cols="50" required ></textarea>
+            <input type="hidden" name="blogID" value="<?php echo $blog->blogID ?>" />
+            <input class="btn btn-primary" type="submit" name="submit" value="Post" />
+          </form>
+        </div>
         <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
       <?php } ?>
-
       <?php require APP . 'view/blogs/search.php' ?>
-
-      <?php if (count($blog_posts) > 0) { ?>
-        <?php foreach ($blog_posts as $post) { ?>
-          <div class="card mb-3">
-            <div class="card-block">
-              <h6 class="card-title">
-                <a href="<?php echo URL . 'post/' . $post->postID ?>"><?php echo $post->title ?></a>
-                <br><small class="text-muted"><?php echo $post->CREATED_AT ?></small>
-              </h6>
-              <p class="card-text"><?php echo nl2br($post->body) ?></p>
-            </div>
-          </div>
-        <?php } ?>
-      <?php } ?>
+      <?php require APP . 'view/posts/list.php' ?>
     </div>
   </div>
 </div>
