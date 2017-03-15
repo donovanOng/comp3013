@@ -23,10 +23,10 @@ class AuthController
     } elseif (isset($_POST["login"])) {
 
       $model = new User();
+
       $user = $model->authenticate_user($_POST["email"],
                                         $_POST["password"]);
 
-      // TODO: HASH Password
       if ($user != NULL) {
 
         $_SESSION['current_user'] = $user;
@@ -41,7 +41,7 @@ class AuthController
     } else {
 
       require APP . 'view/_templates/header.php';
-      require APP . 'view/auth/form.php';
+      require APP . 'view/auth/login.php';
       require APP . 'view/_templates/footer.php';
 
     }
@@ -74,10 +74,12 @@ class AuthController
         Redirect(URL . 'signup');
 
       } else {
+
+        $hash_pw = password_hash($_POST["password"], PASSWORD_DEFAULT);
         $result = $model->create($_POST["first_name"],
                                  $_POST["last_name"],
                                  $_POST["email"],
-                                 $_POST["password"]);
+                                 $hash_pw);
         if ($result) {
           $_SESSION['message'] = 'Sign Up successfully';
           Redirect(URL . 'login');

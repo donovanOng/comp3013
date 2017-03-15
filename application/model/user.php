@@ -17,16 +17,19 @@ class User extends Model
 
   public function authenticate_user($email, $password)
   {
-    $sql = "SELECT userID, first_name, last_name
+    $sql = "SELECT userID, first_name, last_name, password
             FROM user
-            WHERE email = :email AND password = :password
+            WHERE email = :email
             LIMIT 1";
 
     $query = $this->db->prepare($sql);
-    $params = array(':email' => $email,
-                    ':password' => $password);
+    $params = array(':email' => $email);
     $query->execute($params);
-    return $query->fetch();
+    $user = $query->fetch();
+    if (password_verify($password, $user->password) ) {
+      return $user;
+    }
+    return NULL;
   }
 
   public function find_by_id($userID)

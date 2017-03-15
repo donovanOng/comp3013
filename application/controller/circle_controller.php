@@ -58,7 +58,7 @@ class CircleController
     }
 
     $friend_model = new Friend();
-    $friends = $friend_model->find_user_friend($this->current_userID, 0);
+    $friends = $friend_model->find_user_friend($this->current_userID);
     $friends_id  = array_column($friends, 'userID');
 
     $friends_not_members = NULL;

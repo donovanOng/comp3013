@@ -14,15 +14,9 @@ class Post extends Model
            	JOIN user u
                 ON b.userID = u.userID
             WHERE u.userID IN (
-                SELECT userID
-                FROM relationship
-                WHERE STATUS = 0
-                  AND userID_2 = :userID
-                UNION
-                  SELECT userID_2
-                  FROM relationship
-                  WHERE STATUS = 0
-                    AND userID = :userID)
+                SELECT userID_friend
+                FROM friends
+                WHERE  userID_user = :userID)
             ORDER BY p.UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
@@ -43,15 +37,9 @@ class Post extends Model
               p.body LIKE :search_query
               OR p.title LIKE :search_query
               AND u.userID IN (
-                SELECT userID
-                FROM relationship
-                WHERE STATUS = 0
-                  AND userID_2 = :userID
-                UNION
-                  SELECT userID_2
-                  FROM relationship
-                  WHERE STATUS = 0
-                    AND userID = :userID)
+                SELECT userID_friend
+                FROM friends
+                WHERE  userID_user = :userID)
             ORDER BY p.UPDATED_AT DESC";
 
     $query = $this->db->prepare($sql);
