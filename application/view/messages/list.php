@@ -10,4 +10,8 @@
     </div>
   </div>
 <?php } ?>
+<?php } else { ?>
+  <div class="bg-faded p-3">
+    <i class="fa fa-question-circle-o mr-2" aria-hidden="true"></i>No recent message to show.
+  </div>
 <?php } ?>
