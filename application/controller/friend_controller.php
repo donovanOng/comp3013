@@ -29,7 +29,7 @@ class FriendController
     $initiator = $friendModel->friendship_initiator($this->current_userID, $friend_userID);
 
     $friendModel = new Friend();
-    $friends = $friendModel->find_user_friend($friend_userID, 0);
+    $friends = $friendModel->find_user_friend($friend_userID);
     $friend_req_sent = $friendModel->find_friend_req_sent($friend_userID);
     $friend_req_received = $friendModel->find_friend_req_received($friend_userID);
 
