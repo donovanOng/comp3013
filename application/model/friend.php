@@ -34,10 +34,10 @@ class Friend extends Model
 
   public function recommend_friends_based_on_mutual_friends($userID)
   {
-    $sql = "SELECT userID_friendOffriend as userID, count(*) as rank
-            FROM friendandfriendsoffriends
+    $sql = "SELECT userID_friendOfFriend as userID, count(*) as rank
+            FROM friendAndFriendsOfFriends
             WHERE userID_user = :userID 
-            AND userID_friendOffriend NOT IN (
+            AND userID_friendOfFriend NOT IN (
             SELECT userID
               FROM relationship
               WHERE userID_2 = :userID
