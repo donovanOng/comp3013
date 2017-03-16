@@ -16,7 +16,7 @@
     </div>
     <div class="mt-3 mb-3" style="border-top: 1px solid #DDD;"></div>
     <?php if ( (count($circlesAdmin) + count($circlesMember))  == 0) { ?>
-      <p class="pl-1 pr-1 m-0">Not in any Circle.</p>
+      <p class="pl-1 pr-1 m-0"><?php echo user_name($user->userID) ?> not in any Circle.</p>
     <?php } else { ?>
       <div class="row align-items-top">
         <?php if (count($circlesAdmin) > 0) { ?>
