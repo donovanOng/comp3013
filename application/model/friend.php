@@ -66,9 +66,13 @@ class Friend extends Model
               GROUP BY similar.userID
               ORDER BY rank DESC) as temp_friends
             WHERE userID NOT IN (
-              SELECT userID_friend
-              FROM friends
-              WHERE userID_user = :userID
+              SELECT userID
+              FROM relationship
+              WHERE userID_2 = :userID
+              UNION
+              SELECT userID_2
+              FROM relationship
+              WHERE userID = :userID
             ) AND userID != :userID";
 
     $query = $this->db->prepare($sql);
