@@ -33,9 +33,9 @@ class Post extends Model
                 ON b.blogID = p.blogID
            	JOIN user u
                 ON b.userID = u.userID
-            WHERE
+            WHERE (
               p.body LIKE :search_query
-              OR p.title LIKE :search_query
+              OR p.title LIKE :search_query)
               AND u.userID IN (
                 SELECT userID_friend
                 FROM friends
