@@ -18,10 +18,19 @@
     <?php } ?>
     <?php if ($this->current_userID == $user->userID) { ?>
       <div class="p-2 small text-muted">
-        <p>
+        <p class="mb-0">
           <a href="<?php echo URL ?>user/export?userID=<?php echo $user->userID ?>">Download a copy</a>
           of your Social Media data.
         </p>
+        <form action="<?php echo URL ?>user/import" method="post" enctype="multipart/form-data">
+          <label class="label text-primary" style="cursor: pointer;">
+              Import
+              <input type="file" name="importXML" onchange="this.form.submit()" id="upload_file" hidden>
+          </label>
+          your Social Media data.
+          <input type="hidden" name="userID" value="<?php echo $this->current_userID ?>">
+        </form>
+
       </div>
     <?php } ?>
   </div>
