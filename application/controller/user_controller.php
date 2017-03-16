@@ -366,8 +366,8 @@ class UserController
       foreach ($data_row->children() as $value)
       {
         array_push($columns, $value->getName());
-        array_push($values, '\'' . $value . '\'');
-        array_push($update, $value->getName() . '=' . '\'' . $value . '\'');
+        array_push($values, '\'' . addslashes($value) . '\'');
+        array_push($update, $value->getName() . '=' . '\'' . addslashes($value) . '\'');
       }
 
       array_shift($update); // drop primary key for update

@@ -19,7 +19,7 @@ foreach($tables_data as $table => $table_data) {
   foreach ($table_data as $row => $column) {
     $xml .= $tab.'<' . $table . '>'.$br;
     foreach ($column as $key => $value) {
-		  $xml.= $tab.$tab.'<'.$key.'>'.htmlspecialchars(stripslashes($value)).'</'.$key.'>'.$br;
+		  $xml.= $tab.$tab.'<'.$key.'>'.htmlspecialchars(($value)).'</'.$key.'>'.$br;
     }
     $xml .= $tab.'</' . $table . '>'.$br;
   }
