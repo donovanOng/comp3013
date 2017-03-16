@@ -81,5 +81,48 @@ class Admin extends Model
     return $query->execute($params); // boolean result
   }
 
+  public function update_or_insert($table, $columns, $values, $update)
+  {
+    $primaryKey = $columns[0];
+    $primaryKeyValue = $values[0];
+
+    $data_exist = 0;
+
+    if ($table != 'annotation') {
+      $sql = "SELECT *
+              FROM $table
+              WHERE $primaryKey = $primaryKeyValue
+              LIMIT 1";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      $data_exist = $query->fetch();
+      if ($data_exist) {
+        $update_sql = 'UPDATE ' . $table . ' SET '. implode(", ", $update) . ' WHERE ' . $primaryKey . '=' . $primaryKeyValue;
+        $query = $this->db->prepare($update_sql);
+        return 'update: ' . $query->execute(); // boolean result
+      } else {
+        $insert_query = 'INSERT INTO ' . $table . ' ('. implode(", ", $columns) . ') VALUES (' . implode(", ", $values) . ')';
+        $query = $this->db->prepare($insert_query);
+        return 'insert: ' . $query->execute(); // boolean result
+      }
+    } else {
+      $sql = "SELECT *
+              FROM $table
+              WHERE $columns[0] = $values[0]
+                AND $columns[1] = $values[1]
+              LIMIT 1";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      $data_exist = $query->fetch();
+      if (!$data_exist) {
+        $insert_query = 'INSERT INTO ' . $table . ' ('. implode(", ", $columns) . ') VALUES (' . implode(", ", $values) . ')';
+        $query = $this->db->prepare($insert_query);
+        return $query->execute(); // boolean result
+      } else {
+        return 'data already exist';
+      }
+    }
+  }
+
 }
 ?>

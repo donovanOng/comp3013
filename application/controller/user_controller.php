@@ -194,7 +194,7 @@ class UserController
   private function upload_photo($uploadFile)
   {
     $model = new User();
-    $save_filename = $this->current_userID . '_abc' . '.jpg';
+    $save_filename = $this->current_userID . '_profile' . '.jpg';
 
     if (ENVIRONMENT != 'prod') {
 
@@ -309,7 +309,73 @@ class UserController
       $_SESSION['message'] = 'No user ID found.';
       Redirect(URL);
     }
+  }
 
+  public function import()
+  {
+    if (isset($_FILES['importXML'])) {
+
+      $userID = $_POST['userID'];
+      $xml_filename = $_FILES['importXML']['name'];
+      $tmp_filename = $_FILES['importXML']["tmp_name"];
+
+      $action_result = $this->import_xml($tmp_filename);
+
+      require APP . 'view/_templates/header.php';
+      require APP . 'view/users/import.php';
+      require APP . 'view/_templates/footer.php';
+
+    } else {
+      $_SESSION['message'] = 'No file uploaded.';
+      Redirect(URL);
+    }
+
+  }
+
+  private function import_xml($file)
+  {
+    $record = simplexml_load_file($file);
+
+    $action_result = array();
+
+    $model = new Admin();
+
+    foreach ($record->children() as $data_row)
+    {
+      $table_name = $data_row->getName();
+
+      if ($table_name == 'relationship') {
+        if (!isset($data_row->userID) || !isset($data_row->userID_2)){
+          // missing one id for relationship
+          continue;
+        } elseif ($data_row->userID != $this->current_userID && $data_row->userID_2 != $this->current_userID) {
+          // both ids not equal to current user
+          continue;
+        }
+      } else {
+        if (!isset($data_row->userID) || $data_row->userID != $this->current_userID){
+          // no userID or userID not equal to current user
+          continue;
+        }
+      }
+
+      $columns = array();
+      $values = array();
+      $update = array();
+
+      foreach ($data_row->children() as $value)
+      {
+        array_push($columns, $value->getName());
+        array_push($values, '\'' . $value . '\'');
+        array_push($update, $value->getName() . '=' . '\'' . $value . '\'');
+      }
+
+      array_shift($update); // drop primary key for update
+      $result = $model->update_or_insert($table_name, $columns, $values, $update);
+      array_push($action_result, $table_name . ': ' . $columns[0] . ' ' . $values[0] . ' => ' . $result);
+    }
+
+    return ($action_result);
   }
 
 }

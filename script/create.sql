@@ -23,7 +23,8 @@ CREATE TABLE `group8`.`relationship` (
 	`UPDATED_AT` TIMESTAMP NOT NULL,
 	PRIMARY KEY (`relationshipID`),
 	FOREIGN KEY (`userID`) REFERENCES `group8`.`user`(`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (`userID_2`) REFERENCES `group8`.`user`(`userID`) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (`userID_2`) REFERENCES `group8`.`user`(`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `relation` UNIQUE (`userID`, `userID_2`)
 ) ENGINE = InnoDB;
 CREATE TABLE `group8`.`photoCollection` (
 	`collectionID` INT NOT NULL AUTO_INCREMENT,
