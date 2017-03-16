@@ -365,6 +365,12 @@ class UserController
 
       foreach ($data_row->children() as $value)
       {
+        if ($table_name == 'post' && $value->getName() == 'userID') {
+          continue;
+        }
+        if ($table_name == 'post' && $value->getName() == 'name') {
+          continue;
+        }
         array_push($columns, $value->getName());
         array_push($values, '\'' . addslashes($value) . '\'');
         array_push($update, $value->getName() . '=' . '\'' . addslashes($value) . '\'');
