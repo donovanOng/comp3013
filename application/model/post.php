@@ -17,7 +17,7 @@ class Post extends Model
                 SELECT userID_friend
                 FROM friends
                 WHERE  userID_user = :userID)
-            ORDER BY p.UPDATED_AT DESC";
+            ORDER BY p.CREATED_AT DESC";
 
     $query = $this->db->prepare($sql);
     $params = array(':userID' => $userID);
