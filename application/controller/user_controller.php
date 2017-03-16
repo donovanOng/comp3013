@@ -194,7 +194,7 @@ class UserController
   private function upload_photo($uploadFile)
   {
     $model = new User();
-    $save_filename = $this->current_userID . '_abc' . '.jpg';
+    $save_filename = $this->current_userID . '_profile' . '.jpg';
 
     if (ENVIRONMENT != 'prod') {
 
