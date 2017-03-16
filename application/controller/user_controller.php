@@ -3,6 +3,7 @@
 require_once APP . 'model/user.php';
 require_once APP . 'model/blog.php';
 require_once APP . 'model/friend.php';
+require_once APP . 'model/admin.php';
 
 if (ENVIRONMENT == 'prod') {
   require_once APP . 'libs/azure_upload.php';
@@ -147,7 +148,6 @@ class UserController
                                               $hash_pw,
                                               $privacy,
                                               $userID);
-
       } else {
         $result = $model->update_user($first_name,
                                       $last_name,
@@ -161,7 +161,6 @@ class UserController
       } else {
         $_SESSION['message'] = 'Fail to update account';
       }
-
       Redirect(URL . $userID);
 
     } else {
@@ -171,7 +170,6 @@ class UserController
 
   public function upload()
   {
-
     if (isset($_POST['userID'])) {
 
       $userID = $_POST['userID'];
@@ -191,7 +189,6 @@ class UserController
       $_SESSION['message'] = 'Unable to find photo path';
       Redirect(URL);
     }
-
   }
 
   private function upload_photo($uploadFile)
@@ -200,14 +197,12 @@ class UserController
     $save_filename = $this->current_userID . '_profile' . '.jpg';
 
     if (ENVIRONMENT != 'prod') {
+
       $targetDirectory = "uploads/users/" . $this->current_userID . '/';
       // create user's directory if it does not exist
       if (!file_exists($targetDirectory)) {
           mkdir($targetDirectory, 0777, true);
       }
-
-      // TODO validate file format, size
-
       $targetFile = $targetDirectory . $save_filename;
       $uploadResult = move_uploaded_file($uploadFile["tmp_name"], $targetFile);
       if ($uploadResult) {
@@ -283,6 +278,38 @@ class UserController
 
       Redirect(URL . $userID);
     }
+  }
+
+  public function export()
+  {
+    if (isset($_GET['userID']) && strlen($_GET['userID']) > 0) {
+      $userID = $_GET['userID'];
+
+      if ($this->current_userID == $userID) {
+
+        $model = new Admin();
+        $tables = array('user', 'profile', 'circle', 'circleFriends', 'message',
+                      'photoCollection', 'photo', 'comment', 'annotation', 'blog');
+        $tables_data = array();
+        foreach($tables as $table) {
+          $table_data = $model->get_user_rows($userID, $table);
+          $tables_data[$table] =  $table_data;
+        }
+        $tables_data['post'] = $model->get_user_posts($userID);
+        $tables_data['relationship'] = $model->get_user_relationship($userID);
+
+        require APP . 'view/users/export.php';
+
+      } else {
+        $_SESSION['message'] = 'Not authorized.';
+        Redirect(URL);
+      }
+
+    } else {
+      $_SESSION['message'] = 'No user ID found.';
+      Redirect(URL);
+    }
+
   }
 
 }

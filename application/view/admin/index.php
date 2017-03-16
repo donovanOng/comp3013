@@ -25,7 +25,7 @@
             }
             echo '<td>
               <a class="btn-link" href="' . URL . 'admin/user?' .
-              'userID=' . $tables_data['user'][0]->userID .
+              'userID=' . $column->userID .
               '">View</a>';
             echo '</tr>';
           }

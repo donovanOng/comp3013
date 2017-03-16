@@ -16,6 +16,14 @@
     <?php if($profile != NULL) { ?>
       <?php require APP . 'view/users/profile_details.php'; ?>
     <?php } ?>
+    <?php if ($this->current_userID == $user->userID) { ?>
+      <div class="p-2 small text-muted">
+        <p>
+          <a href="<?php echo URL ?>user/export?userID=<?php echo $user->userID ?>">Download a copy</a>
+          of your Social Media data.
+        </p>
+      </div>
+    <?php } ?>
   </div>
   <div class="col-8">
     <?php if ($blog == NULL && $this->current_userID == $user->userID) { ?>

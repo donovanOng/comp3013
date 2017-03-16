@@ -23,8 +23,8 @@ class SearchController
       $users = $model->find_by_name($query);
 
       $post_model = new Post();
-      $posts = $post_model->search_post($query,
-                                        $this->current_userID);
+      $posts = $post_model->search_post($this->current_userID,
+                                        $query);
 
       require APP . 'view/_templates/header.php';
       require APP . 'view/search/result.php';
