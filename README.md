@@ -23,3 +23,11 @@ LoadModule rewrite_module modules/mod_rewrite.so
 
 </Directory>
 ```
+
+#### Setup SQL 
+
+Upload the 3 scripts found under the script folder with the following order:
+
+1. create.sql
+2. create_view.sql
+3. insert.sql
